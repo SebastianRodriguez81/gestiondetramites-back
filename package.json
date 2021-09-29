@@ -1,10 +1,11 @@
 {
+  "type": "module",
   "name": "gestiondetramites",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node src/main.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/SebastianRodriguez81/gestiondetramites-android/issues"
   },
-  "homepage": "https://github.com/SebastianRodriguez81/gestiondetramites-android#readme"
+  "homepage": "https://github.com/SebastianRodriguez81/gestiondetramites-android#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  }
 }
