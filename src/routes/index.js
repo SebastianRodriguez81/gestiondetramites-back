@@ -1,8 +1,10 @@
-import router from 'express'
+import express from 'express'
 import tramiteRouter from './tramite.js'
 
+const router = express.Router()
+
 /** AGREGAR AQUI LAS RUTAS **/
-router.use(tramiteRouter)
+router.use('/tramites', tramiteRouter)
 
 /****************************/
 

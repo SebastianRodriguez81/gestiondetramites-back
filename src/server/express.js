@@ -1,11 +1,12 @@
 import express from 'express'
-import tramiteRouter from '../routes/tramite.js'
-
+import router from '../routes/index.js'
+import errorHandler from '../middleware/errorHandler.js'
 
 function crearServidor() {
   const app = express()
   app.use(express.json())
-  app.use('/tramite', tramiteRouter)
+  app.use(router)
+  app.use(errorHandler)
 
   let server = null
 
@@ -20,7 +21,7 @@ function crearServidor() {
             resolve()
           })
           server.on('error', (err) => {
-            reject(err)
+            reject('err')
           })
         }
       })
