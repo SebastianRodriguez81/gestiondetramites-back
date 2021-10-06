@@ -1,5 +1,5 @@
 import express from 'express'
-import tramiteRouter from '../../tramite/route/index.js'
+import tramiteRouter from '../routes/tramite.js'
 
 
 function crearServidor() {

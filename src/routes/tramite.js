@@ -1,6 +1,6 @@
 import express from 'express'
-import getObtenerTipoTramite from '../application/obtenerTipoTramiteFactory.js'
-import getObtenerTramite from '../application/obtenerTramiteFactory.js'
+import getObtenerTiposTramite from '../modules/tramite/application/obtenerTiposTramiteFactory.js'
+import getObtenerTramite from '../modules/tramite/application/obtenerTramitesFactory.js'
 
 //impor seguridadFactory from segufactory
 
@@ -18,7 +18,7 @@ tramiteRouter.get('/tiposTramites/obtenerTodos/', async (req, res, next) => {
         // }
 
 
-        const obtenerTipoTramite = getObtenerTipoTramite()
+        const obtenerTipoTramite = getObtenerTiposTramite()
         const respuesta = await obtenerTipoTramite.ejecutar()
         res.json(respuesta)
     } catch (error) {

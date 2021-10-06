@@ -1,4 +1,4 @@
-import crearDaoTipoTramite from './daoTipoTramite.js'
+import crearDaoTipoTramite from './daoTipoTramiteMock.js'
 
 let daoTipoTramite
 daoTipoTramite = crearDaoTipoTramite(null)
