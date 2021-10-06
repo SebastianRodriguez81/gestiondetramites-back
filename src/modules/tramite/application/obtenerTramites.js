@@ -1,7 +1,7 @@
 function crearObtenerTramites(tramite) {
     return {
-        async ejecutar(estadoId, tipoTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuarioId, usuarioAsigId) {
-            return await tramite.buscarTodos(estadoId, tipoTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuarioId, usuarioAsigId)
+        async ejecutar(estadosId, tiposTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId) {
+            return await tramite.buscarTodos(estadosId, tiposTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId)
         }
     }
 }

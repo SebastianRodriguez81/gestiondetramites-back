@@ -1,7 +1,7 @@
 function crearTramite(daoTramite) {
     return {
-        async buscarTodos(estadoId, tipoTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuarioId, usuarioAsigId) {
-            return await daoTramite.buscarTodos()
+        async buscarTodos(estadosId, tiposTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId) {
+            return await daoTramite.buscarTodos(estadosId, tiposTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId)
         }
     }
 }

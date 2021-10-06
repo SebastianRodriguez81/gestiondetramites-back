@@ -2,12 +2,11 @@ import pg from "pg";
 import {getDbConnectionString} from '../config/index.js'
 
 function crearElephantClient() {
-  const conString = getDbConnectionString()
-  const client = new pg.Client(conString);
-
   return {
-    ejecutar: (queryString) => {     
+    ejecutar: (queryString) => {
       return new Promise((resolve, reject) => {
+        const conString = getDbConnectionString()
+        const client = new pg.Client(conString);
         client.connect(function (err) {
           if (err) {
             reject('could not connect to postgres', err);
@@ -17,7 +16,10 @@ function crearElephantClient() {
               reject(err);
             }
             if (result) {
+              client.end();
               resolve(result.rows);
+            } else {
+              reject('error inesperado')
             }
           });
         });

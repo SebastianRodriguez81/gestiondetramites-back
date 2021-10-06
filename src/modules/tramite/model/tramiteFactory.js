@@ -1,4 +1,4 @@
-import getDaoTramite from "../persitence/mock/daoTramiteFactoryMock.js";
+import getDaoTramite from "../persitence/elephant/daoTramiteElephantFactory.js";
 import crearTramite from "./Tramite.js"
 
 let daoTramite = getDaoTramite()
