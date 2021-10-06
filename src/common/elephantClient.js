@@ -2,11 +2,11 @@ import pg from "pg";
 import {getDbConnectionString} from '../config/index.js'
 
 function crearElephantClient() {
-  var conString = getDbConnectionString()
-  var client = new pg.Client(conString);
+  const conString = getDbConnectionString()
+  const client = new pg.Client(conString);
 
   return {
-    connect: (queryString) => {
+    ejecutar: (queryString) => {     
       return new Promise((resolve, reject) => {
         client.connect(function (err) {
           if (err) {
@@ -16,7 +16,9 @@ function crearElephantClient() {
             if (err) {
               reject(err);
             }
-            resolve(result.rows);
+            if (result) {
+              resolve(result.rows);
+            }
           });
         });
       });
