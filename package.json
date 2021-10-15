@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node src/main.js"
+    "test": "node src/app.js",
+    "testDb": "node src/testDb.js"
   },
   "repository": {
     "type": "git",
