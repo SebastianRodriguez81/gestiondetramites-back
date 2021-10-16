@@ -4,6 +4,7 @@ import errorHandler from '../middleware/errorHandler.js'
 
 function crearServidor() {
   const app = express()
+  //app.use(securityHandler))
   app.use(express.json())
   app.use(router)
   app.use(errorHandler)
