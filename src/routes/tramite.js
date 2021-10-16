@@ -1,7 +1,7 @@
 import express from 'express'
 import getObtenerTiposTramite from '../modules/tramite/application/obtenerTiposTramiteFactory.js'
 import getObtenerTramite from '../modules/tramite/application/obtenerTramitesFactory.js'
-import getSetTramites from '../modules/tramite/application/setearTramiteFactory.js'
+import getAltaTramites from '../modules/tramite/application/altaTramiteFactory.js'
 
 const tramiteRouter = express.Router()
 
@@ -24,12 +24,12 @@ tramiteRouter.get('/obtenerTodos/', async (req, res, next) => {
         next(error)
     }
 })
-tramiteRouter.post('/setearTramite/', async (req, res, next) => {
+tramiteRouter.post('/crearTramite/', async (req, res, next) => {
     try {
-        const seteadorTramite = getSetTramites()      
-        //const respuesta = await seteadorTramite.ejecutar(req.query.estadosId, req.query.tiposTramiteId, req.query.fechaCreacionDesde, req.query.fechaCreacionHasta, req.query.usuariosId, req.query.usuariosAsigId)
-        const respuesta = await seteadorTramite.ejecutar()
-        res.json("todo ok")
+        const altaTramite = getAltaTramites() 
+        console.log(req.body)
+        const respuesta = await altaTramite.ejecutar(req.body)
+        res.json(respuesta)
     } catch (error) {
         next(error)
     }
