@@ -17,4 +17,4 @@ function crearAltaTramite(altaTramiteLicenciaConduicir) {
     }
 }
 
-export default crearAltaTramitegi
+export default crearAltaTramite
