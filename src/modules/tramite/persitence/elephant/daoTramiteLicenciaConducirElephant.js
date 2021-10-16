@@ -4,7 +4,7 @@ function crearDaoTramiteLicenciaConducir(db) {
        
         persistir: async (tramiteLicenciaConducir) => {           
 
-            console.log(tramiteLicenciaConducir)
+            //console.log(tramiteLicenciaConducir)
 
             const qTabla = 'licenciaconducirdatos'
             const qFormer = db.getQueryBuilder()
@@ -14,7 +14,7 @@ function crearDaoTramiteLicenciaConducir(db) {
             qFormer.setTabla(qTabla)
             qFormer.setQueryType(qFormer.getQueryTypes().insert)
             qFormer.addCampo('id',"default")            
-            qFormer.addCampo('tipostramiteidx',tramiteLicenciaConducir.tramite.tipoTramite.id)
+            qFormer.addCampo('tipostramiteidx',tramiteLicenciaConducir.tramite.tiposTramiteIdx)
             qFormer.addCampo('tramitesid',tramiteLicenciaConducir.tramite.id)
             qFormer.addCampo('tipolicencia',"'"+tramiteLicenciaConducir.tipoLicencia+"'")   
             tramiteLicenciaConducir.fechaLicencia? qFormer.addCampo('fechalicencia',tramiteLicenciaConducir.fechaLicencia) :
@@ -24,7 +24,7 @@ function crearDaoTramiteLicenciaConducir(db) {
             qFormer.addCampo('ultimamodifciacion',"'"+fecha+"'")
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)
+            //console.log(newQ)
 
             try {
                 const result = await db.ejecutar(newQ);

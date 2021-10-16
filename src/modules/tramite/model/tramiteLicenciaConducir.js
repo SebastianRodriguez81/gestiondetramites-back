@@ -1,49 +1,31 @@
 function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
 
-    return {
+    return {        
         id: null,
         tramite: tramite,
-        tipolicencia: null,
+        tipoLicencia: null,
         fechaLicencia: null,
         fechaTramite: null,
         retirada: null,
 
+        setUsuariosId(usuariosId) {this.tramite.usuariosId = usuariosId},
+        setEstadosIdx(estadosIdx) {this.tramite.estadosIdx = estadosIdx},
+        setTipoLicencia(tipoLicencia) {this.tipoLicencia = tipoLicencia},
+        setFechaLicencia(fechaLicencia) {this.fechaLicencia = fechaLicencia},
+        setFechaTramite(fechaTramite) {this.fechaTramite = fechaTramite},
+        setRetirada(retirada) {this.retirada = retirada},
+
         async persistir() {
+            this.tramite.tiposTramiteIdx = 1
+            
+            let result 
 
-            this.tramite.tipoTramite = {
-                id: 1
-            }
-            await this.tramite.persistir(this.tramite)
-            this.id = await daoTramiteLicenciaConducir.persistir(this)
-            return this
-        },
-
-        setUser(userId) {
-            this.tramite.usuario = {
-                id: userId
-            }
-        },
-
-        setEstadoTramite(estadoTramiteId) {
-            this.tramite.estadoTramite = {
-                id: estadoTramiteId
-            }
-        },
-
-        setTipoLicencia(tipoLicencia) {
-            this.tipoLicencia = tipoLicencia
-        },
-
-        setFechaLicencia(fechaLicencia) {
-            this.fechaLicencia = fechaLicencia
-        },
-
-        setFechaTramite(fechaTramite) {
-            this.fechaTramite = fechaTramite
-        },
-
-        setRetirada(retirada) {
-            this.retirada = retirada
+            if(await this.tramite.persistir(this.tramite)){
+                result = await daoTramiteLicenciaConducir.persistir(this)
+                if(this.id){this.id = result}
+            }            
+            
+            return result
         },
     }
 }

@@ -26,8 +26,7 @@ tramiteRouter.get('/obtenerTodos/', async (req, res, next) => {
 })
 tramiteRouter.post('/crearTramite/', async (req, res, next) => {
     try {
-        const altaTramite = getAltaTramites() 
-        console.log(req.body)
+        const altaTramite = getAltaTramites()        
         const respuesta = await altaTramite.ejecutar(req.body)
         res.json(respuesta)
     } catch (error) {

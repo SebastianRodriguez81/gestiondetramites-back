@@ -9,6 +9,8 @@ function crearDaoTramite(db) {
             const objFecha = new Date()
             const fecha = objFecha.getFullYear()+"-"+objFecha.getMonth()+"-"+objFecha.getDay()
 
+            //console.log(tramite)   
+
             if (tramite.id){
                 // UPDATE
                 
@@ -17,16 +19,17 @@ function crearDaoTramite(db) {
                 qFormer.setTabla(qTabla)
                 qFormer.setQueryType(qFormer.getQueryTypes().insert)
                 qFormer.addCampo('id',"default")
-                qFormer.addCampo('estadosidx',tramite.estadoTramite.id)
-                qFormer.addCampo('tipostramiteidx',tramite.tipoTramite.id)
-                qFormer.addCampo('usuariosid',tramite.usuario.id)
-                tramite.usuarioAsig? qFormer.addCampo('usuariosasigid',tramite.usuarioAsig.id) : 
+                qFormer.addCampo('estadosidx',tramite.estadosIdx)
+                qFormer.addCampo('tipostramiteidx',tramite.tiposTramiteIdx)
+                qFormer.addCampo('usuariosid',tramite.usuariosId)
+                tramite.usuarioAsigId? qFormer.addCampo('usuariosasigid',tramite.usuariosAsigId) : 
                 tramite.fechaCreacion? qFormer.addCampo('fechacreacion',tramite.fechaCreacion) : qFormer.addCampo('fechacreacion',"'"+fecha+"'")
                 qFormer.addCampo('eliminado',false)
                 qFormer.addCampo('ultimamodifciacion',"'"+fecha+"'")
-            }            
+            }        
 
-            const newQ = qFormer.getQuerry()       
+            const newQ = qFormer.getQuerry()
+            //console.log(newQ)
 
             try {
                 const result = await db.ejecutar(newQ);
@@ -36,7 +39,7 @@ function crearDaoTramite(db) {
             }
         },
 
-        buscarTodos: async (estadosId, tiposTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId) => {   
+        buscarTodos: async (estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId) => {   
             
             // OLD **************************************************************
 
@@ -64,15 +67,15 @@ function crearDaoTramite(db) {
             // eliminado = false
             //`
 
-            // OLD **************************************************************
+            // OLD **************************************************************            
 
             const qTabla = 'tramites'
             const qFormer = db.getQueryBuilder()
             
             qFormer.setTabla(qTabla)
             qFormer.setQueryType(qFormer.getQueryTypes().select)
-            if (estadosId) {qFormer.addCondicion("estadosIdx","=",estadosId)}
-            if (tiposTramiteId) {qFormer.addCondicion("tiposTramiteIdx","=",tiposTramiteId)}
+            if (estadosIdx) {qFormer.addCondicion("estadosIdx","=",estadosIdx)}
+            if (tiposTramiteIdx) {qFormer.addCondicion("tiposTramiteIdx","=",tiposTramiteIdx)}
             if (fechaCreacionDesde) {qFormer.addCondicion("fechaCreacion",">=",fechaCreacionDesde)}
             if (fechaCreacionHasta) {qFormer.addCondicion("fechaCreacion","<=",fechaCreacionHasta)}
             if (usuariosId) {qFormer.addCondicion("usuariosId","=",usuariosId)}
