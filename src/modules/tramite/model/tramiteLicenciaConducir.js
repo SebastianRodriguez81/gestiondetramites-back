@@ -20,9 +20,9 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
             
             let result 
 
-            if(await this.tramite.persistir(this.tramite)){
+            if(await this.tramite.persistir()){
                 result = await daoTramiteLicenciaConducir.persistir(this)
-                if(this.id){this.id = result}
+                if(!this.id){this.id = result}
             }            
             
             return result
