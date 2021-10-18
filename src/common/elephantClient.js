@@ -10,7 +10,7 @@ function queryBuilder() {
     valores: [],
     condiciones: null,
     orden: null,
-    join: null,
+    joins: null,
     queryTypes: {
       select: "select",
       insert: "insert",
@@ -40,6 +40,14 @@ function queryBuilder() {
 
     setOrden: function (ordenNuevo) {this.orden = ordenNuevo},
 
+    addJoin: function(join,tablaJoin, onJoin){
+      if (this.joins) {
+        this.joins += ' '+join+' '+tablaJoin+' ON '+onJoin
+      } else {
+        this.joins = ' '+join+' '+tablaJoin+' ON '+onJoin
+      }     
+    },
+
 
     getQuerry: function () {
       let querry = ''
@@ -50,6 +58,7 @@ function queryBuilder() {
                   ${this.queryType} 
                   ${(this.campos.length? this.campos.toString():"*")} 
                   from ${this.tabla} 
+                  ${(this.joins? this.joins:"")} 
                   ${(this.condiciones? "where "+this.condiciones:"")} 
                   ${(this.orden? "order by "+this.orden:"")} 
                   `
