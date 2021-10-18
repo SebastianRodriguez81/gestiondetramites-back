@@ -14,7 +14,8 @@ function queryBuilder() {
     queryTypes: {
       select: "select",
       insert: "insert",
-      update: "update"
+      update: "update",
+      delete: "delete"
     },
 
     getQueryTypes: function () {return this.queryTypes},
@@ -29,8 +30,7 @@ function queryBuilder() {
       }
     },
 
-    addCondicion: function (campo, condicion, valor) {
-      console.log(this.condiciones)
+    addCondicion: function (campo, condicion, valor) {      
       if (this.condiciones) {
         this.condiciones += ' AND ' + campo + ' ' + condicion + ' ' + valor
       } else {
@@ -76,6 +76,13 @@ function queryBuilder() {
           querry = `
                   update ${this.tabla}
                   set ${camposUpdate} 
+                  ${(this.condiciones? "where "+this.condiciones:"")}                     
+                  `
+          break;
+
+        case this.queryTypes.delete:
+          querry = `
+                  delete from  ${this.tabla}                  
                   ${(this.condiciones? "where "+this.condiciones:"")}                     
                   `
           break;

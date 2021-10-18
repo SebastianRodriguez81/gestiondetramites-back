@@ -6,8 +6,6 @@ let tramite = getTramite()
 let daoTramiteLicenciaConducir = getDaoTramiteLicenciaConducir()
 let tramiteLicenciaConducir = crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir)
 
-function getTramiteLicenciaConducir() {
-    return tramiteLicenciaConducir
-}
+function getTramiteLicenciaConducir() {return tramiteLicenciaConducir}
 
 export default getTramiteLicenciaConducir
