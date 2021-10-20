@@ -4,7 +4,7 @@ import tramiteRouter from './tramite.js'
 const router = express.Router()
 
 /** AGREGAR AQUI LAS RUTAS **/
-router.use('/tramites', tramiteRouter)
+router.use('/procedures', tramiteRouter)
 
 /****************************/
 

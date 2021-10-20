@@ -16,7 +16,7 @@ tramiteRouter.get('/tiposTramite/obtenerTodos/', async (req, res, next) => {
 })
 
 tramiteRouter.get('/obtenerTodos/', async (req, res, next) => {
-    try {
+    try {        
         const obtenerTramite = getObtenerTramite()      
         const respuesta = await obtenerTramite.ejecutar(req.query.estadosId, req.query.tiposTramiteId, req.query.fechaCreacionDesde, req.query.fechaCreacionHasta, req.query.usuariosId, req.query.usuariosAsigId)
         res.json(respuesta)

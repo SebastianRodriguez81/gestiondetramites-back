@@ -1,14 +1,15 @@
 import express from 'express'
 import router from '../routes/index.js'
 import errorHandler from '../middleware/errorHandler.js'
+import securityHandler from '../middleware/securityHandler.js'
 
 
 
 function crearServidor() {
   const app = express()
-  //app.use(securityHandler)) 
+  //app.use(securityHandler)
   app.use(express.json())
-  app.use(router)
+  app.use("/api",router)
   app.use(errorHandler)
 
   let server = null
