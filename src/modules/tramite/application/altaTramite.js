@@ -3,9 +3,9 @@ function crearAltaTramite(altaTramiteLicenciaConduicir) {
         async ejecutar(tramiteData) {                     
 
             if (!tramiteData) {throw new Error("Tramite invalido o faltante.")}            
-            if (!tramiteData.tiposTramiteIdx) {throw new Error("Tipo de tramite invalido o faltante.")}
+            if (!tramiteData.idProcedureType) {throw new Error("Tipo de tramite invalido o faltante.")}
                            
-            switch (tramiteData.tiposTramiteIdx) {
+            switch (tramiteData.idProcedureType) {
                 case 1:
                     return altaTramiteLicenciaConduicir.ejecutar(tramiteData)
                     break;
