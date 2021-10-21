@@ -1,3 +1,4 @@
+
 function crearUsuario(daoUsuario) {
     return {
         id: null,
@@ -34,7 +35,7 @@ function crearUsuario(daoUsuario) {
         setTiposUsuarioIdx(tiposUsuarioIdx) {
             this.tiposUsuarioIdx = tiposUsuarioIdx;
         },
-        setTiposCorreo(correo) {
+        setCorreo(correo) {
             this.correo = correo;
         },
         setNombre(nombre) {
@@ -84,6 +85,7 @@ function crearUsuario(daoUsuario) {
             }
         },
         //puede ser una entidad o enum de tipo de usuario y a partir de ahi establecer los datos para el tipo
+        
         
     };
 }
