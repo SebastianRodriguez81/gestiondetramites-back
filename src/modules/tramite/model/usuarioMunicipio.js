@@ -4,10 +4,9 @@ function crearUsuarioMunicipio(daoUsuario) {
         id: null,
         usuarioId: null,
         usuarioMunicipioRolesId: null,
-        usuario: null,
-        //pongo el usuario para establecerlo a partir del usuarioid
         tipoTramiteHabilitaciones: null,
         //que hago con la lista de tipo de tramites para los que esta habilitado?
+        usuario: null,
 
         async buscarTodos(id, usuarioId, usuarioMunicipioRolesId) {
             return await daoUsuario.buscarTodos(

@@ -7,7 +7,6 @@ function crearUsuarioCiudadano(daoUsuario) {
         domicilio: null,
         fechaDeNacimiento: null,
         usuario: null,
-        //pongo el usuario para establecerlo a partir del usuarioid
 
         async buscarTodos(id, usuarioId, dni, domicilio, fechaDeNacimiento) {
             return await daoUsuario.buscarTodos(
