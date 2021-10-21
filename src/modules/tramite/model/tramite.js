@@ -5,24 +5,46 @@ function crearTramite(daoTramite) {
         tiposTramiteIdx: null,
         usuariosId: null,
         usuariosAsigId: null,
-        fechaCreacion: null,       
+        fechaCreacion: null,
 
-        async buscarTodos(estadosId, tiposTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId) {
-            return await daoTramite.buscarTodos(estadosId, tiposTramiteId, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId)
+        async buscarTodos(
+            estadosId,
+            tiposTramiteId,
+            fechaCreacionDesde,
+            fechaCreacionHasta,
+            usuariosId,
+            usuariosAsigId
+        ) {
+            return await daoTramite.buscarTodos(
+                estadosId,
+                tiposTramiteId,
+                fechaCreacionDesde,
+                fechaCreacionHasta,
+                usuariosId,
+                usuariosAsigId
+            );
         },
 
-        async persistir() {            
-            if(!this.estadosIdx){throw new Error("Estado faltante")}
-            if(!this.tiposTramiteIdx){throw new Error("TipoTramite faltante")}
-            if(!this.usuariosId){throw new Error("Usuario faltante")} 
-            
-            const result = await daoTramite.persistir(this)
+        async persistir() {
+            if (!this.estadosIdx) {
+                throw new Error("Estado faltante");
+            }
+            if (!this.tiposTramiteIdx) {
+                throw new Error("TipoTramite faltante");
+            }
+            if (!this.usuariosId) {
+                throw new Error("Usuario faltante");
+            }
 
-            if(!this.id){this.id = result}
+            const result = await daoTramite.persistir(this);
 
-            return result  
-        },        
-    }
+            if (!this.id) {
+                this.id = result;
+            }
+
+            return result;
+        },
+    };
 }
 
-export default crearTramite
+export default crearTramite;
