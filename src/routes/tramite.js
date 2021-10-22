@@ -27,7 +27,7 @@ tramiteRouter.post('/', async (req, res, next) => {
 //#region GET
 tramiteRouter.get('/', async (req, res, next) => {
     try {
-        const obtenerTramitesPorUsuario = tamiteApplications.getObtenerTramitePorUsuario()
+        const obtenerTramitesPorUsuario = tamiteApplications.getObtenerTramitesPorUsuario()
         const respuesta = await obtenerTramitesPorUsuario.ejecutar(req.query.idUser)
         res.json(respuesta)
     } catch (error) {
@@ -37,7 +37,7 @@ tramiteRouter.get('/', async (req, res, next) => {
 
 tramiteRouter.get('/pending', async (req, res, next) => {
     try {
-        const obtenerTramitesPendiente = getObtenerTramitesPendiente()
+        const obtenerTramitesPendiente = tamiteApplications.getObtenerTramitesPendiente()
         const respuesta = await obtenerTramitesPendiente.ejecutar()
         res.json(respuesta)
     } catch (error) {
@@ -47,7 +47,7 @@ tramiteRouter.get('/pending', async (req, res, next) => {
 
 tramiteRouter.get('/inProgress', async (req, res, next) => {
     try {
-        const obtenerTramitesEnProceso = getObtenerTramitesEnProceso()
+        const obtenerTramitesEnProceso = tamiteApplications.getObtenerTramitesEnProceso()
         const respuesta = await obtenerTramitesEnProceso.ejecutar(req.query.idUser)
         res.json(respuesta)
     } catch (error) {
