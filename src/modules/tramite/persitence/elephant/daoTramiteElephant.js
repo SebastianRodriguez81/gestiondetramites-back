@@ -39,7 +39,7 @@ function crearDaoTramite(db) {
             }
         },
 
-        buscarTodos: async (estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId) => {   
+        buscarTodos: async (estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id) => {   
                               
             const qTabla = 'tramites as tra'
             const qTUser = 'usuarios as usu'
@@ -60,6 +60,7 @@ function crearDaoTramite(db) {
             if (fechaCreacionHasta) {qFormer.addCondicion("tra.fechaCreacion","<=",fechaCreacionHasta)}
             if (usuariosId) {qFormer.addCondicion("tra.usuariosId","=",usuariosId)}
             if (usuariosAsigId) {qFormer.addCondicion("tra.usuariosAsigId","=",usuariosAsigId)}
+            if (id) {qFormer.addCondicion("tra.id","=",id)}
             qFormer.addCondicion("usu.eliminado","=",false)
             qFormer.addCondicion("tra.eliminado","=",false)
 

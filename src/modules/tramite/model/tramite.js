@@ -13,7 +13,8 @@ function crearTramite(daoTramite) {
             fechaCreacionDesde,
             fechaCreacionHasta,
             usuariosId,
-            usuariosAsigId
+            usuariosAsigId,
+            id
         ) {
             return await daoTramite.buscarTodos(
                 estadosIdx,
@@ -21,7 +22,8 @@ function crearTramite(daoTramite) {
                 fechaCreacionDesde,
                 fechaCreacionHasta,
                 usuariosId,
-                usuariosAsigId
+                usuariosAsigId,
+                id
             );
         },
 
