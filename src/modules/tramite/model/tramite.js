@@ -46,6 +46,8 @@ function crearTramite(daoTramite) {
 
             return result;
         },
+
+        async obtenerCantidades() {return await daoTramite.obtenerCantidades()}
     };
 }
 

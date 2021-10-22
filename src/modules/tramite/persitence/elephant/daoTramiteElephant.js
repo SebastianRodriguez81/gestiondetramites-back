@@ -2,6 +2,28 @@ function crearDaoTramite(db) {
 
     return {
 
+        obtenerCantidades: async () => {
+
+            const newQ = `  select 
+                                count(tra.id) as cantidadTramites,
+                                tra.estadosidx as estadosIdx,
+                                es.codigo as estadosCodigo,
+                                es.descripcion as estadosDescripcion,
+                                es.descripcionPublica as estadosDescripcionPublica
+                            from estados as es
+                            join tramites as tra
+                            on tra.estadosIdx = es.idx
+                            group by estadosidx, es.codigo, es.descripcion, es.descripcionPublica`
+
+            try {
+                const result = await db.ejecutar(newQ);
+                return result;
+            } catch (err) {
+                throw new Error('Hubo un error al persistir el tramite: ' + err.message)
+            }
+
+        },
+
         persistir: async (tramite) => {           
             
             const qTabla = 'tramites'
