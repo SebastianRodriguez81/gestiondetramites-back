@@ -74,6 +74,7 @@ function crearDaoTramite(db) {
             const qTUserAsig = 'usuarios as usuasig'
             const qTEstado = 'estados as est'
             const qTTipo = 'tipostramite as tipo'
+            const qTUserCiudadano = 'usuariosciudadano as ctz'
 
 
             const qFormer = db.getQueryBuilder()
@@ -93,29 +94,48 @@ function crearDaoTramite(db) {
             qFormer.addJoin("join",qTEstado, "est.idx = tra.estadosIdx")
             qFormer.addJoin("join",qTTipo, "tipo.idx = tra.tiposTramiteIdx")
             qFormer.addJoin("join",qTUser, "usu.id = tra.usuariosId")
+            qFormer.addJoin("join",qTUserCiudadano, "ctz.usuariosId = usu.id")
             qFormer.addJoin("left join",qTUserAsig, "usuasig.id = tra.usuariosAsigId")
-
+            
             qFormer.addCampo("tra.id")
-            qFormer.addCampo("tra.fechacreacion")
-            qFormer.addCampo("usu.id as usuariosId")
+            qFormer.addCampo("tra.nombre")
+            qFormer.addCampo("tra.apellido")
+            qFormer.addCampo("tra.domicilio")
+            qFormer.addCampo("tra.fechaNacimiento")
+            qFormer.addCampo("tra.fechaCreacion")
+            qFormer.addCampo("tra.fechaRevision")
+            qFormer.addCampo("tra.fechaRetiro")
+            qFormer.addCampo("tra.rechazado")            
+            qFormer.addCampo("tra.rechazoMotivo")
+
+            qFormer.addCampo("tra.estadosidx")
+            qFormer.addCampo("est.codigo as estadoCodigo")
+            qFormer.addCampo("est.descripcion as estadoDescripcion")
+            qFormer.addCampo("est.descripcionPublica as estadoDescripcionPublica")
+
+            qFormer.addCampo("tra.tipostramiteidx")
+            qFormer.addCampo("tipo.codigo as tipoTramiteCodigo")
+            qFormer.addCampo("tipo.descripcion as tipoTramiteDescripcion")
+
+            qFormer.addCampo("tra.usuariosid")            
             qFormer.addCampo("usu.correo as usuariosCorreo")
-            qFormer.addCampo("usu.nombre as usuariosNombre")           
+            qFormer.addCampo("usu.nombre as usuariosNombre")
             qFormer.addCampo("usu.apellido as usuariosApellido")
+            qFormer.addCampo("ctz.dni as usuariosDni")
+            qFormer.addCampo("ctz.Domicilio as usuariosDomicilio")
+            qFormer.addCampo("ctz.fechaNacimiento as usuariosFechaNacimiento")
+
+            qFormer.addCampo("tra.usuariosasigid")
             qFormer.addCampo("usuasig.id as usuariosAsigId")
             qFormer.addCampo("usuasig.correo as usuariosAsigCorreo")
             qFormer.addCampo("usuasig.nombre as usuariosAsigNombre")           
             qFormer.addCampo("usuasig.apellido as usuariosaAsigApellido")
-            qFormer.addCampo("est.idx as estadosId")
-            qFormer.addCampo("est.codigo as estadosCodigo")
-            qFormer.addCampo("est.descripcion as estadosDescripcion")
-            qFormer.addCampo("tipo.idx as tiposTramiteId")
-            qFormer.addCampo("tipo.codigo as tiposTramiteCodigo")
-            qFormer.addCampo("tipo.descripcion as tiposTramiteDescripcion")
+            
             //qFormer.addCampo("*")
 
             const newQ = qFormer.getQuerry()
 
-            //console.log(newQ)
+            console.log(newQ)
 
             try {
                 const result = await db.ejecutar(newQ);

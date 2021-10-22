@@ -8,16 +8,16 @@ function crearTramite(daoTramite) {
         fechaCreacion: null,
 
         async buscarTodos(
-            estadosId,
-            tiposTramiteId,
+            estadosIdx,
+            tiposTramiteIdx,
             fechaCreacionDesde,
             fechaCreacionHasta,
             usuariosId,
             usuariosAsigId
         ) {
             return await daoTramite.buscarTodos(
-                estadosId,
-                tiposTramiteId,
+                estadosIdx,
+                tiposTramiteIdx,
                 fechaCreacionDesde,
                 fechaCreacionHasta,
                 usuariosId,
