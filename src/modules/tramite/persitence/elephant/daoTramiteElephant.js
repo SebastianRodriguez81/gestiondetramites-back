@@ -40,35 +40,7 @@ function crearDaoTramite(db) {
         },
 
         buscarTodos: async (estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId) => {   
-            
-            // OLD **************************************************************
-
-            // const qTabla = 'tramites'
-            // let qEstadoId = ''
-            // let qTipoTramiteId = ''
-            // let qFechaCreacionDesde = ''
-            // let qFechaCreacionHasta = ''
-            // let qUsuarioId = ''
-            // let qUsuarioAsigId = ''
-
-            // if (estadosId) {qEstadoId = `(estadosIdx = ${estadosId}) and `}
-            // if (tiposTramiteId) {qTipoTramiteId = `(tiposTramiteIdx = ${tiposTramiteId}) and `}
-            // if (fechaCreacionDesde) {qFechaCreacionDesde = `(fechaCreacion >= ${fechaCreacionDesde}) and `}
-            // if (fechaCreacionHasta) {qFechaCreacionHasta = `(fechaCreacion <= ${fechaCreacionHasta}) and `}
-            // if (usuariosId) {qUsuarioId = `(usuariosId = ${usuariosId}) and `}
-            // if (usuariosAsigId) {qUsuarioAsigId = `(usuariosAsigId = ${usuariosAsigId}) and `}
-
-            // const querry = `
-            // select 
-            // * 
-            // from ${qTabla} 
-            // where
-            // ${qEstadoId} ${qTipoTramiteId} ${qFechaCreacionDesde} ${qFechaCreacionHasta} ${qUsuarioId} ${qUsuarioAsigId}          
-            // eliminado = false
-            //`
-
-            // OLD **************************************************************            
-
+                              
             const qTabla = 'tramites as tra'
             const qTUser = 'usuarios as usu'
             const qTUserAsig = 'usuarios as usuasig'
@@ -82,12 +54,12 @@ function crearDaoTramite(db) {
             qFormer.setTabla(qTabla)
             qFormer.setQueryType(qFormer.getQueryTypes().select)
 
-            if (estadosIdx) {qFormer.addCondicion("estadosIdx","=",estadosIdx)}
-            if (tiposTramiteIdx) {qFormer.addCondicion("tiposTramiteIdx","=",tiposTramiteIdx)}
-            if (fechaCreacionDesde) {qFormer.addCondicion("fechaCreacion",">=",fechaCreacionDesde)}
-            if (fechaCreacionHasta) {qFormer.addCondicion("fechaCreacion","<=",fechaCreacionHasta)}
-            if (usuariosId) {qFormer.addCondicion("usuariosId","=",usuariosId)}
-            if (usuariosAsigId) {qFormer.addCondicion("usuariosAsigId","=",usuariosAsigId)}
+            if (estadosIdx) {qFormer.addCondicion("tra.estadosIdx","=",estadosIdx)}
+            if (tiposTramiteIdx) {qFormer.addCondicion("tra.tiposTramiteIdx","=",tiposTramiteIdx)}
+            if (fechaCreacionDesde) {qFormer.addCondicion("tra.fechaCreacion",">=",fechaCreacionDesde)}
+            if (fechaCreacionHasta) {qFormer.addCondicion("tra.fechaCreacion","<=",fechaCreacionHasta)}
+            if (usuariosId) {qFormer.addCondicion("tra.usuariosId","=",usuariosId)}
+            if (usuariosAsigId) {qFormer.addCondicion("tra.usuariosAsigId","=",usuariosAsigId)}
             qFormer.addCondicion("usu.eliminado","=",false)
             qFormer.addCondicion("tra.eliminado","=",false)
 
