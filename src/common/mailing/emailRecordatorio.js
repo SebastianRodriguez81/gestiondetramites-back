@@ -1,7 +1,7 @@
 import { createEmailSender } from "./emailSender.js";
 import { createEmailBuilder } from "./emailBuilder.js";
 
-function createEmailComprobante(user, pass) {
+function createEmailRecordatorio(user, pass) {
   const builder = createEmailBuilder();
   const sender = createEmailSender(user, pass);
 
@@ -45,4 +45,4 @@ function createEmailComprobante(user, pass) {
   };
 }
 
-export { createEmailComprobante };
+export { createEmailRecordatorio };
