@@ -1,3 +1,6 @@
+import { getValidDate } from "../../../common/validDate.js"
+import ValidationError from '../../../common/errors.js'
+
 function crearTramite(daoTramite) {
     return {
         id: null,
@@ -56,12 +59,42 @@ function crearTramite(daoTramite) {
         },
 
         asignarResponsable(idUser) {
+            if (this.idState != 1) { throw new ValidationError("El estado del tramite no permite esta accion.") }
             this.idUserMunicipal = idUser
+            this.assignmentDate = getValidDate()
             this.idState = 2
             return this
+        },
+
+        asignarFechaRevision(revisionDate) {
+            if (this.idState != 2) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            this.revisionDate = revisionDate
+            this.idState = 3
+            return this
+        },
+
+        asignarFechaRetiro(withdrawalDate) {
+            if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            this.withdrawalDate = withdrawalDate
+            this.idState = 4
+            return this
+        },
+
+        finalizarTramite() {
+            if (this.idState != 4) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            this.completedDate = getValidDate()
+            this.idState = 5
+            return this
+        },
+
+        rechazarTramite(reasonRejection) {
+            if (this.idState != 4) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            this.completedDate = getValidDate()
+            this.rejected = true
+            this.reasonRejection = reasonRejection
+            this.idState = 5
+            return this
         }
-
-
     }
 }
 

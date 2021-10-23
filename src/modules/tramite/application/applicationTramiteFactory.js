@@ -12,6 +12,9 @@ import crearObtenerTramite from "./obtenerTramites.js"
 import crearAltaTramite from "./altaTramite.js"
 import crearAltaTramiteLicenciaConducir from "./altaTramiteLicenciaConducir.js"
 import crearAsignarResponsable from "./asignarResponsable.js"
+import crearAsignarFechaRevision from "./asignarFechaRevision.js"
+import crearAsignarFechaRetiro from "./asignarFechaRetiro.js"
+import crearFinalizarTramite from "./finalizarTramite.js"
 
 function getTramiteApplications() {
     return {
@@ -32,6 +35,24 @@ function getTramiteApplications() {
             let tramite = getTramite()
             let asignarResponsable = crearAsignarResponsable(tramite)
             return asignarResponsable
+        },
+
+        getAsignarFechaRevision: function() {
+            let tramite = getTramite()
+            let asignarFechaRevision = crearAsignarFechaRevision(tramite)
+            return asignarFechaRevision
+        },
+
+        getAsignarFechaRetiro: function() {
+            let tramite = getTramite()
+            let asignarFechaRetiro = crearAsignarFechaRetiro(tramite)
+            return asignarFechaRetiro
+        },
+
+        getFinalizarTramite: function() {
+            let tramite = getTramite()
+            let finalizarTramite = crearFinalizarTramite(tramite)
+            return finalizarTramite
         },
 
         getObtenerTramitePorId: function () {

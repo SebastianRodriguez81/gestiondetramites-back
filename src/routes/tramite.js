@@ -46,6 +46,43 @@ tramiteRouter.put('/setUserRespon', async (req, res, next) => {
         next(error)
     }
 })
+
+tramiteRouter.put('/setRevisionDate', async (req, res, next) => {
+    try {       
+        if (typeof req.body.idProcedure !== 'number' ){throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
+        if (typeof req.body.revisionDate !== 'string' ){throw new ValidationError("Fecha de revision erronea o faltantes.")}        
+        const asignarFechaRevision = tamiteApplications.getAsignarFechaRevision()
+        const respuesta = await asignarFechaRevision.ejecutar(req.body.idProcedure, req.body.revisionDate)
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
+
+tramiteRouter.put('/setWithdrawalDate', async (req, res, next) => {
+    try {       
+        if (typeof req.body.idProcedure !== 'number' ){throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
+        if (typeof req.body.withdrawalDate !== 'string' ){throw new ValidationError("Fecha de retiro erronea o faltantes.")}        
+        const asignarFechaRetiro = tamiteApplications.getAsignarFechaRetiro()
+        const respuesta = await asignarFechaRetiro.ejecutar(req.body.idProcedure, req.body.withdrawalDate)
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
+
+tramiteRouter.put('/finishProcedure', async (req, res, next) => {
+    try {       
+        if (typeof req.body.idProcedure !== 'number' ){throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
+        if (typeof req.body.rejected !== 'boolean' ){throw new ValidationError("Identificador de rechazo erroneo o faltantes.")}
+        if (req.body.rejected && typeof req.body.reasonRejection !== 'string') { throw new ValidationError("Motivo de retiro erronea o faltantes.") }
+        const finalizarTramite = tamiteApplications.getFinalizarTramite()
+        const respuesta = await finalizarTramite.ejecutar(req.body.idProcedure, req.body.rejected, req.body.reasonRejection)
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
 //#endregion
 
 //#region GET
