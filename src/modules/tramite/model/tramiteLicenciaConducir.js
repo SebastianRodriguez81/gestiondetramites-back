@@ -27,6 +27,11 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
             
             return result
         },
+
+        async obtenerDatosLicencia(id) {          
+
+            return await daoTramiteLicenciaConducir.obtenerDatosLicencia(id)
+        }
     }
 }
 

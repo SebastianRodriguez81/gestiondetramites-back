@@ -1,6 +1,28 @@
 function crearDaoTramiteLicenciaConducir(db) {
 
     return {
+
+        obtenerDatosLicencia: async (tramitesId) => {
+
+            const newQ = `  select
+                                tipotramitelicencia,
+                                claselicencia,
+                                selfieurl,
+                                selfiedniurl,
+                                frentedniurl,
+                                dorsodniurl,
+                                libredeudasurl
+                            from licenciaconducirdatos
+                            where tramitesId = ${tramitesId}`
+
+            try {
+                const result = await db.ejecutar(newQ);
+                return result;
+            } catch (err) {
+                throw new Error('Hubo un error al persistir el tramite: ' + err.message)
+            }
+
+        },
        
         persistir: async (tramiteLicenciaConducir) => {           
 

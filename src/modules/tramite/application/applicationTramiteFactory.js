@@ -1,4 +1,5 @@
 import getTramite from "../model/tramiteFactory.js";
+import getTramiteLicenciaConducir from "../model/tramiteLicenciaConducirFactory.js";
 import getTipoTramite from "../model/tipoTramiteFactory.js";
 import crearObtenerTramitePorId from "./obtenerTramitePorId.js"
 import crearObtenerTramitesPorUsuario from "./obtenerTramitesPorUsuario.js"
@@ -16,7 +17,8 @@ function getTramiteApplications(){
 
         getObtenerTramitePorId: function() {
             let tramite = getTramite()
-            let obtenerTipoTramitePorId = crearObtenerTramitePorId(tramite)   
+            let licenciaConducir = getTramiteLicenciaConducir()
+            let obtenerTipoTramitePorId = crearObtenerTramitePorId(tramite, licenciaConducir)   
             return obtenerTipoTramitePorId
         },
 
