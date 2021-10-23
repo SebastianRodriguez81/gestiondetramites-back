@@ -1,6 +1,17 @@
+import ValidationError from '../common/errors.js'
+
 function errorHandler(err, req, res, next) {
     console.error(err.stack);
-    res.status(500).send('Something broke!');   
+
+    switch (err.constructor) {
+        case ValidationError:
+            res.status(499).send('Error de validacion: ' + err.message)
+            break;
+
+        default:
+            res.status(500).send('ups..!');
+            break;
+    }
 }
 
 export default errorHandler

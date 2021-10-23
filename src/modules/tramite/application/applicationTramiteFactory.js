@@ -9,56 +9,68 @@ import crearObtenerTramitesFinalizado from "./obtenerTramitesFinalizado.js"
 import crearObtenerTramitesCantidades from "./obtenerTramitesCantidades.js"
 import crearObtenerTiposTramite from "./obtenerTiposTramite.js"
 import crearObtenerTramite from "./obtenerTramites.js"
+import crearAltaTramite from "./altaTramite.js"
+import crearAltaTramiteLicenciaConducir from "./altaTramiteLicenciaConducir.js"
 
+function getTramiteApplications() {
+    return {
 
+        getAltaTramites: function() {
+            let altaTramiteLicenciaConducir = this.getAltaTramitesLicenciaConducir()
+            let obtenerAltaTramite = crearAltaTramite(altaTramiteLicenciaConducir)
+            return obtenerAltaTramite
+        },
 
-function getTramiteApplications(){
-    return{
+        getAltaTramitesLicenciaConducir: function() {
+            let tramiteLicenciaConducir = getTramiteLicenciaConducir()
+            let obtenerAltaTramiteLicenciaConducir = crearAltaTramiteLicenciaConducir(tramiteLicenciaConducir)
+            return obtenerAltaTramiteLicenciaConducir
+        },
 
-        getObtenerTramitePorId: function() {
+        getObtenerTramitePorId: function () {
             let tramite = getTramite()
             let licenciaConducir = getTramiteLicenciaConducir()
-            let obtenerTipoTramitePorId = crearObtenerTramitePorId(tramite, licenciaConducir)   
+            let obtenerTipoTramitePorId = crearObtenerTramitePorId(tramite, licenciaConducir)
             return obtenerTipoTramitePorId
         },
 
-        getObtenerTramitesPorUsuario: function() {
+        getObtenerTramitesPorUsuario: function () {
             let tramite = getTramite()
-            let obtenerTipoTramitesPorUsuario = crearObtenerTramitesPorUsuario(tramite)   
+            let obtenerTipoTramitesPorUsuario = crearObtenerTramitesPorUsuario(tramite)
             return obtenerTipoTramitesPorUsuario
         },
 
-        getObtenerTramitesPendiente: function() {
+        getObtenerTramitesPendiente: function () {
             let tramite = getTramite()
-            let obtenerTipoTramitesPendiente = crearObtenerTramitesPendiente(tramite)   
+            let obtenerTipoTramitesPendiente = crearObtenerTramitesPendiente(tramite)
             return obtenerTipoTramitesPendiente
         },
 
-        getObtenerTramitesEnProceso: function() {
+        getObtenerTramitesEnProceso: function () {
             let tramite = getTramite()
-            let obtenerTipoTramitesEnProceso = crearObtenerTramitesEnProceso(tramite)   
+            let obtenerTipoTramitesEnProceso = crearObtenerTramitesEnProceso(tramite)
             return obtenerTipoTramitesEnProceso
         },
 
-        getObtenerTramitesFinalizado: function() {
+        getObtenerTramitesFinalizado: function () {
             let tramite = getTramite()
-            let obtenerTipoTramitesFinalizado = crearObtenerTramitesFinalizado(tramite)   
+            let obtenerTipoTramitesFinalizado = crearObtenerTramitesFinalizado(tramite)
             return obtenerTipoTramitesFinalizado
         },
 
-        getObtenerTramitesCantidades: function() {
+        getObtenerTramitesCantidades: function () {
             let tramite = getTramite()
-            let obtenerTipoTramitesCantidades = crearObtenerTramitesCantidades(tramite)   
+            let obtenerTipoTramitesCantidades = crearObtenerTramitesCantidades(tramite)
             return obtenerTipoTramitesCantidades
         },
 
-        getObtenerTiposTramite: function() {
+        getObtenerTiposTramite: function () {
             let tipoTramite = getTipoTramite()
             let obtenerTipoTramite = crearObtenerTiposTramite(tipoTramite)
             return obtenerTipoTramite
         },
 
-        getObtenerTramites: function() {
+        getObtenerTramites: function () {
             let tramite = getTramite()
             let obtenerTramite = crearObtenerTramite(tramite)
             return obtenerTramite

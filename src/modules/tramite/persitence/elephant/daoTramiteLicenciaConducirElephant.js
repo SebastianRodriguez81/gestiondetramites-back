@@ -5,13 +5,13 @@ function crearDaoTramiteLicenciaConducir(db) {
         obtenerDatosLicencia: async (tramitesId) => {
 
             const newQ = `  select
-                                tipotramitelicencia,
-                                claselicencia,
-                                selfieurl,
-                                selfiedniurl,
-                                frentedniurl,
-                                dorsodniurl,
-                                libredeudasurl
+                                tipotramitelicencia as subProcedureType,
+                                claselicencia as licenceCode,
+                                selfieurl as selfieUrl,
+                                selfiedniurl as selfieDniUrl,
+                                frentedniurl as frontDniUrl,
+                                dorsodniurl as backDniUrl,
+                                libredeudasurl as debtFreeUrl
                             from licenciaconducirdatos
                             where tramitesId = ${tramitesId}`
 
@@ -23,30 +23,26 @@ function crearDaoTramiteLicenciaConducir(db) {
             }
 
         },
-       
-        persistir: async (tramiteLicenciaConducir) => {           
 
-            //console.log(tramiteLicenciaConducir)
+        persistir: async (tramiteLicenciaConducir) => {
 
             const qTabla = 'licenciaconducirdatos'
             const qFormer = db.getQueryBuilder()
-            const objFecha = new Date()
-            const fecha = objFecha.getFullYear()+"-"+objFecha.getMonth()+"-"+objFecha.getDay()
 
             qFormer.setTabla(qTabla)
             qFormer.setQueryType(qFormer.getQueryTypes().insert)
-            qFormer.addCampo('id',"default")            
-            qFormer.addCampo('tipostramiteidx',tramiteLicenciaConducir.tramite.tiposTramiteIdx)
-            qFormer.addCampo('tramitesid',tramiteLicenciaConducir.tramite.id)
-            qFormer.addCampo('tipolicencia',"'"+tramiteLicenciaConducir.tipoLicencia+"'")   
-            tramiteLicenciaConducir.fechaLicencia? qFormer.addCampo('fechalicencia',tramiteLicenciaConducir.fechaLicencia) :
-            tramiteLicenciaConducir.fechaTramite? qFormer.addCampo('fechatramite',tramiteLicenciaConducir.fechaTramite) : 
-            qFormer.addCampo('retirada',tramiteLicenciaConducir.retirada)
-            qFormer.addCampo('eliminado',false)
-            qFormer.addCampo('ultimamodifciacion',"'"+fecha+"'")
+            qFormer.addCampo('id', "default")
+            qFormer.addCampo('tramitesid', tramiteLicenciaConducir.tramite.id)
+            qFormer.addCampo('tipotramitelicencia', "'" + tramiteLicenciaConducir.subProcedureType + "'")
+            qFormer.addCampo('claselicencia', "'" + tramiteLicenciaConducir.licenceCode + "'")
+            qFormer.addCampo('selfieurl', "'" + tramiteLicenciaConducir.selfieUrl + "'")
+            qFormer.addCampo('selfiedniurl', "'" + tramiteLicenciaConducir.selfieDniUrl + "'")
+            qFormer.addCampo('frentedniurl', "'" + tramiteLicenciaConducir.frontDniUrl + "'")
+            qFormer.addCampo('dorsodniurl', "'" + tramiteLicenciaConducir.backDniUrl + "'")
+            qFormer.addCampo('libredeudasurl', "'" + tramiteLicenciaConducir.debtFreeUrl + "'")
 
             const newQ = qFormer.getQuerry()
-            //console.log(newQ)
+            console.log(newQ)
 
             try {
                 const result = await db.ejecutar(newQ);

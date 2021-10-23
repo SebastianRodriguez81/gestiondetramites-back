@@ -1,8 +1,7 @@
 import pg from "pg";
-import {getDbConnectionString} from '../config/index.js'
+import { getDbConnectionString } from '../config/index.js'
 
 function queryBuilder() {
-
   return {
     queryType: null,
     tabla: null,
@@ -18,10 +17,10 @@ function queryBuilder() {
       delete: "delete"
     },
 
-    getQueryTypes: function () {return this.queryTypes},
-    setQueryType: function (queryType) {this.queryType = queryType},
+    getQueryTypes: function () { return this.queryTypes },
+    setQueryType: function (queryType) { this.queryType = queryType },
 
-    setTabla: function (tablaNueva) {this.tabla = tablaNueva},
+    setTabla: function (tablaNueva) { this.tabla = tablaNueva },
 
     addCampo: function (campoNuevo, valorNuevo) {
       if (campoNuevo) {
@@ -30,7 +29,7 @@ function queryBuilder() {
       }
     },
 
-    addCondicion: function (campo, condicion, valor) {      
+    addCondicion: function (campo, condicion, valor) {
       if (this.condiciones) {
         this.condiciones += ' AND ' + campo + ' ' + condicion + ' ' + valor
       } else {
@@ -38,16 +37,15 @@ function queryBuilder() {
       }
     },
 
-    setOrden: function (ordenNuevo) {this.orden = ordenNuevo},
+    setOrden: function (ordenNuevo) { this.orden = ordenNuevo },
 
-    addJoin: function(join,tablaJoin, onJoin){
+    addJoin: function (join, tablaJoin, onJoin) {
       if (this.joins) {
-        this.joins += ' '+join+' '+tablaJoin+' ON '+onJoin
+        this.joins += ' ' + join + ' ' + tablaJoin + ' ON ' + onJoin
       } else {
-        this.joins = ' '+join+' '+tablaJoin+' ON '+onJoin
-      }     
+        this.joins = ' ' + join + ' ' + tablaJoin + ' ON ' + onJoin
+      }
     },
-
 
     getQuerry: function () {
       let querry = ''
@@ -80,7 +78,7 @@ function queryBuilder() {
           for (let index = 0; index < this.campos.length; index++) {
             camposUpdate += this.campos[index] + " = " + this.valores[index]
           }
-          camposUpdate += ' )'         
+          camposUpdate += ' )'
 
           querry = `
                   update ${this.tabla}
@@ -105,23 +103,16 @@ function queryBuilder() {
 
 function crearElephantClient() {
   return {
-
-    getQueryBuilder: (tablaParm) => {
-      return queryBuilder(tablaParm)
-    },
+    getQueryBuilder: (tablaParm) => { return queryBuilder(tablaParm) },
 
     ejecutar: (queryString) => {
       return new Promise((resolve, reject) => {
         const conString = getDbConnectionString()
         const client = new pg.Client(conString);
         client.connect(function (err) {
-          if (err) {
-            reject('could not connect to postgres', err);
-          }
+          if (err) { reject('could not connect to postgres', err); }
           client.query(queryString, function (err, result) {
-            if (err) {
-              reject(err);
-            }
+            if (err) { reject(err); }
             if (result) {
               client.end();
               switch (result.command) {
@@ -130,15 +121,13 @@ function crearElephantClient() {
                   break;
 
                 case 'SELECT':
-                    resolve(result.rows);
-                    break;
-              
+                  resolve(result.rows);
+                  break;
+
                 default:
                   resolve(result);
                   break;
               }
-
-              
             } else {
               reject('error inesperado')
             }

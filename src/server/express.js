@@ -9,7 +9,7 @@ function crearServidor() {
   const app = express()
   //app.use(securityHandler)
   app.use(express.json())
-  app.use("/api",router)
+  app.use("/api", router)
   app.use(errorHandler)
 
   let server = null
@@ -47,6 +47,4 @@ function crearServidor() {
   }
 }
 
-export {
-  crearServidor
-}
+export { crearServidor }

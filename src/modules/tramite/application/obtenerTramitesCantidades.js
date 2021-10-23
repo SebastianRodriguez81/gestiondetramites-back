@@ -1,6 +1,6 @@
 function crearObtenerTramiteCantidades(tramite) {
     return {
-        async ejecutar(id) {                             
+        async ejecutar() {
             return await tramite.obtenerCantidades()
         }
     }

@@ -1,54 +1,38 @@
 function crearTramite(daoTramite) {
     return {
         id: null,
-        estadosIdx: null,
-        tiposTramiteIdx: null,
-        usuariosId: null,
-        usuariosAsigId: null,
-        fechaCreacion: null,
+        idState: null,
+        idProcedureType: null,
+        idUserCitizen: null,
+        idUserMunicipal: null,
+        userName: null,
+        userSurname: null,
+        userDni: null,
+        userAddress: null,
+        userBirthdate: null,
+        creationDate: null,
+        assignmentDate: null,
+        revisionDate: null,
+        withdrawalDate: null,
+        completedDate: null,
+        rejected: null,
+        reasonRejection: null,
 
-        async buscarTodos(
-            estadosIdx,
-            tiposTramiteIdx,
-            fechaCreacionDesde,
-            fechaCreacionHasta,
-            usuariosId,
-            usuariosAsigId,
-            id
-        ) {
-            return await daoTramite.buscarTodos(
-                estadosIdx,
-                tiposTramiteIdx,
-                fechaCreacionDesde,
-                fechaCreacionHasta,
-                usuariosId,
-                usuariosAsigId,
-                id
-            );
+
+        async buscarTodos(estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id) {
+            return await daoTramite.buscarTodos(estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id);
         },
 
         async persistir() {
-            if (!this.estadosIdx) {
-                throw new Error("Estado faltante");
-            }
-            if (!this.tiposTramiteIdx) {
-                throw new Error("TipoTramite faltante");
-            }
-            if (!this.usuariosId) {
-                throw new Error("Usuario faltante");
-            }
-
-            const result = await daoTramite.persistir(this);
-
-            if (!this.id) {
-                this.id = result;
-            }
-
-            return result;
+            const result = await daoTramite.persistir(this)
+            if (!this.id) { this.id = result }
+            return this;
         },
 
-        async obtenerCantidades() {return await daoTramite.obtenerCantidades()}
+        async obtenerCantidades() {
+            return await daoTramite.obtenerCantidades()
+        }
     };
 }
 
-export default crearTramite;
+export default crearTramite

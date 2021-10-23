@@ -1,35 +1,28 @@
 function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
 
-    return {        
+    return {
         id: null,
         tramite: tramite,
-        tipoLicencia: null,
-        fechaLicencia: null,
-        fechaTramite: null,
-        retirada: null,
-
-        setUsuariosId(usuariosId) {this.tramite.usuariosId = usuariosId},
-        setEstadosIdx(estadosIdx) {this.tramite.estadosIdx = estadosIdx},
-        setTipoLicencia(tipoLicencia) {this.tipoLicencia = tipoLicencia},
-        setFechaLicencia(fechaLicencia) {this.fechaLicencia = fechaLicencia},
-        setFechaTramite(fechaTramite) {this.fechaTramite = fechaTramite},
-        setRetirada(retirada) {this.retirada = retirada},
+        subProcedureType: null,
+        licenceCode: null,
+        selfieUrl: null,
+        selfieDniUrl: null,
+        frontDniUrl: null,
+        backDniUrl: null,
+        debtFreeUrl: null,
 
         async persistir() {
-            this.tramite.tiposTramiteIdx = 1
-            
-            let result 
-
-            if(await this.tramite.persistir()){
-                result = await daoTramiteLicenciaConducir.persistir(this)
-                if(!this.id){this.id = result}
-            }            
-            
-            return result
+            this.tramite.idProcedureType = 1
+            await this.tramite.persistir()
+            if (this.tramite.id) {
+                let result = await daoTramiteLicenciaConducir.persistir(this)
+                if (!this.id) { this.id = result }
+            }
+                       
+            return this
         },
 
-        async obtenerDatosLicencia(id) {          
-
+        async obtenerDatosLicencia(id) {
             return await daoTramiteLicenciaConducir.obtenerDatosLicencia(id)
         }
     }

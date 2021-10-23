@@ -1,6 +1,8 @@
 function crearTipoTramite(daoTipoTramite) {
     return {
-        async buscarTodos() {return await daoTipoTramite.buscarTodos()}
+        async buscarTodos() {
+            return await daoTipoTramite.buscarTodos()
+        }
     }
 }
 

@@ -1,6 +1,5 @@
 import express from 'express'
-
-import getAltaTramites from '../modules/tramite/application/altaTramiteFactory.js'
+import ValidationError from '../common/errors.js'
 import getTramiteApplications from '../modules/tramite/application/applicationTramiteFactory.js'
 
 const tramiteRouter = express.Router()
@@ -8,10 +7,27 @@ const tamiteApplications = getTramiteApplications()
 
 //#region POST
 tramiteRouter.post('/', async (req, res, next) => {
-    try {
-        const altaTramite = getAltaTramites()        
-        const respuesta = await altaTramite.ejecutar(req.body)
-        res.json(respuesta)
+    try {       
+        
+        if (typeof req.body.idUser !== 'number' ||
+            typeof req.body.idProcedureType !== 'number' ||
+            typeof req.body.userName !== 'string' ||
+            typeof req.body.userSurname !== 'string' ||
+            typeof req.body.userDni !== 'string' ||
+            typeof req.body.userAddress !== 'string' ||
+            typeof req.body.userBirthdate !== 'string' ||
+            typeof req.body.subProcedureType !== 'string' ||
+            typeof req.body.licenceCode !== 'string' ||
+            typeof req.body.selfieUrl !== 'string' ||
+            typeof req.body.selfieDniUrl !== 'string' ||
+            typeof req.body.frontDniUrl !== 'string' ||
+            typeof req.body.backDniUrl !== 'string' ||
+            typeof req.body.debtFreeUrl !== 'string'
+        ){throw new ValidationError("Datos errornes y/o faltantes.")}
+
+            const altaTramite = tamiteApplications.getAltaTramites()
+            const respuesta = await altaTramite.ejecutar(req.body)
+            res.json(respuesta)
     } catch (error) {
         next(error)
     }
@@ -93,8 +109,8 @@ tramiteRouter.get('/procedureTypes', async (req, res, next) => {
 })
 
 tramiteRouter.get('/obtenerTodos/', async (req, res, next) => {
-    try {        
-        const obtenerTramite = tamiteApplications.getObtenerTramites()      
+    try {
+        const obtenerTramite = tamiteApplications.getObtenerTramites()
         const respuesta = await obtenerTramite.ejecutar(req.query.estadosIdx, req.query.tiposTramiteIdx, req.query.fechaCreacionDesde, req.query.fechaCreacionHasta, req.query.usuariosId, req.query.usuariosAsigId)
         res.json(respuesta)
     } catch (error) {
