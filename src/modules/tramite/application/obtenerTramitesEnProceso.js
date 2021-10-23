@@ -4,7 +4,7 @@ function crearObtenerTramitesEnProceso(tramite) {
     return {
         async ejecutar(usuariosId) {
             if (!usuariosId) { throw new ValidationError("Usuario invalido o faltante") }
-            return await tramite.buscarTodos(2, null, null, null, null, usuariosId)
+            return await tramite.buscarTodos(null, null, null, null, usuariosId, null, null, 2, 3, 4)
         }
     }
 }

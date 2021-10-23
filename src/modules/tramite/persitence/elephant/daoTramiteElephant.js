@@ -3,6 +3,7 @@ import {getValidDate} from "../../../../common/validDate.js"
 function crearDaoTramite(db) {
 
     return {
+
         obtenerCantidades: async () => {
             const newQ = `  select 
                                 count(tra.id) as proceduresCount,
@@ -63,7 +64,7 @@ function crearDaoTramite(db) {
             }
         },
 
-        buscarTodos: async (estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id) => {
+        buscarTodos: async (estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id, opEstadosIdx1, opEstadosIdx2, opEstadosIdx3) => {
 
             const qTabla = 'tramites as tra'
             const qTUser = 'usuarios as usu'
@@ -76,28 +77,17 @@ function crearDaoTramite(db) {
 
             qFormer.setTabla(qTabla)
             qFormer.setQueryType(qFormer.getQueryTypes().select)
-
-            if (estadosIdx) {
-                qFormer.addCondicion("tra.estadosIdx", "=", estadosIdx)
-            }
-            if (tiposTramiteIdx) {
-                qFormer.addCondicion("tra.tiposTramiteIdx", "=", tiposTramiteIdx)
-            }
-            if (fechaCreacionDesde) {
-                qFormer.addCondicion("tra.fechaCreacion", ">=", fechaCreacionDesde)
-            }
-            if (fechaCreacionHasta) {
-                qFormer.addCondicion("tra.fechaCreacion", "<=", fechaCreacionHasta)
-            }
-            if (usuariosId) {
-                qFormer.addCondicion("tra.usuariosId", "=", usuariosId)
-            }
-            if (usuariosAsigId) {
-                qFormer.addCondicion("tra.usuariosAsigId", "=", usuariosAsigId)
-            }
-            if (id) {
-                qFormer.addCondicion("tra.id", "=", id)
-            }
+            console.log(opEstadosIdx1)
+            console.log(opEstadosIdx2)
+            console.log(opEstadosIdx3)
+            if (opEstadosIdx1 && opEstadosIdx2 && opEstadosIdx3) { qFormer.addCondicion("tra.estadosIdx", "in", `( ${opEstadosIdx1} , ${opEstadosIdx2}, ${opEstadosIdx3})`) }    
+            if (estadosIdx) { qFormer.addCondicion("tra.estadosIdx", "=", estadosIdx) }    
+            if (tiposTramiteIdx) { qFormer.addCondicion("tra.tiposTramiteIdx", "=", tiposTramiteIdx) }
+            if (fechaCreacionDesde) { qFormer.addCondicion("tra.fechaCreacion", ">=", fechaCreacionDesde) }
+            if (fechaCreacionHasta) { qFormer.addCondicion("tra.fechaCreacion", "<=", fechaCreacionHasta) }
+            if (usuariosId) { qFormer.addCondicion("tra.usuariosId", "=", usuariosId) }
+            if (usuariosAsigId) { qFormer.addCondicion("tra.usuariosAsigId", "=", usuariosAsigId) }
+            if (id) { qFormer.addCondicion("tra.id", "=", id) }          
 
             qFormer.addCondicion("usu.eliminado", "=", false)
             qFormer.addCondicion("tra.eliminado", "=", false)
@@ -146,6 +136,8 @@ function crearDaoTramite(db) {
             qFormer.addCampo("usuasig.apellido as userMunicipalSurname")
 
             const newQ = qFormer.getQuerry()
+
+            console.log(newQ)
 
             try {
                 const result = await db.ejecutar(newQ);
