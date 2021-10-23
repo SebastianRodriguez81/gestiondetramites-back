@@ -57,6 +57,7 @@ function crearTramite(daoTramite) {
 
         asignarResponsable(idUser) {
             this.idUserMunicipal = idUser
+            this.idState = 2
             return this
         }
 
