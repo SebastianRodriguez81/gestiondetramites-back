@@ -87,8 +87,8 @@ tramiteRouter.put('/finishProcedure', async (req, res, next) => {
 
 //#region GET
 tramiteRouter.get('/', async (req, res, next) => {
-    try {
-        if (typeof req.body.idProcedure !== 'number' ){throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
+    try {        
+        if (isNaN(req.query.idProcedure)) {throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
         const obtenerTramitePorId = tamiteApplications.getObtenerTramitePorId()
         const respuesta = await obtenerTramitePorId.ejecutar(req.query.idProcedure)
         res.json(respuesta)
@@ -99,7 +99,7 @@ tramiteRouter.get('/', async (req, res, next) => {
 
 tramiteRouter.get('/user', async (req, res, next) => {
     try {
-        if (typeof req.body.idUser !== 'number' ){throw new ValidationError("Identificador de usuario erroneo o faltantes.")}
+        if (isNaN(req.query.idUser)) { throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
         const obtenerTramitesPorUsuario = tamiteApplications.getObtenerTramitesPorUsuario()
         const respuesta = await obtenerTramitesPorUsuario.ejecutar(req.query.idUser)
         res.json(respuesta)
@@ -120,7 +120,7 @@ tramiteRouter.get('/pending', async (req, res, next) => {
 
 tramiteRouter.get('/inProgress', async (req, res, next) => {
     try {
-        if (typeof req.body.idUser !== 'number' ){throw new ValidationError("Identificador de usuario erroneo o faltantes.")}
+        if (isNaN(req.query.idUser)) {throw new ValidationError("Identificador de usuario erroneo o faltantes.")}
         const obtenerTramitesEnProceso = tamiteApplications.getObtenerTramitesEnProceso()
         const respuesta = await obtenerTramitesEnProceso.ejecutar(req.query.idUser)
         res.json(respuesta)
