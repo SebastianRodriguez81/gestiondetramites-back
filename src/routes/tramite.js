@@ -35,11 +35,23 @@ tramiteRouter.post('/', async (req, res, next) => {
 //#endregion
 
 //#region PUT
+tramiteRouter.put('/setUserRespon', async (req, res, next) => {
+    try {       
+        if (typeof req.body.idProcedure !== 'number' ){throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
+        if (typeof req.body.idUser !== 'number' ){throw new ValidationError("Identificador de usuario erroneo o faltantes.")}
+        const asignarResponsable = tamiteApplications.getAsignarResponsable()
+        const respuesta = await asignarResponsable.ejecutar(req.body.idProcedure, req.body.idUser)
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
 //#endregion
 
 //#region GET
 tramiteRouter.get('/', async (req, res, next) => {
     try {
+        if (typeof req.body.idProcedure !== 'number' ){throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
         const obtenerTramitePorId = tamiteApplications.getObtenerTramitePorId()
         const respuesta = await obtenerTramitePorId.ejecutar(req.query.idProcedure)
         res.json(respuesta)
@@ -50,6 +62,7 @@ tramiteRouter.get('/', async (req, res, next) => {
 
 tramiteRouter.get('/user', async (req, res, next) => {
     try {
+        if (typeof req.body.idUser !== 'number' ){throw new ValidationError("Identificador de usuario erroneo o faltantes.")}
         const obtenerTramitesPorUsuario = tamiteApplications.getObtenerTramitesPorUsuario()
         const respuesta = await obtenerTramitesPorUsuario.ejecutar(req.query.idUser)
         res.json(respuesta)
@@ -70,6 +83,7 @@ tramiteRouter.get('/pending', async (req, res, next) => {
 
 tramiteRouter.get('/inProgress', async (req, res, next) => {
     try {
+        if (typeof req.body.idUser !== 'number' ){throw new ValidationError("Identificador de usuario erroneo o faltantes.")}
         const obtenerTramitesEnProceso = tamiteApplications.getObtenerTramitesEnProceso()
         const respuesta = await obtenerTramitesEnProceso.ejecutar(req.query.idUser)
         res.json(respuesta)

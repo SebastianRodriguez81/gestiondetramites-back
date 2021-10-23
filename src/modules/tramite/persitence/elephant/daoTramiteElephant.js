@@ -1,8 +1,108 @@
-import {getValidDate} from "../../../../common/validDate.js"
+import ValidationError from "../../../../common/errors.js"
+import {
+    getValidDate
+} from "../../../../common/validDate.js"
 
 function crearDaoTramite(db) {
 
     return {
+        persistir: async (tramite) => {
+            const qTabla = 'tramites'
+            const qFormer = db.getQueryBuilder()
+            const fecha = getValidDate()
+
+            if (tramite.id) {
+                // UPDATE       
+                qFormer.setTabla(qTabla)
+                qFormer.setQueryType(qFormer.getQueryTypes().update)
+                qFormer.addCampo('estadosidx', tramite.idState)
+                qFormer.addCampo('tipostramiteidx', tramite.idProcedureType)
+                qFormer.addCampo('usuariosid', tramite.idUserCitizen)
+                qFormer.addCampo('usuariosasigid', tramite.idUserMunicipal)
+                tramite.userName ? qFormer.addCampo('nombre', "'" + tramite.userName + "'") : qFormer.addCampo('nombre', tramite.userName)
+                tramite.userSurname ? qFormer.addCampo('apellido', "'" + tramite.userSurname + "'") : qFormer.addCampo('apellido', tramite.userSurname)
+                tramite.userDni ? qFormer.addCampo('dni', "'" + tramite.userDni + "'") : qFormer.addCampo('dni', tramite.userDni)
+                tramite.userAddress ? qFormer.addCampo('domicilio', "'" + tramite.userAddress + "'") : qFormer.addCampo('domicilio', tramite.userAddress)
+                tramite.userBirthdate ? qFormer.addCampo('fechanacimiento', "'" + tramite.userBirthdate + "'") : qFormer.addCampo('fechanacimiento', tramite.userBirthdate)
+                tramite.userBirthdate ? qFormer.addCampo('fechacreacion', "'" + tramite.userBirthdate + "'") : qFormer.addCampo('fechacreacion', tramite.userBirthdate)
+                tramite.assignmentDate ? qFormer.addCampo('fechaasigancion', "'" + tramite.assignmentDate + "'") : qFormer.addCampo('fechaasigancion', tramite.assignmentDate)
+                tramite.revisionDate ? qFormer.addCampo('fecharevision', "'" + tramite.revisionDate + "'") : qFormer.addCampo('fecharevision', tramite.revisionDate)
+                tramite.withdrawalDate ? qFormer.addCampo('fecharetiro', "'" + tramite.withdrawalDate + "'") : qFormer.addCampo('fecharetiro', tramite.withdrawalDate)
+                tramite.completedDate ? qFormer.addCampo('fechafinalizado', "'" + tramite.completedDate + "'") : qFormer.addCampo('fechafinalizado', tramite.completedDate)
+                qFormer.addCampo('rechazado', tramite.rejected)
+                tramite.reasonRejection ? qFormer.addCampo('rechazomotivo', "'" + tramite.reasonRejection + "'") : qFormer.addCampo('rechazomotivo', tramite.reasonRejection)
+                qFormer.addCampo('eliminado', false)
+                qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
+                qFormer.addCondicion("id", "=", tramite.id)
+
+            } else {
+                // INSERT
+                qFormer.setTabla(qTabla)
+                qFormer.setQueryType(qFormer.getQueryTypes().insert)
+                qFormer.addCampo('id', "default")
+                qFormer.addCampo('estadosidx', tramite.idState)
+                qFormer.addCampo('tipostramiteidx', tramite.idProcedureType)
+                qFormer.addCampo('usuariosid', tramite.idUserCitizen)
+                tramite.idUserMunicipal ? qFormer.addCampo('usuariosasigid', tramite.idUserMunicipal) : 1 == 1
+                tramite.userName ? qFormer.addCampo('nombre', "'" + tramite.userName + "'") : qFormer.addCampo('nombre', tramite.userName)
+                tramite.userSurname ? qFormer.addCampo('apellido', "'" + tramite.userSurname + "'") : qFormer.addCampo('apellido', tramite.userSurname)
+                tramite.userDni ? qFormer.addCampo('dni', "'" + tramite.userDni + "'") : qFormer.addCampo('dni', tramite.userDni)
+                tramite.userAddress ? qFormer.addCampo('domicilio', "'" + tramite.userAddress + "'") : qFormer.addCampo('domicilio', tramite.userAddress)
+                tramite.userBirthdate ? qFormer.addCampo('fechanacimiento', "'" + tramite.userBirthdate + "'") : qFormer.addCampo('fechanacimiento', tramite.userBirthdate)
+                qFormer.addCampo('fechacreacion', "'" + fecha + "'")
+                qFormer.addCampo('rechazado', tramite.rejected)
+                qFormer.addCampo('eliminado', false)
+                qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
+            }
+
+            const newQ = qFormer.getQuerry()
+            console.log(newQ)            
+
+            try {
+                const result = await db.ejecutar(newQ);
+                return result;
+            } catch (err) {
+                throw new Error('Hubo un error al persistir el tramite: ' + err.message)
+            }
+        },
+
+        obtenerDatos: async (id) => {
+            const qTabla = 'tramites'
+            const qFormer = db.getQueryBuilder()
+            const fecha = getValidDate()
+
+            qFormer.setTabla(qTabla)
+            qFormer.setQueryType(qFormer.getQueryTypes().select)
+            qFormer.addCampo('id')
+            qFormer.addCampo('estadosidx as idState')
+            qFormer.addCampo('tipostramiteidx as idProcedureType')
+            qFormer.addCampo('usuariosid as idUserCitizen')
+            qFormer.addCampo('usuariosasigid as idUserMunicipal')
+            qFormer.addCampo('nombre as userName')
+            qFormer.addCampo('apellido as userSurname')
+            qFormer.addCampo('dni as userDni')
+            qFormer.addCampo('domicilio as userAddress')
+            qFormer.addCampo('fechanacimiento as userBirthdate')
+            qFormer.addCampo('fechacreacion as creationDate')
+            qFormer.addCampo('fechaasigancion as assignmentDate')
+            qFormer.addCampo('fecharevision as revisionDate')
+            qFormer.addCampo('fecharetiro as withdrawalDate')
+            qFormer.addCampo('fechafinalizado as completedDate')
+            qFormer.addCampo('rechazado as rejected')
+            qFormer.addCampo('rechazomotivo as reasonRejection')
+            qFormer.addCondicion("id", "=", id)
+            qFormer.addCondicion("eliminado", "=", false)
+
+            const newQ = qFormer.getQuerry()
+            //console.log(newQ)            
+
+            try {
+                const result = await db.ejecutar(newQ);
+                return result[0];
+            } catch (err) {
+                throw new Error('Hubo un error al obtener el tramite: ' + err.message)
+            }
+        },
 
         obtenerCantidades: async () => {
             const newQ = `  select 
@@ -15,46 +115,6 @@ function crearDaoTramite(db) {
                             join tramites as tra
                             on tra.estadosIdx = es.idx
                             group by estadosidx, es.codigo, es.descripcion, es.descripcionPublica`
-
-            try {
-                const result = await db.ejecutar(newQ);
-                return result;
-            } catch (err) {
-                throw new Error('Hubo un error al persistir el tramite: ' + err.message)
-            }
-        },
-
-        persistir: async (tramite) => {
-            const qTabla = 'tramites'
-            const qFormer = db.getQueryBuilder()            
-            const fecha = getValidDate()
-
-            if (tramite.id) {
-                // UPDATE
-
-            } else {
-
-                // INSERT
-                qFormer.setTabla(qTabla)
-                qFormer.setQueryType(qFormer.getQueryTypes().insert)
-                qFormer.addCampo('id', "default")
-                qFormer.addCampo('estadosidx', tramite.idState)
-                qFormer.addCampo('tipostramiteidx', tramite.idProcedureType)
-                qFormer.addCampo('usuariosid', tramite.idUserCitizen)
-                tramite.idUserMunicipal ? qFormer.addCampo('usuariosasigid', tramite.idUserMunicipal) : 1 == 1
-                qFormer.addCampo('nombre', "'" + tramite.userName + "'")
-                qFormer.addCampo('apellido', "'" + tramite.userSurname + "'")
-                qFormer.addCampo('dni', tramite.userDni)
-                qFormer.addCampo('domicilio', "'" + tramite.userAddress + "'")
-                qFormer.addCampo('fechanacimiento', "'" + tramite.userBirthdate + "'")
-                qFormer.addCampo('fechacreacion', "'" + fecha + "'")
-                qFormer.addCampo('rechazado', tramite.rejected)
-                qFormer.addCampo('eliminado', false)
-                qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
-            }
-
-            const newQ = qFormer.getQuerry()
-
 
             try {
                 const result = await db.ejecutar(newQ);
@@ -80,14 +140,14 @@ function crearDaoTramite(db) {
             console.log(opEstadosIdx1)
             console.log(opEstadosIdx2)
             console.log(opEstadosIdx3)
-            if (opEstadosIdx1 && opEstadosIdx2 && opEstadosIdx3) { qFormer.addCondicion("tra.estadosIdx", "in", `( ${opEstadosIdx1} , ${opEstadosIdx2}, ${opEstadosIdx3})`) }    
-            if (estadosIdx) { qFormer.addCondicion("tra.estadosIdx", "=", estadosIdx) }    
+            if (opEstadosIdx1 && opEstadosIdx2 && opEstadosIdx3) { qFormer.addCondicion("tra.estadosIdx", "in", `( ${opEstadosIdx1} , ${opEstadosIdx2}, ${opEstadosIdx3})`) }
+            if (estadosIdx) { qFormer.addCondicion("tra.estadosIdx", "=", estadosIdx) }
             if (tiposTramiteIdx) { qFormer.addCondicion("tra.tiposTramiteIdx", "=", tiposTramiteIdx) }
             if (fechaCreacionDesde) { qFormer.addCondicion("tra.fechaCreacion", ">=", fechaCreacionDesde) }
             if (fechaCreacionHasta) { qFormer.addCondicion("tra.fechaCreacion", "<=", fechaCreacionHasta) }
             if (usuariosId) { qFormer.addCondicion("tra.usuariosId", "=", usuariosId) }
             if (usuariosAsigId) { qFormer.addCondicion("tra.usuariosAsigId", "=", usuariosAsigId) }
-            if (id) { qFormer.addCondicion("tra.id", "=", id) }          
+            if (id) { qFormer.addCondicion("tra.id", "=", id) }
 
             qFormer.addCondicion("usu.eliminado", "=", false)
             qFormer.addCondicion("tra.eliminado", "=", false)
@@ -106,8 +166,7 @@ function crearDaoTramite(db) {
             qFormer.addCampo("tra.fechaNacimiento as userBirthdate")
             qFormer.addCampo("tra.fechaCreacion as creationDate")
             qFormer.addCampo("tra.fechaasigancion as assignmentDate")
-            qFormer.addCampo("tra.fechaRevision as revisionDate")
-            qFormer.addCampo("tra.fechaRetiro as withdrawalDate")
+            qFormer.addCampo("tra.fechaRevision as revisionDate")           
             qFormer.addCampo("tra.fechaRetiro as withdrawalDate")
             qFormer.addCampo("tra.fechafinalizado as completedDate")
             qFormer.addCampo("tra.rechazado as rejected")
@@ -136,8 +195,7 @@ function crearDaoTramite(db) {
             qFormer.addCampo("usuasig.apellido as userMunicipalSurname")
 
             const newQ = qFormer.getQuerry()
-
-            console.log(newQ)
+            //console.log(newQ)
 
             try {
                 const result = await db.ejecutar(newQ);

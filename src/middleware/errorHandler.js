@@ -5,7 +5,7 @@ function errorHandler(err, req, res, next) {
 
     switch (err.constructor) {
         case ValidationError:
-            res.status(499).send('Error de validacion: ' + err.message)
+            res.status(461).send('Error de validacion: ' + err.message)
             break;
 
         default:

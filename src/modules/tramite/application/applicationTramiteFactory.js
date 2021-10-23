@@ -11,6 +11,7 @@ import crearObtenerTiposTramite from "./obtenerTiposTramite.js"
 import crearObtenerTramite from "./obtenerTramites.js"
 import crearAltaTramite from "./altaTramite.js"
 import crearAltaTramiteLicenciaConducir from "./altaTramiteLicenciaConducir.js"
+import crearAsignarResponsable from "./asignarResponsable.js"
 
 function getTramiteApplications() {
     return {
@@ -25,6 +26,12 @@ function getTramiteApplications() {
             let tramiteLicenciaConducir = getTramiteLicenciaConducir()
             let obtenerAltaTramiteLicenciaConducir = crearAltaTramiteLicenciaConducir(tramiteLicenciaConducir)
             return obtenerAltaTramiteLicenciaConducir
+        },
+
+        getAsignarResponsable: function() {
+            let tramite = getTramite()
+            let asignarResponsable = crearAsignarResponsable(tramite)
+            return asignarResponsable
         },
 
         getObtenerTramitePorId: function () {

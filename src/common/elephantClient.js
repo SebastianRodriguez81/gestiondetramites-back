@@ -74,11 +74,12 @@ function queryBuilder() {
 
         case this.queryTypes.update:
 
-          let camposUpdate = '( '
+          let camposUpdate = ' '
           for (let index = 0; index < this.campos.length; index++) {
+            if(index > 0){camposUpdate+= ', '}
             camposUpdate += this.campos[index] + " = " + this.valores[index]
           }
-          camposUpdate += ' )'
+          camposUpdate += ' '
 
           querry = `
                   update ${this.tabla}
