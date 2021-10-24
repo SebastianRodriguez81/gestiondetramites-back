@@ -1,5 +1,6 @@
 import crearDaoUsuario from './elephant/daoUsuarioElephant.js'
 import crearDaoUsuarioCiudadano from './elephant/daoUsuarioCiudadanoElephant.js'
+import crearDaoUsuarioMunicipal from './elephant/daoUsuarioMunicipalElephant.js'
 import crearElephantClient from '../../../common/elephantClient.js'
 
 function getUsuarioDaos() {
@@ -14,6 +15,12 @@ function getUsuarioDaos() {
             const elephantClient = crearElephantClient()
             const daoUsuarioCiudadano = crearDaoUsuarioCiudadano(elephantClient)
             return daoUsuarioCiudadano
+        },
+
+        getDaoUsuarioMunicipal: function () {
+            const elephantClient = crearElephantClient()
+            const daoUsuarioMunicipal = crearDaoUsuarioMunicipal(elephantClient)
+            return daoUsuarioMunicipal
         }
     }
 }

@@ -9,10 +9,11 @@ function crearDaoUsuario(db) {
                 const newQ = `select
                                 id,
                                 tiposusuarioidx as isUserType,
-                                tipo.codigo as userTypeCode,
-                                correo as email, nombre as name,
+                                correo as email,
+                                nombre as name,
                                 apellido as surname, 
-                                fechacreacion as creationDate
+                                fechacreacion as creationDate,
+                                tipo.codigo as userTypeCode
                             from usuarios as usu
                             join tiposUsuario as tipo
                             on tipo.idx = usu.tiposusuarioidx
@@ -41,10 +42,11 @@ function crearDaoUsuario(db) {
                 const newQ = `select
                                 id,
                                 tiposusuarioidx as isUserType,
-                                tipo.codigo as userTypeCode,
-                                correo as email, nombre as name,
+                                correo as email,
+                                nombre as name,
                                 apellido as surname, 
-                                fechacreacion as creationDate
+                                fechacreacion as creationDate,
+                                tipo.codigo as userTypeCode
                             from usuarios as usu
                             join tiposUsuario as tipo
                             on tipo.idx = usu.tiposusuarioidx

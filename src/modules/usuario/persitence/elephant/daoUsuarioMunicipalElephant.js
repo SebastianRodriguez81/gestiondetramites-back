@@ -1,6 +1,6 @@
 import { NotFoundError } from "../../../../common/errors.js"
 
-function crearDaoUsuarioCiudadano(db) {
+function crearDaoUsuarioMunicipal(db) {
     return {
         persistir: async (usuarioCiudadno) => {},
 
@@ -12,20 +12,22 @@ function crearDaoUsuarioCiudadano(db) {
                                 usu.id,
                                 tiposusuarioidx as idUserType,
                                 tipo.codigo as userTypeCode,
+                                tipo.codigo as userTypeCode,
                                 correo as email, nombre as name,
                                 apellido as surname, 
                                 fechacreacion as creationDate,
-                                ciu.id as idUserCitizen,
-                                ciu.dni as dni,
-                                ciu.domicilio as address,
-                                ciu.fechanacimiento as birthdate
+                                mun.id as idUserMunicipal,
+                                mun.usuariomunicipiorolesidx as idMunicipalRole,
+                                rol.codigo as municipalRoleCode
                             from usuarios as usu
                             join tiposUsuario as tipo
                                 on tipo.idx = usu.tiposusuarioidx
                                 and tipo.idx = 2
-                            join usuariosciudadano as ciu
-                                on ciu.usuariosId = usu.id
-                            where eliminado = false
+                            join usuariosmunicipo as mun
+                                on mun.usuariosId = usu.id
+                            join usuariomunicipioroles as rol
+                                on rol.idx = mun.usuariomunicipiorolesidx
+                            where usu.eliminado = false
                             and usu.id = ${id}`
 
                 const result = await db.ejecutar(newQ)
@@ -44,4 +46,4 @@ function crearDaoUsuarioCiudadano(db) {
     }
 }
 
-export default crearDaoUsuarioCiudadano
+export default crearDaoUsuarioMunicipal

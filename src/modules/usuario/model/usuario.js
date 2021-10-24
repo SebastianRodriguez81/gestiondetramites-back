@@ -5,7 +5,8 @@ function crearUsuario(daoUsuario) {
         email: null,
         name: null,
         surname: null,
-        creationDate: null,     
+        creationDate: null, 
+        userTypeCode: null,    
 
         async persistir() {
             const result = await daoUsuario.persistir(this)
@@ -16,16 +17,17 @@ function crearUsuario(daoUsuario) {
         async obtenerDatos(id) {
             const datos = await daoUsuario.obtenerDatosPorId(id)           
             this.id = datos.id
-            this.idUserType = datos.idUserType
+            this.idUserType = datos.idusertype
             this.email = datos.email
             this.name = datos.name
             this.surname = datos.surname
             this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
+            this.userTypeCode = datos.usertypecode
             return this
         },
 
-        async buscarTodos( id, idUserType, email, name, surname, creationDateFrom, creationDateTo ) {
-            return await daoUsuario.buscarTodos( id, idUserType, email, name, surname, creationDateFrom, creationDateTo );
+        async buscarTodos() {
+            return await daoUsuario.buscarTodos();
         },      
         
         // getTipoDeUsuario() {

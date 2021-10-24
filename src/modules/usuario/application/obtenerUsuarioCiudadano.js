@@ -1,4 +1,4 @@
-function crearObtenerUsuarioCuidadanoPorId(usuarioCiudadano) {
+function crearObtenerUsuarioCuidadano(usuarioCiudadano) {
     return {
         async ejecutar(id) {
             await usuarioCiudadano.obtenerDatos(id)
@@ -7,4 +7,4 @@ function crearObtenerUsuarioCuidadanoPorId(usuarioCiudadano) {
     }
 }
 
-export default crearObtenerUsuarioCuidadanoPorId
+export default crearObtenerUsuarioCuidadano

@@ -1,7 +1,7 @@
 import getUsuarioDaos from "../persitence/persistenceUsuarioElephant.js"
 import crearUsuario from "./usuario.js"
 import crearUsuarioCiudadano from "./usuarioCiudadano.js"
-import crearUsuarioMunicipio from "./usuarioMunicipio.js"
+import crearUsuarioMunicipal from "./usuarioMunicipial.js"
 
 const usuarioDaos = getUsuarioDaos()
 
@@ -19,10 +19,10 @@ function getUsuarioModels() {
             return usuarioCiudadano;
         },
 
-        getUsuarioMunicipio: function () {
-            let daoUsuario = usuarioDaos.getDaoUsuario()
-            let usuarioMunicipio = crearUsuarioMunicipio(daoUsuario)
-            return usuarioMunicipio
+        getUsuarioMunicipal: function () {
+            let daoUsuarioMunicipal = usuarioDaos.getDaoUsuarioMunicipal()
+            let usuarioMunicipal = crearUsuarioMunicipal(daoUsuarioMunicipal)
+            return usuarioMunicipal
         }
     }
 }
