@@ -1,25 +1,9 @@
 function crearObtenerUsuarios(usuario) {
     return {
-        async ejecutar(
-            tiposUsuarioId,
-            correo,
-            nombre,
-            apellido,
-            fechaCreacionDesde,
-            fechaCreacionHasta,
-            ultimaModificacion
-        ) {
-            return await usuario.buscarTodos(
-                tiposUsuarioId,
-                correo,
-                nombre,
-                apellido,
-                fechaCreacionDesde,
-                fechaCreacionHasta,
-                ultimaModificacion
-            );
-        },
-    };
+        async ejecutar() {
+            return await usuario.buscarTodos()
+        }
+    }
 }
 
-export default crearObtenerUsuarios;
+export default crearObtenerUsuarios

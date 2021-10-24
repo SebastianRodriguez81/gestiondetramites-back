@@ -1,5 +1,3 @@
-import ValidationError from "../../../common/errors.js";
-
 function asignarResponsable(tramite) {
     return {
         async ejecutar(idProcedure, idUser) {           
