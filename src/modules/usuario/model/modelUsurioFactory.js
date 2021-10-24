@@ -1,4 +1,4 @@
-import getUsuarioDaos from "../persitence/elephant/persistenceUsuarioElephant.js"
+import getUsuarioDaos from "../persitence/persistenceUsuarioElephant.js"
 import crearUsuario from "./usuario.js"
 import crearUsuarioCiudadano from "./usuarioCiudadano.js"
 import crearUsuarioMunicipio from "./usuarioMunicipio.js"

@@ -20,18 +20,19 @@ function crearDaoUsuario(db) {
                             and usu.id = ${id}`
 
                 const result = await db.ejecutar(newQ)
-                if (!result.length) {throw new NotFoundError('Usuario no encontrado.')}
+                if (!result.length) {
+                    throw new NotFoundError('Usuario no encontrado.')
+                }
                 return result[0]
             } catch (err) {
-                switch (err.constructor) {                   
-            
+                switch (err.constructor) {
                     case NotFoundError:
                         throw err
-            
+
                     default:
                         throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
                 }
-                
+
             }
         },
 

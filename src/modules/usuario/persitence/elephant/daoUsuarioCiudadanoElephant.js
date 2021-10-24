@@ -32,8 +32,13 @@ function crearDaoUsuarioCiudadano(db) {
                 if (!result.length) {throw new NotFoundError('Usuario no encontrado.')}
                 return result[0]
             } catch (err) {
-                if ()
-                throw new Error('Hubo un error al buscar los datos del usuario ciudadano. ' + err.message)
+                switch (err.constructor) {
+                    case NotFoundError:
+                        throw err
+
+                    default:
+                        throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
+                }
             }
         }        
     }
