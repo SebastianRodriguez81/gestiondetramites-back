@@ -1,4 +1,5 @@
 import getUsuarioModels from "../model/modelUsurioFactory.js"
+import crearAltaUsuarioCiudadano from "./altaUsuarioCiudadano.js"
 import crearObtenerUsuarioCiudadano from "./obtenerUsuarioCiudadano.js"
 import crearObtenerUsuarioMunicipal from "./obtenerUsuarioMunicipal.js"
 import crearObtenerUsuariosMunicipalResponsable from "./obtenerUsuariosMunicipalResponsable.js"
@@ -8,6 +9,13 @@ let usuarioModels = getUsuarioModels()
 
 function getUsuarioApplications() {
     return {
+
+        getAltaUsuarioCiudadano: function () {
+            let usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
+            let altaUsuarioUsuarioCiudadano = crearAltaUsuarioCiudadano(usuarioCiudadano)
+            return altaUsuarioUsuarioCiudadano
+        },
+
         getObtenerUsuarioCiudadano: function () {
             let usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
             let obtenerUsuarioUsuarioCiudadano = crearObtenerUsuarioCiudadano(usuarioCiudadano)

@@ -45,7 +45,7 @@ function crearDaoUsuarioMunicipal(db) {
             }
         },
 
-        obtenerResponsables: async () => {
+        buscarResponsables: async () => {
             try {
                 const newQ = `
                             select

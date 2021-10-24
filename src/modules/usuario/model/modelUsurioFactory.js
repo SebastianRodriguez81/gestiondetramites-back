@@ -14,14 +14,16 @@ function getUsuarioModels() {
         },
 
         getUsuarioCiudadano: function () {
+            let usuario = this.getUsuario()
             let daoUsuarioCiudadano = usuarioDaos.getDaoUsuarioCiudadano();
-            let usuarioCiudadano = crearUsuarioCiudadano(daoUsuarioCiudadano)
+            let usuarioCiudadano = crearUsuarioCiudadano(usuario, daoUsuarioCiudadano)
             return usuarioCiudadano;
         },
 
         getUsuarioMunicipal: function () {
+            let usuario = this.getUsuario()
             let daoUsuarioMunicipal = usuarioDaos.getDaoUsuarioMunicipal()
-            let usuarioMunicipal = crearUsuarioMunicipal(daoUsuarioMunicipal)
+            let usuarioMunicipal = crearUsuarioMunicipal(usuario, daoUsuarioMunicipal)
             return usuarioMunicipal
         }
     }

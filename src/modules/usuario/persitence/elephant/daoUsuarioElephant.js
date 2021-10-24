@@ -2,7 +2,41 @@ import { NotFoundError } from "../../../../common/errors.js"
 
 function crearDaoUsuario(db) {
     return {
-        persistir: async (usuario) => {},
+        persistir: async (usuario) => {
+            const qTabla = 'usuarios'
+            const qFormer = db.getQueryBuilder()
+            const fecha = getValidDate()
+
+            qFormer.setTabla(qTabla)
+            
+            qFormer.addCampo('tiposusuarioidx', usuario.idUserType)              
+            usuario.email ? qFormer.addCampo('correo', "'" + usuario.email + "'") : qFormer.addCampo('correo', usuario.email)
+            usuario.name ? qFormer.addCampo('nombre', "'" + usuario.name + "'") : qFormer.addCampo('nombre', usuario.name)
+            usuario.surname ? qFormer.addCampo('apellido', "'" + usuario.surname + "'") : qFormer.addCampo('apellido', usuario.surname)
+            qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
+
+            if (usuario.id) {
+                // UPDATE  
+                usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)  
+                qFormer.addCondicion("id", "=", tramite.id)
+            } else {
+                // INSERT
+                qFormer.addCampo('id', "default")
+                qFormer.addCampo('eliminado', false)
+                qFormer.addCampo('fechacreacion', "'" + fecha + "'")      
+                qFormer.setQueryType(qFormer.getQueryTypes().insert)               
+            }
+
+            const newQ = qFormer.getQuerry()
+            console.log(newQ)            
+
+            try {
+                const result = await db.ejecutar(newQ);
+                return result;
+            } catch (err) {
+                throw new Error('Hubo un error al persistir el usuario: ' + err.message)
+            }
+        },
 
         obtenerDatosPorId: async (id) => {
             try {

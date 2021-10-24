@@ -1,34 +1,28 @@
-function crearUsuarioMunicipal(daoUsuarioMunicipal) {
+function crearUsuarioMunicipal(usuario, daoUsuarioMunicipal) {
+    usuario.idUserMunicipal = null
+    usuario.idMunicipalRole = null
+
     return {
-        id: null,
-        idUserMunicipal: null,
-        idUserType: null,
-        idMunicipalRole: null,
-        email: null,
-        name: null,
-        surname: null,
-        creationDate: null,
-        userTypeCode: null,
-        municipalRoleCode: null,
+        user: usuario,
 
         async obtenerDatos(id) {
             const datos = await daoUsuarioMunicipal.obtenerDatosPorId(id)
-            this.id = datos.id
-            this.idUserMunicipal = datos.idusermunicipal
-            this.idUserType = datos.idusertype
-            this.idMunicipalRole = datos.idmunicipalrole
-            this.email = datos.email
-            this.name = datos.name
-            this.surname = datos.surname
-            this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
-            this.userTypeCode = datos.usertypecode
-            this.municipalRoleCode = datos.municipalrolecode
+            this.user.id = datos.id
+            this.user.idUserMunicipal = datos.idusermunicipal
+            this.user.idUserType = datos.idusertype
+            this.user.idMunicipalRole = datos.idmunicipalrole
+            this.user.email = datos.email
+            this.user.name = datos.name
+            this.user.surname = datos.surname
+            this.user.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
+            //this.user.userTypeCode = datos.usertypecode
+            //this.user.municipalRoleCode = datos.municipalrolecode
 
             return this
         },
 
         async obtenerResponsables() {
-            return await daoUsuarioMunicipal.obtenerResponsables()
+            return await daoUsuarioMunicipal.buscarResponsables()
         }
     }
 }

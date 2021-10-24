@@ -6,7 +6,7 @@ function crearUsuario(daoUsuario) {
         name: null,
         surname: null,
         creationDate: null, 
-        userTypeCode: null,    
+        //userTypeCode: null,    
 
         async persistir() {
             const result = await daoUsuario.persistir(this)
@@ -22,7 +22,7 @@ function crearUsuario(daoUsuario) {
             this.name = datos.name
             this.surname = datos.surname
             this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
-            this.userTypeCode = datos.usertypecode
+            //this.userTypeCode = datos.usertypecode
             return this
         },
 

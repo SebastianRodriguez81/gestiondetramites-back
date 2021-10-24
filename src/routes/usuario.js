@@ -6,13 +6,27 @@ const usuarioRouter = express.Router()
 const usuarioApplications = getUsuarioApplications()
 
 //#region POST
-usuarioRouter.post('/', async (req, res, next) => {
-    res.json("segui participando")
+usuarioRouter.post('/citizens', async (req, res, next) => {
+    try {
+        if (typeof req.body.email !== 'string' ||
+            typeof req.body.name !== 'string' ||
+            typeof req.body.surname !== 'string' ||
+            typeof req.body.dni !== 'string' ||
+            typeof req.body.address !== 'string' ||
+            typeof req.body.birthdate !== 'string'
+        ) {
+            throw new ValidationError("Datos errornes y/o faltantes.")
+        }
+        const altaUsuarioCiudadano = usuarioApplications.getAltaUsuarioCiudadano()
+        const respuesta = await altaUsuarioCiudadano.ejecutar(req.body)
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
 })
 //#endregion
 
 //#region PUT
-
 //#endregion
 
 //#region GET
