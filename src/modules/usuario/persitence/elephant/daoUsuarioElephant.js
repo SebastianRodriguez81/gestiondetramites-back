@@ -1,4 +1,5 @@
 import { NotFoundError } from "../../../../common/errors.js"
+import { getValidDate } from "../../../../common/validDate.js"
 
 function crearDaoUsuario(db) {
     return {
@@ -10,14 +11,15 @@ function crearDaoUsuario(db) {
             qFormer.setTabla(qTabla)
             qFormer.addCampo('tiposusuarioidx', usuario.idUserType)
             usuario.email ? qFormer.addCampo('correo', "'" + usuario.email + "'") : qFormer.addCampo('correo', usuario.email)
+            usuario.pass ? qFormer.addCampo('contraseña', "'" + usuario.pass + "'") : qFormer.addCampo('contraseña', usuario.pass)
             usuario.name ? qFormer.addCampo('nombre', "'" + usuario.name + "'") : qFormer.addCampo('nombre', usuario.name)
             usuario.surname ? qFormer.addCampo('apellido', "'" + usuario.surname + "'") : qFormer.addCampo('apellido', usuario.surname)
-            usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)
             qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
 
             if (usuario.id) {
                 // UPDATE  
-                qFormer.setQueryType(qFormer.getQueryTypes().update)                
+                qFormer.setQueryType(qFormer.getQueryTypes().update)  
+                usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)              
                 qFormer.addCondicion("id", "=", tramite.id)
             } else {
                 // INSERT

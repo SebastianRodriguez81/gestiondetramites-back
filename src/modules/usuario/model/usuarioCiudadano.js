@@ -10,10 +10,11 @@ function crearUsuarioCiudadano(usuario, daoUsuarioCuidadano) {
         user: usuario,
 
         async persistir() {
-            if (idUserType != 2) { throw new ValidationError("Tipo de usuario incorrecto o faltante.") }
+            console.log(this.user.idUserType)
+            if (this.user.idUserType != 2) { throw new ValidationError("Tipo de usuario incorrecto o faltante.") }
             await this.user.persistir()
             if (this.user.id) {
-                let result = await daoTramiteLicenciaConducir.persistir(this)
+                let result = await daoUsuarioCuidadano.persistir(this)
                 if (!this.user.idUserCitizen) {
                     this.user.idUserCitizen = result
                 }

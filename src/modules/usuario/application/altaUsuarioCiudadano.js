@@ -7,13 +7,14 @@ function crearAltaUsuarioCiudadano(usuarioCiudadano) {
 
             //  Validar datos
             if (
-                typeof usuarioCiudadanoData.body.email !== 'string' ||
-                typeof usuarioCiudadanoData.body.name !== 'string' ||
-                typeof usuarioCiudadanoData.body.surname !== 'string' ||
-                typeof usuarioCiudadanoData.body.dni !== 'string' ||
-                typeof usuarioCiudadanoData.body.address !== 'string' ||
-                typeof usuarioCiudadanoData.body.birthdate !== 'string' ||
-                !isValidDate(usuarioCiudadanoData.userBirthdate)
+                typeof usuarioCiudadanoData.email !== 'string' ||
+                typeof usuarioCiudadanoData.pass !== 'string' ||
+                typeof usuarioCiudadanoData.name !== 'string' ||
+                typeof usuarioCiudadanoData.surname !== 'string' ||
+                typeof usuarioCiudadanoData.dni !== 'string' ||
+                typeof usuarioCiudadanoData.address !== 'string' ||
+                typeof usuarioCiudadanoData.birthdate !== 'string' ||
+                !isValidDate(usuarioCiudadanoData.birthdate)
             ) {
                 throw new ValidationError("Datos erroneos y/o faltantes.")
             }
@@ -22,12 +23,13 @@ function crearAltaUsuarioCiudadano(usuarioCiudadano) {
 
             //  Preparar usuario ciudadano
             usuarioCiudadano.user.idUserType = 2
-            usuarioCiudadano.user.email = usuarioCiudadanoData.body.email
-            usuarioCiudadano.user.name = usuarioCiudadanoData.body.name
-            usuarioCiudadano.user.surname = usuarioCiudadanoData.body.surname
-            usuarioCiudadano.user.dni = usuarioCiudadanoData.body.dni
-            usuarioCiudadano.user.address = usuarioCiudadanoData.body.address
-            usuarioCiudadano.user.birthdate = usuarioCiudadanoData.body.birthdate
+            usuarioCiudadano.user.email = usuarioCiudadanoData.email
+            usuarioCiudadano.user.pass = usuarioCiudadanoData.pass
+            usuarioCiudadano.user.name = usuarioCiudadanoData.name
+            usuarioCiudadano.user.surname = usuarioCiudadanoData.surname
+            usuarioCiudadano.user.dni = usuarioCiudadanoData.dni
+            usuarioCiudadano.user.address = usuarioCiudadanoData.address
+            usuarioCiudadano.user.birthdate = usuarioCiudadanoData.birthdate
             usuarioCiudadano.user.creationDate = getValidDate()
 
             // Grabar

@@ -1,23 +1,24 @@
 import { NotFoundError } from "../../../../common/errors.js"
+import { getValidDate } from "../../../../common/validDate.js"
 
 function crearDaoUsuarioCiudadano(db) {
     return {
         persistir: async (usuario) => {
-            const qTabla = 'usuarios'
+            const qTabla = 'usuariosciudadano'
             const qFormer = db.getQueryBuilder()
             const fecha = getValidDate()
 
             qFormer.setTabla(qTabla)
-            qFormer.addCampo('usuariosid', usuario.id)
-            usuario.dni ? qFormer.addCampo('dni', "'" + usuario.dni + "'") : qFormer.addCampo('dni', usuario.dni)
-            usuario.address ? qFormer.addCampo('domicilio', "'" + usuario.address + "'") : qFormer.addCampo('domicilio', usuario.address)
-            usuario.birthdate ? qFormer.addCampo('fechanacimiento', "'" + usuario.birthdate + "'") : qFormer.addCampo('fechanacimiento', usuario.birthdate)
-            qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
+            qFormer.addCampo('usuariosid', usuario.user.id)
+            usuario.user.dni ? qFormer.addCampo('dni', "'" + usuario.user.dni + "'") : qFormer.addCampo('dni', usuario.user.dni)
+            usuario.user.address ? qFormer.addCampo('domicilio', "'" + usuario.user.address + "'") : qFormer.addCampo('domicilio', usuario.user.address)
+            usuario.user.birthdate ? qFormer.addCampo('fechanacimiento', "'" + usuario.user.birthdate + "'") : qFormer.addCampo('fechanacimiento', usuario.user.birthdate)
+            
 
             if (usuario.idUserCitizen) {
                 // UPDATE   
                 qFormer.setQueryType(qFormer.getQueryTypes().update)
-                qFormer.addCondicion("id", "=", usuario.idUserCitizen)
+                qFormer.addCondicion("id", "=", usuario.user.idUserCitizen)
             } else {
                 // INSERT
                 qFormer.setQueryType(qFormer.getQueryTypes().insert)

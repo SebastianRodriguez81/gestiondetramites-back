@@ -10,6 +10,7 @@ usuarioRouter.post('/citizens', async (req, res, next) => {
     try {
         if (typeof req.body.email !== 'string' ||
             typeof req.body.name !== 'string' ||
+            typeof req.body.pass !== 'string' ||
             typeof req.body.surname !== 'string' ||
             typeof req.body.dni !== 'string' ||
             typeof req.body.address !== 'string' ||
@@ -17,6 +18,7 @@ usuarioRouter.post('/citizens', async (req, res, next) => {
         ) {
             throw new ValidationError("Datos errornes y/o faltantes.")
         }
+        
         const altaUsuarioCiudadano = usuarioApplications.getAltaUsuarioCiudadano()
         const respuesta = await altaUsuarioCiudadano.ejecutar(req.body)
         res.json(respuesta)
