@@ -1,33 +1,29 @@
-function crearUsuarioCiudadano(daoUsuario) {
-    //dao usuairo o usuario ciudadano?
+function crearUsuarioCiudadano(daoUsuarioCuidadano) {
     return {
         id: null,
-        usuarioId: null,
+        idCitizen: null,      
+        idUserType: null,
+        email: null,
+        name: null,
+        surname: null,
+        creationDate: null,
         dni: null,
-        domicilio: null,
-        fechaDeNacimiento: null,
-        usuario: null,
+        address: null,
+        birthdate: null,
 
-        async buscarTodos(id, usuarioId, dni, domicilio, fechaDeNacimiento) {
-            return await daoUsuario.buscarTodos(
-                id,
-                usuarioId,
-                dni,
-                domicilio,
-                fechaDeNacimiento
-            );
-        },
-        setUsuarioId(usuarioId) {
-            this.usuarioId = usuarioId;
-        },
-        setDni(dni) {
-            this.dni = dni;
-        },
-        setdomicilio(domicilio) {
-            this.domicilio = domicilio;
-        },
-        setfechaDeNacimiento(fechaDeNacimiento) {
-            this.fechaDeNacimiento = fechaDeNacimiento;
+        async obtenerDatos(id) {
+            const datos = await daoUsuarioCuidadano.obtenerDatosPorId(id)           
+            this.id = datos.id
+            this.idCitizen = datos.idCitizen
+            this.idUserType = datos.idUserType
+            this.email = datos.email
+            this.name = datos.name
+            this.surname = datos.surname
+            this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
+            this.dni = datos.dni
+            this.address = datos.address
+            this.birthdate = datos.birthdate ? datos.birthdate.toISOString().split('T')[0] : datos.birthdate
+            return this
         },
 
         async persistir() {

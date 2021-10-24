@@ -1,4 +1,4 @@
-import ValidationError from "../../../common/errors.js";
+import { ValidationError } from "../../../common/errors.js";
 
 function finalizarTramite(tramite) {
     return {

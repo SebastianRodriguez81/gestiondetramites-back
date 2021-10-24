@@ -1,8 +1,15 @@
 class ValidationError extends Error {
     constructor(message) {
-        super(message); // (1)
-        this.name = "ValidationError"; // (2)
+        super(message)
+        this.name = "ValidationError"
     }
 }
 
-export default ValidationError
+class NotFoundError extends Error {
+    constructor(message) {
+        super(message)
+        this.name = "NotFoundError"
+    }
+}
+
+export { ValidationError, NotFoundError }

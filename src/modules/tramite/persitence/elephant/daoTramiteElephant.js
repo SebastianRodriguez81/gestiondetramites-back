@@ -1,7 +1,4 @@
-import ValidationError from "../../../../common/errors.js"
-import {
-    getValidDate
-} from "../../../../common/validDate.js"
+import { getValidDate } from "../../../../common/validDate.js"
 
 function crearDaoTramite(db) {
 

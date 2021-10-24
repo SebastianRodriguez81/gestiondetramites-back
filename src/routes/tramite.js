@@ -1,5 +1,5 @@
 import express from 'express'
-import ValidationError from '../common/errors.js'
+import { ValidationError } from '../common/errors.js'
 import getTramiteApplications from '../modules/tramite/application/applicationTramiteFactory.js'
 
 const tramiteRouter = express.Router()

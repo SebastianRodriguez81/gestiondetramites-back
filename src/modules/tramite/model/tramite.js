@@ -1,5 +1,5 @@
 import { getValidDate } from "../../../common/validDate.js"
-import ValidationError from '../../../common/errors.js'
+import { ValidationError } from '../../../common/errors.js'
 
 function crearTramite(daoTramite) {
     return {
