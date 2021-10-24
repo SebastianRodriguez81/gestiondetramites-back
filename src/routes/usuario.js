@@ -38,6 +38,16 @@ usuarioRouter.get('/municipal', async (req, res, next) => {
     }
 })
 
+usuarioRouter.get('/municipal/responsible', async (req, res, next) => {
+    try {        
+        const obtenerUsuariosMunicipalResponsable = usuarioApplications.getObtenerUsuariosMunicipalResponsable()
+        const respuesta = await obtenerUsuariosMunicipalResponsable.ejecutar()
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
+
 usuarioRouter.get('/obtenerTodos/', async (req, res, next) => {
     try {
         const obtenerUsuarios = usuarioApplications.getObtenerUsuarios()

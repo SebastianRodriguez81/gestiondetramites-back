@@ -25,6 +25,10 @@ function crearUsuarioMunicipal(daoUsuarioMunicipal) {
             this.municipalRoleCode = datos.municipalrolecode
 
             return this
+        },
+
+        async obtenerResponsables() {
+            return await daoUsuarioMunicipal.obtenerResponsables()
         }
     }
 }
