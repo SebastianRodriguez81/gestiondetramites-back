@@ -3,6 +3,7 @@ import { ValidationError } from "../../../common/errors.js"
 function crearUsuarioCiudadano(usuario, daoUsuarioCuidadano) {
     usuario.idUserCitizen = null
     usuario.dni = null
+    usuario.address = null
     usuario.birthdate = null
 
     return {

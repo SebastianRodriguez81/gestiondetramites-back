@@ -2,7 +2,38 @@ import { NotFoundError } from "../../../../common/errors.js"
 
 function crearDaoUsuarioCiudadano(db) {
     return {
-        persistir: async (usuarioCiudadno) => {},
+        persistir: async (usuario) => {
+            const qTabla = 'usuarios'
+            const qFormer = db.getQueryBuilder()
+            const fecha = getValidDate()
+
+            qFormer.setTabla(qTabla)
+            qFormer.addCampo('usuariosid', usuario.id)
+            usuario.dni ? qFormer.addCampo('dni', "'" + usuario.dni + "'") : qFormer.addCampo('dni', usuario.dni)
+            usuario.address ? qFormer.addCampo('domicilio', "'" + usuario.address + "'") : qFormer.addCampo('domicilio', usuario.address)
+            usuario.birthdate ? qFormer.addCampo('fechanacimiento', "'" + usuario.birthdate + "'") : qFormer.addCampo('fechanacimiento', usuario.birthdate)
+            qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
+
+            if (usuario.idUserCitizen) {
+                // UPDATE   
+                qFormer.setQueryType(qFormer.getQueryTypes().update)
+                qFormer.addCondicion("id", "=", usuario.idUserCitizen)
+            } else {
+                // INSERT
+                qFormer.setQueryType(qFormer.getQueryTypes().insert)
+                qFormer.addCampo('id', "default")
+            }
+
+            const newQ = qFormer.getQuerry()
+            console.log(newQ)
+
+            try {
+                const result = await db.ejecutar(newQ);
+                return result;
+            } catch (err) {
+                throw new Error('Hubo un error al persistir el usuario: ' + err.message)
+            }
+        },
 
         obtenerDatosPorId: async (id) => {
             console.log(id)

@@ -8,27 +8,27 @@ function crearDaoUsuario(db) {
             const fecha = getValidDate()
 
             qFormer.setTabla(qTabla)
-            
-            qFormer.addCampo('tiposusuarioidx', usuario.idUserType)              
+            qFormer.addCampo('tiposusuarioidx', usuario.idUserType)
             usuario.email ? qFormer.addCampo('correo', "'" + usuario.email + "'") : qFormer.addCampo('correo', usuario.email)
             usuario.name ? qFormer.addCampo('nombre', "'" + usuario.name + "'") : qFormer.addCampo('nombre', usuario.name)
             usuario.surname ? qFormer.addCampo('apellido', "'" + usuario.surname + "'") : qFormer.addCampo('apellido', usuario.surname)
+            usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)
             qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
 
             if (usuario.id) {
                 // UPDATE  
-                usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)  
+                qFormer.setQueryType(qFormer.getQueryTypes().update)                
                 qFormer.addCondicion("id", "=", tramite.id)
             } else {
                 // INSERT
+                qFormer.setQueryType(qFormer.getQueryTypes().insert)
                 qFormer.addCampo('id', "default")
                 qFormer.addCampo('eliminado', false)
-                qFormer.addCampo('fechacreacion', "'" + fecha + "'")      
-                qFormer.setQueryType(qFormer.getQueryTypes().insert)               
+                qFormer.addCampo('fechacreacion', "'" + fecha + "'")
             }
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)            
+            console.log(newQ)
 
             try {
                 const result = await db.ejecutar(newQ);
