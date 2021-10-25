@@ -1,6 +1,6 @@
 import { ValidationError } from "../../../common/errors.js";
 
-function crearAltaTramite(tramite) {
+function crearAltaTramite(altaTramiteLicenciaConduicir) {
     return {
         async ejecutar(tramiteData) {
 

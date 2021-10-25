@@ -7,8 +7,7 @@ const tamiteApplications = getTramiteApplications()
 
 //#region POST
 tramiteRouter.post('/', async (req, res, next) => {
-    try {       
-        
+    try {    
         if (typeof req.body.idUser !== 'number' ||
             typeof req.body.idProcedureType !== 'number' ||
             typeof req.body.userName !== 'string' ||

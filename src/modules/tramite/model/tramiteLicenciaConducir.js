@@ -1,22 +1,22 @@
 function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
+    tramite.idLicence = null
+    tramite.subProcedureType = null
+    tramite.licenceCode = null
+    tramite.selfieUrl = null
+    tramite.selfieDniUrl = null
+    tramite.frontDniUrl = null
+    tramite.backDniUrl = null
+    tramite.debtFreeUrl = null
 
-    return {
-        id: null,
-        tramite: tramite,
-        subProcedureType: null,
-        licenceCode: null,
-        selfieUrl: null,
-        selfieDniUrl: null,
-        frontDniUrl: null,
-        backDniUrl: null,
-        debtFreeUrl: null,
+    return {       
+        procedure: tramite,        
 
         async persistir() {
-            this.tramite.idProcedureType = 1
-            await this.tramite.persistir()
-            if (this.tramite.id) {
-                let result = await daoTramiteLicenciaConducir.persistir(this)
-                if (!this.id) { this.id = result }
+            this.procedure.idProcedureType = 1
+            await this.procedure.persistir()
+            if (this.procedure.id) {
+                let result = await daoTramiteLicenciaConducir.persistir(this.procedure)
+                if (!this.procedure.idLicence) { this.procedure.idLicence = result }
             }
                        
             return this

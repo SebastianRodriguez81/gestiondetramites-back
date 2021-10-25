@@ -32,7 +32,7 @@ function crearDaoTramiteLicenciaConducir(db) {
             qFormer.setTabla(qTabla)
             qFormer.setQueryType(qFormer.getQueryTypes().insert)
             qFormer.addCampo('id', "default")
-            qFormer.addCampo('tramitesid', tramiteLicenciaConducir.tramite.id)
+            qFormer.addCampo('tramitesid', tramiteLicenciaConducir.id)
             qFormer.addCampo('tipotramitelicencia', "'" + tramiteLicenciaConducir.subProcedureType + "'")
             qFormer.addCampo('claselicencia', "'" + tramiteLicenciaConducir.licenceCode + "'")
             qFormer.addCampo('selfieurl', "'" + tramiteLicenciaConducir.selfieUrl + "'")
