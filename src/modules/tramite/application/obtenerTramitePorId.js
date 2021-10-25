@@ -2,21 +2,20 @@ function crearObtenerTramitePorId(tramite, licenciaconducirdatos) {
     return {
         async ejecutar(id) {
             if (!id) { throw new Error("tramite invalido o faltante") }
+           
+            await tramite.obtenerDatos(id)           
 
-            let resp = {}
-            let tramiteDatos = await tramite.buscarTodos(null, null, null, null, null, null, id)
-            resp.procedure = tramiteDatos[0]
+            if (!tramite.idProcedureType) {throw new Error("No se pudo identificar el tipo de tramite.")}
 
-            if (resp.procedure.idproceduretype) {
-                switch (resp.procedure.idproceduretype) {
-                    case 1:
-                        let licenciaDatos = await licenciaconducirdatos.obtenerDatosLicencia(id)
-                        resp.driverLicenseProcedure = licenciaDatos[0]
-                        break;
-                }
-            }
+            
 
-            return resp
+            switch (tramite.idProcedureType) {
+                case 1:                   
+                    await licenciaconducirdatos.obtenerDatos(tramite.id)                        
+                    break;
+            }            
+
+            return licenciaconducirdatos
         }
     }
 }

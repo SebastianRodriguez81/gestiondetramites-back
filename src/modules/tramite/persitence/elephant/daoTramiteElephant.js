@@ -1,4 +1,5 @@
 import { getValidDate } from "../../../../common/validDate.js"
+import { NotFoundError } from "../../../../common/errors.js"
 
 function crearDaoTramite(db) {
 
@@ -94,10 +95,16 @@ function crearDaoTramite(db) {
             //console.log(newQ)            
 
             try {
-                const result = await db.ejecutar(newQ);
+                const result = await db.ejecutar(newQ)
+                if (!result.length) { throw new NotFoundError('tramite no encontrado.') }
                 return result[0];
             } catch (err) {
-                throw new Error('Hubo un error al obtener el tramite: ' + err.message)
+                switch (err.constructor) {
+                    case NotFoundError:
+                        throw err
+                    default:
+                        throw new Error('Hubo un error al obtener los datos del tramite:' + err.message)
+                }  
             }
         },
 
