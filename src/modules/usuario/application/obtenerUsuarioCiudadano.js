@@ -1,7 +1,7 @@
 function crearObtenerUsuarioCuidadano(usuarioCiudadano) {
     return {
-        async ejecutar(id) {
-            await usuarioCiudadano.obtenerDatos(id)
+        async ejecutar(id, email) {            
+            await usuarioCiudadano.obtenerDatos(id, email)
             return usuarioCiudadano
         }
     }

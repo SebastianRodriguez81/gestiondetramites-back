@@ -72,7 +72,46 @@ function crearDaoUsuarioCiudadano(db) {
                         throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
                 }
             }
-        }        
+        },
+        
+        obtenerDatosPorEmail: async (email) => {
+            console.log(email)
+            try {
+                const newQ = `
+                            select
+                                usu.id,
+                                tiposusuarioidx as idUserType,
+                                tipo.codigo as userTypeCode,
+                                correo as email, nombre as name,
+                                apellido as surname, 
+                                fechacreacion as creationDate,
+                                ciu.id as idUserCitizen,
+                                ciu.dni as dni,
+                                ciu.domicilio as address,
+                                ciu.fechanacimiento as birthdate
+                            from usuarios as usu
+                            join tiposUsuario as tipo
+                                on tipo.idx = usu.tiposusuarioidx
+                                and tipo.idx = 2
+                            join usuariosciudadano as ciu
+                                on ciu.usuariosId = usu.id
+                            where eliminado = false
+                            and usu.correo = '${email}'`
+
+                console.log(newQ)
+                const result = await db.ejecutar(newQ)
+                if (!result.length) {throw new NotFoundError('Usuario no encontrado.')}
+                return result[0]
+            } catch (err) {
+                switch (err.constructor) {
+                    case NotFoundError:
+                        throw err
+
+                    default:
+                        throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
+                }
+            }
+        }
     }
 }
 
