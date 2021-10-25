@@ -22,8 +22,18 @@ function crearUsuarioCiudadano(usuario, daoUsuarioCuidadano) {
             return this
         },
 
-        async obtenerDatos(id) {
-            const datos = await daoUsuarioCuidadano.obtenerDatosPorId(id)
+        async obtenerDatos(id, email) {
+            let datos
+            if(id){
+                datos = await daoUsuarioCuidadano.obtenerDatosPorId(id)
+            } else {
+                if(email){
+                    datos = await daoUsuarioCuidadano.obtenerDatosPorEmail(email)
+                } else {
+                    throw new ValidationError("Identificador de usuario faltante.")
+                }
+            }
+            
             this.user.id = datos.id
             this.user.idUserCitizen = datos.idusercitizen
             this.user.idUserType = datos.idusertype

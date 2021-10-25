@@ -33,10 +33,11 @@ usuarioRouter.post('/citizens', async (req, res, next) => {
 
 //#region GET
 usuarioRouter.get('/citizens', async (req, res, next) => {
-    try {
-        if (isNaN(req.query.idUser)) { throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
+    try {        
+        if (isNaN(req.query.idUser) && (typeof req.query.email !== 'string')) {
+             throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
         const obtenerUsuarioCiudadno = usuarioApplications.getObtenerUsuarioCiudadano()
-        const respuesta = await obtenerUsuarioCiudadno.ejecutar(req.query.idUser)
+        const respuesta = await obtenerUsuarioCiudadno.ejecutar(req.query.idUser, req.query.email)
         res.json(respuesta)
     } catch (error) {
         next(error)
