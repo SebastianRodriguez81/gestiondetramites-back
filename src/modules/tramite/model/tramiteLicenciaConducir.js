@@ -17,15 +17,11 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
             if (this.procedure.id) {
                 let result = await daoTramiteLicenciaConducir.persistir(this.procedure)
                 if (!this.procedure.idLicence) { this.procedure.idLicence = result }
-            }
-                       
+            }                       
             return this
         },
 
-        async obtenerDatos(idProcedure) {  
-            
-            console.log(idProcedure)
-
+        async obtenerDatos(idProcedure) {
             const datos = await daoTramiteLicenciaConducir.obtenerDatosLicencia(idProcedure)
 
             this.procedure.id = datos.id
@@ -54,7 +50,7 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
             this.procedure.backDniUrl = datos.backdniurl
             this.procedure.debtFreeUrl = datos.debtfreeurl
 
-            return this.procedure
+            return this
         }
     }
 }
