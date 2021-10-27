@@ -6,7 +6,21 @@ function crearUsuarioMunicipal(usuario, daoUsuarioMunicipal) {
         user: usuario,
 
         async obtenerDatos(id) {
-            const datos = await daoUsuarioMunicipal.obtenerDatosPorId(id)
+            let datos
+
+            if(id){
+                datos = await daoUsuarioMunicipal.obtenerDatosPorId(id)
+            } else {
+                if(email){
+                    datos = await daoUsuarioMunicipal.obtenerDatosPorEmail(email)
+                } else {
+                    throw new ValidationError("Identificador de usuario faltante.")
+                }
+            }
+
+
+
+           
             this.user.id = datos.id
             this.user.idUserMunicipal = datos.idusermunicipal
             this.user.idUserType = datos.idusertype

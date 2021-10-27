@@ -46,9 +46,9 @@ usuarioRouter.get('/citizens', async (req, res, next) => {
 
 usuarioRouter.get('/municipal', async (req, res, next) => {
     try {
-        if (isNaN(req.query.idUser)) { throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
+        if (isNaN(req.query.idUser) && (typeof req.query.email !== 'string')) { throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
         const obtenerUsuarioMunicipal = usuarioApplications.getObtenerUsuarioMunicipal()
-        const respuesta = await obtenerUsuarioMunicipal.ejecutar(req.query.idUser)
+        const respuesta = await obtenerUsuarioMunicipal.ejecutar(req.query.idUser, req.query.email)
         res.json(respuesta)
     } catch (error) {
         next(error)
