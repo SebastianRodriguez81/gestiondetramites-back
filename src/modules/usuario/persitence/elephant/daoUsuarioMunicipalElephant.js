@@ -82,7 +82,7 @@ function crearDaoUsuarioMunicipal(db) {
                         throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
                 }
             }
-        }
+        },
 
         buscarResponsables: async () => {
             try {
