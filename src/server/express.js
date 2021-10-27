@@ -1,50 +1,50 @@
-import express from 'express'
-import router from '../routes/index.js'
-import errorHandler from '../middleware/errorHandler.js'
-import securityHandler from '../middleware/securityHandler.js'
-
-
+import express from "express";
+import router from "../routes/index.js";
+import errorHandler from "../middleware/errorHandler.js";
+import securityHandler from "../middleware/securityHandler.js";
+import cors from "cors";
 
 function crearServidor() {
-  const app = express()
+  const app = express();
+  app.use(cors());
   //app.use(securityHandler)
-  app.use(express.json())
-  app.use("/api", router)
-  app.use(errorHandler)
+  app.use(express.json());
+  app.use("/api", router);
+  app.use(errorHandler);
 
-  let server = null
+  let server = null;
 
   return {
     conectar: (port) => {
       return new Promise((resolve, reject) => {
         if (server) {
-          reject(new Error('servidor ya conectado'))
+          reject(new Error("servidor ya conectado"));
         } else {
           server = app.listen(port, () => {
-            console.log(`conectado en puerto ${server.address().port}`)
-            resolve()
-          })
-          server.on('error', (err) => {
-            reject('err')
-          })
+            console.log(`conectado en puerto ${server.address().port}`);
+            resolve();
+          });
+          server.on("error", (err) => {
+            reject("err");
+          });
         }
-      })
+      });
     },
 
     desconectar: () => {
       return new Promise((resolve, reject) => {
         server.close((err) => {
           if (err) {
-            reject(err)
+            reject(err);
           } else {
-            server = null
-            console.log('desconectado!')
-            resolve()
+            server = null;
+            console.log("desconectado!");
+            resolve();
           }
-        })
-      })
-    }
-  }
+        });
+      });
+    },
+  };
 }
 
-export { crearServidor }
+export { crearServidor };
