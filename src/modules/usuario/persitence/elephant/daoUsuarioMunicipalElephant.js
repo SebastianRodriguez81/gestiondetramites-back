@@ -67,7 +67,7 @@ function crearDaoUsuarioMunicipal(db) {
             join usuariomunicipioroles as rol
                 on rol.idx = mun.usuariomunicipiorolesidx
             where usu.eliminado = false
-            and usu.email = ${email}`
+            and usu.correo = '${email}'`
 
                 console.log(newQ)
                 const result = await db.ejecutar(newQ)
