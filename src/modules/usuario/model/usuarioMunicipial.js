@@ -5,7 +5,7 @@ function crearUsuarioMunicipal(usuario, daoUsuarioMunicipal) {
     return {
         user: usuario,
 
-        async obtenerDatos(id) {
+        async obtenerDatos(id, email) {
             let datos
 
             if(id){
