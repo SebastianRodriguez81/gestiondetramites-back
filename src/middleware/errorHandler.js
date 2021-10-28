@@ -5,11 +5,11 @@ function errorHandler(err, req, res, next) {
 
     switch (err.constructor) {
         case ValidationError:
-            res.status(461).send('Error de validacion: ' + err.message)
+            res.status(400).send('Error de validacion: ' + err.message)
             break
 
         case NotFoundError:
-            res.status(401).send('Entidad no encontrada: ' + err.message)
+            res.status(404).send('Entidad no encontrada: ' + err.message)
             break
 
         default:
