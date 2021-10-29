@@ -16,7 +16,7 @@ import crearAsignarResponsable from "./asignarResponsable.js"
 import crearAsignarFechaRevision from "./asignarFechaRevision.js"
 import crearAsignarFechaRetiro from "./asignarFechaRetiro.js"
 import crearFinalizarTramite from "./finalizarTramite.js"
-import crearMailer from "../../../common/mailing/mailerFactory.js"
+import {crearMailer} from "../../../common/mailing/mailerFactory.js"
 
 function getTramiteApplications() {
     return {

@@ -7,10 +7,10 @@ function finalizarTramite(tramite, mailer) {
             if (!rejected) {
                 tramite.finalizarTramite()
                 let datos = {
-                    from = "Tramites",
-                    to = tramite.userEmail,
-                    asunto = "Tramite finalizado",
-                    mensaje = "El tramite ha sido finalizado. La razon es la siguiente " + reasonRejection
+                    from : "Tramites",
+                    to : tramite.userEmail,
+                    asunto : "Tramite finalizado",
+                    mensaje : "El tramite ha sido finalizado. La razon es la siguiente " + reasonRejection
                 }
                 mailer.send(datos)
             } else {

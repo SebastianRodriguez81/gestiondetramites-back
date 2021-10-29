@@ -9,10 +9,10 @@ function asignarFechaRetiro(tramite, mailer) {
             tramite.asignarFechaRetiro(withdrawalDate)           
             await tramite.persistir()
             let datos = {
-                from = "Tramites",
-                to = tramite.userEmail,
-                asunto = "Fecha de retiro",
-                mensaje = "La fecha del retiro ya está establecida. " + withdrawalDate
+                from : "Tramites",
+                to : tramite.userEmail,
+                asunto : "Fecha de retiro",
+                mensaje : "La fecha del retiro ya está establecida. " + withdrawalDate
             }
             mailer.send(datos)
 
