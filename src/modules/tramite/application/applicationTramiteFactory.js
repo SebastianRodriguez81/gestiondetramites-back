@@ -16,6 +16,7 @@ import crearAsignarResponsable from "./asignarResponsable.js"
 import crearAsignarFechaRevision from "./asignarFechaRevision.js"
 import crearAsignarFechaRetiro from "./asignarFechaRetiro.js"
 import crearFinalizarTramite from "./finalizarTramite.js"
+import crearMailer from "../../../common/mailing/mailerFactory.js"
 
 function getTramiteApplications() {
     return {
@@ -46,19 +47,19 @@ function getTramiteApplications() {
 
         getAsignarFechaRevision: function() {
             let tramite = getTramite()
-            let asignarFechaRevision = crearAsignarFechaRevision(tramite)
+            let asignarFechaRevision = crearAsignarFechaRevision(tramite, crearMailer())
             return asignarFechaRevision
         },
 
         getAsignarFechaRetiro: function() {
             let tramite = getTramite()
-            let asignarFechaRetiro = crearAsignarFechaRetiro(tramite)
+            let asignarFechaRetiro = crearAsignarFechaRetiro(tramite, crearMailer())
             return asignarFechaRetiro
         },
 
         getFinalizarTramite: function() {
             let tramite = getTramite()
-            let finalizarTramite = crearFinalizarTramite(tramite)
+            let finalizarTramite = crearFinalizarTramite(tramite, crearMailer())
             return finalizarTramite
         },
 

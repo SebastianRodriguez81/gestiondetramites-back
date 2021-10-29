@@ -11,6 +11,7 @@ function crearTramite(daoTramite) {
         userName: null,
         userSurname: null,
         userDni: null,
+        //userEmail: null,
         userAddress: null,
         userBirthdate: null,
         creationDate: null,
@@ -38,6 +39,7 @@ function crearTramite(daoTramite) {
             this.userName = datos.username
             this.userSurname = datos.usersurname
             this.userDni = datos.userdni
+            this.userEmail = datos.userEmail
             this.userAddress = datos.useraddress
             this.userBirthdate = datos.userbirthdate ? datos.userbirthdate.toISOString().split('T')[0] :  datos.userbirthdate
             this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
@@ -72,6 +74,7 @@ function crearTramite(daoTramite) {
                 tramiteRow.userName = datos.username
                 tramiteRow.userSurname = datos.usersurname
                 tramiteRow.userDni = datos.userdni
+                tramiteRow.userEmail = datos.userEmail
                 tramiteRow.userAddress = datos.useraddress
                 tramiteRow.userBirthdate = datos.userbirthdate ? datos.userbirthdate.toISOString().split('T')[0] :  datos.userbirthdate
                 tramiteRow.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
