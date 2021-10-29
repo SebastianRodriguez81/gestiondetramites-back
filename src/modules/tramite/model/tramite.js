@@ -14,6 +14,7 @@ function crearTramite(daoTramite) {
         userAddress: null,
         userBirthdate: null,
         creationDate: null,
+        anlystAssignmentDate: null,
         assignmentDate: null,
         revisionDate: null,
         withdrawalDate: null,
@@ -40,6 +41,7 @@ function crearTramite(daoTramite) {
             this.userAddress = datos.useraddress
             this.userBirthdate = datos.userbirthdate ? datos.userbirthdate.toISOString().split('T')[0] :  datos.userbirthdate
             this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
+            this.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] : datos.anlystassignmentdate
             this.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] : datos.assignmentdate
             this.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().split('T')[0] : datos.revisiondate
             this.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().split('T')[0] : datos.withdrawaldate
@@ -54,27 +56,87 @@ function crearTramite(daoTramite) {
             return await daoTramite.obtenerCantidades()
         },
 
-        async buscarTodos(estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id, opEstadosIdx1, opEstadosIdx2, opEstadosIdx3) {
-            return await daoTramite.buscarTodos(estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id, opEstadosIdx1, opEstadosIdx2, opEstadosIdx3);
+        async buscarTodos(estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id, opEstadosIdx1, opEstadosIdx2, opEstadosIdx3, idUsermunicipalRole) {
+
+            const dbResult = await daoTramite.buscarTodos(estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id, opEstadosIdx1, opEstadosIdx2, opEstadosIdx3, idUsermunicipalRole)
+            const resultList = []
+
+            dbResult.forEach(datos => {                
+                const tramiteRow = {}
+
+                tramiteRow.id = datos.id
+                tramiteRow.idState = datos.idstate
+                tramiteRow.idProcedureType = datos.idproceduretype
+                tramiteRow.idUserCitizen = datos.idusercitizen
+                tramiteRow.idUserMunicipal = datos.idusermunicipal
+                tramiteRow.userName = datos.username
+                tramiteRow.userSurname = datos.usersurname
+                tramiteRow.userDni = datos.userdni
+                tramiteRow.userAddress = datos.useraddress
+                tramiteRow.userBirthdate = datos.userbirthdate ? datos.userbirthdate.toISOString().split('T')[0] :  datos.userbirthdate
+                tramiteRow.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
+                tramiteRow.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] : datos.anlystassignmentdate
+                tramiteRow.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] : datos.assignmentdate
+                tramiteRow.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().split('T')[0] : datos.revisiondate
+                tramiteRow.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().split('T')[0] : datos.withdrawaldate
+                tramiteRow.completedDate = datos.completeddate ? datos.completeddate.toISOString().split('T')[0] : datos.completeddate
+                tramiteRow.rejected = datos.rejected
+                tramiteRow.reasonRejection = datos.reasonrejection
+
+                tramiteRow.stateCode = datos.statecode
+                tramiteRow.stateDescription = datos.statedescription
+                tramiteRow.statePublicDescription = datos.statepublicdescription
+
+                tramiteRow.procedureTypeCode = datos.proceduretypecode
+                tramiteRow.procedureTypeDescription = datos.proceduretypedescription
+
+                tramiteRow.userCitizenEmail = datos.usercitizenemail
+                tramiteRow.userCitizenName = datos.usercitizenname
+                tramiteRow.userCitizenSurname = datos.usercitizensurname
+                tramiteRow.userCitizenDni = datos.usercitizendni
+                tramiteRow.userCitizenAddress = datos.usercitizenaddress
+                tramiteRow.userCitizenBirthdate = datos.usercitizenbirthdate ? datos.usercitizenbirthdate.toISOString().split('T')[0] : datos.usercitizenbirthdate
+               
+                tramiteRow.userMunicipalEmail = datos.usermunicipalemail
+                tramiteRow.userMunicipalName = datos.usermunicipalname
+                tramiteRow.userMunicipalSurname = datos.usermunicipalsurname
+
+                tramiteRow.idUserMunicipalRole = datos.idusermunicipalrole
+                tramiteRow.userMunicipalRoleCode = datos.usermunicipalrolecode
+                tramiteRow.userMunicipalRoleDesciption = datos.usermunicipalroledesciption          
+
+                resultList.push(tramiteRow)                
+            })
+            
+            return resultList
+            
         },
 
-        asignarResponsable(idUser) {
+        asignarAnalista(idUser) {
             if (this.idState != 1) { throw new ValidationError("El estado del tramite no permite esta accion.") }
             this.idUserMunicipal = idUser
-            this.assignmentDate = getValidDate()
+            this.anlystAssignmentDate = getValidDate()
             this.idState = 2
             return this
         },
 
-        asignarFechaRevision(revisionDate) {
+        asignarResponsable(idUser) {
             if (this.idState != 2) { throw new ValidationError("El estado del tramite no permite esta accion.") }
-            this.revisionDate = revisionDate
+            this.idUserMunicipal = idUser
+            this.assignmentDate = getValidDate()
             this.idState = 3
+            return this
+        },
+
+        asignarFechaRevision(revisionDate) {
+            if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            this.revisionDate = revisionDate            
             return this
         },
 
         asignarFechaRetiro(withdrawalDate) {
             if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            if (this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }
             this.withdrawalDate = withdrawalDate
             this.idState = 4
             return this

@@ -34,6 +34,18 @@ tramiteRouter.post('/', async (req, res, next) => {
 //#endregion
 
 //#region PUT
+tramiteRouter.put('/setUserAnalist', async (req, res, next) => {
+    try {       
+        if (typeof req.body.idProcedure !== 'number' ){throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
+        if (typeof req.body.idUser !== 'number' ){throw new ValidationError("Identificador de usuario erroneo o faltantes.")}
+        const asignarAnalista = tamiteApplications.getAsignarAnalista()
+        const respuesta = await asignarAnalista.ejecutar(req.body.idProcedure, req.body.idUser)
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+}),
+
 tramiteRouter.put('/setUserRespon', async (req, res, next) => {
     try {       
         if (typeof req.body.idProcedure !== 'number' ){throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
@@ -109,8 +121,9 @@ tramiteRouter.get('/user', async (req, res, next) => {
 
 tramiteRouter.get('/pending', async (req, res, next) => {
     try {
+        if (req.query.idUsermunicipalRole) { if (NaN(req.query.idUsermunicipalRole)) { throw new ValidationError("Identificador de rol erroneo o faltantes.") } }
         const obtenerTramitesPendiente = tamiteApplications.getObtenerTramitesPendiente()
-        const respuesta = await obtenerTramitesPendiente.ejecutar()
+        const respuesta = await obtenerTramitesPendiente.ejecutar(req.query.idUsermunicipalRole)
         res.json(respuesta)
     } catch (error) {
         next(error)

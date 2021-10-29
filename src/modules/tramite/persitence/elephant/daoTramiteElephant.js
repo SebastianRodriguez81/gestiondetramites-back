@@ -128,11 +128,13 @@ function crearDaoTramite(db) {
             }
         },
 
-        buscarTodos: async (estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id, opEstadosIdx1, opEstadosIdx2, opEstadosIdx3) => {
+        buscarTodos: async (estadosIdx, tiposTramiteIdx, fechaCreacionDesde, fechaCreacionHasta, usuariosId, usuariosAsigId, id, opEstadosIdx1, opEstadosIdx2, opEstadosIdx3, idUsermunicipalRole) => {
 
             const qTabla = 'tramites as tra'
             const qTUser = 'usuarios as usu'
             const qTUserAsig = 'usuarios as usuasig'
+            const qTUserAsigDetail = 'usuariosmunicipo as usuasigdetail'
+            const qTRoleAsig = 'usuariomunicipioroles as rol'
             const qTEstado = 'estados as est'
             const qTTipo = 'tipostramite as tipo'
             const qTUserCiudadano = 'usuariosciudadano as ctz'
@@ -141,9 +143,7 @@ function crearDaoTramite(db) {
 
             qFormer.setTabla(qTabla)
             qFormer.setQueryType(qFormer.getQueryTypes().select)
-            console.log(opEstadosIdx1)
-            console.log(opEstadosIdx2)
-            console.log(opEstadosIdx3)
+         
             if (opEstadosIdx1 && opEstadosIdx2 && opEstadosIdx3) { qFormer.addCondicion("tra.estadosIdx", "in", `( ${opEstadosIdx1} , ${opEstadosIdx2}, ${opEstadosIdx3})`) }
             if (estadosIdx) { qFormer.addCondicion("tra.estadosIdx", "=", estadosIdx) }
             if (tiposTramiteIdx) { qFormer.addCondicion("tra.tiposTramiteIdx", "=", tiposTramiteIdx) }
@@ -151,6 +151,7 @@ function crearDaoTramite(db) {
             if (fechaCreacionHasta) { qFormer.addCondicion("tra.fechaCreacion", "<=", fechaCreacionHasta) }
             if (usuariosId) { qFormer.addCondicion("tra.usuariosId", "=", usuariosId) }
             if (usuariosAsigId) { qFormer.addCondicion("tra.usuariosAsigId", "=", usuariosAsigId) }
+            if (idUsermunicipalRole) { qFormer.addCondicion("rol.idx", "=", idUsermunicipalRole) }
             if (id) { qFormer.addCondicion("tra.id", "=", id) }
 
             qFormer.addCondicion("usu.eliminado", "=", false)
@@ -161,6 +162,8 @@ function crearDaoTramite(db) {
             qFormer.addJoin("join", qTUser, "usu.id = tra.usuariosId")
             qFormer.addJoin("join", qTUserCiudadano, "ctz.usuariosId = usu.id")
             qFormer.addJoin("left join", qTUserAsig, "usuasig.id = tra.usuariosAsigId")
+            qFormer.addJoin("left join", qTUserAsigDetail, "usuasigdetail.id = usuasig.id")
+            qFormer.addJoin("left join", qTRoleAsig, "rol.idx = usuasigdetail.usuariomunicipiorolesidx")
 
             qFormer.addCampo("tra.id")
             qFormer.addCampo("tra.nombre as userName")
@@ -169,6 +172,7 @@ function crearDaoTramite(db) {
             qFormer.addCampo("tra.domicilio as userAddress")
             qFormer.addCampo("tra.fechaNacimiento as userBirthdate")
             qFormer.addCampo("tra.fechaCreacion as creationDate")
+            qFormer.addCampo("tra.fechainicio as anlystassignmentdate")
             qFormer.addCampo("tra.fechaasigancion as assignmentDate")
             qFormer.addCampo("tra.fechaRevision as revisionDate")           
             qFormer.addCampo("tra.fechaRetiro as withdrawalDate")
@@ -198,8 +202,12 @@ function crearDaoTramite(db) {
             qFormer.addCampo("usuasig.nombre as userMunicipalName")
             qFormer.addCampo("usuasig.apellido as userMunicipalSurname")
 
+            qFormer.addCampo("rol.idx as idUserMunicipalRole")
+            qFormer.addCampo("rol.codigo as userMunicipalRoleCode")
+            qFormer.addCampo("rol.descripcion as userMunicipalRoleDesciption")
+
             const newQ = qFormer.getQuerry()
-            //console.log(newQ)
+            console.log(newQ)
 
             try {
                 const result = await db.ejecutar(newQ);
