@@ -47,27 +47,28 @@ function crearDaoUsuarioMunicipal(db) {
             console.log(email)
             try {
                 const newQ = `
-                select
-                usu.id,
-                tiposusuarioidx as idUserType,
-                tipo.codigo as userTypeCode,
-                tipo.codigo as userTypeCode,
-                correo as email, nombre as name,
-                apellido as surname, 
-                fechacreacion as creationDate,
-                mun.id as idUserMunicipal,
-                mun.usuariomunicipiorolesidx as idMunicipalRole,
-                rol.codigo as municipalRoleCode
-            from usuarios as usu
-            join tiposUsuario as tipo
-                on tipo.idx = usu.tiposusuarioidx
-                and tipo.idx = 2
-            join usuariosmunicipo as mun
-                on mun.usuariosId = usu.id
-            join usuariomunicipioroles as rol
-                on rol.idx = mun.usuariomunicipiorolesidx
-            where usu.eliminado = false
-            and usu.correo = '${email}'`
+                            select
+                                usu.id,
+                                tiposusuarioidx as idUserType,
+                                tipo.codigo as userTypeCode,
+                                tipo.codigo as userTypeCode,
+                                correo as email, nombre as name,
+                                apellido as surname, 
+                                fechacreacion as creationDate,
+                                mun.id as idUserMunicipal,
+                                mun.usuariomunicipiorolesidx as idMunicipalRole,
+                                rol.codigo as municipalRoleCode,
+                                rol.descripcion as municipalRoleDescription
+                            from usuarios as usu
+                            join tiposUsuario as tipo
+                                on tipo.idx = usu.tiposusuarioidx
+                                and tipo.idx = 2
+                            join usuariosmunicipo as mun
+                                on mun.usuariosId = usu.id
+                            join usuariomunicipioroles as rol
+                                on rol.idx = mun.usuariomunicipiorolesidx
+                            where usu.eliminado = false
+                            and usu.correo = '${email}'`
 
                 console.log(newQ)
                 const result = await db.ejecutar(newQ)
@@ -97,7 +98,8 @@ function crearDaoUsuarioMunicipal(db) {
                                 fechacreacion as creationDate,
                                 mun.id as idUserMunicipal,
                                 mun.usuariomunicipiorolesidx as idMunicipalRole,
-                                rol.codigo as municipalRoleCode
+                                rol.codigo as municipalRoleCode,
+                                rol.descripcion as municipalRoleDescription
                             from usuarios as usu
                             join tiposUsuario as tipo
                                 on tipo.idx = usu.tiposusuarioidx

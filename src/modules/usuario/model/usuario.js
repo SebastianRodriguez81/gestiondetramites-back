@@ -3,7 +3,7 @@ function crearUsuario(daoUsuario) {
         id: null,
         idUserType: null,
         email: null,
-        pass: null,
+        //pass: null,
         name: null,
         surname: null,
         creationDate: null, 
