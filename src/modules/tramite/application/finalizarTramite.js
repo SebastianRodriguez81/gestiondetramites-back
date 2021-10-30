@@ -1,14 +1,15 @@
 import { ValidationError } from "../../../common/errors.js";
 
-function finalizarTramite(tramite, mailer) {
+function finalizarTramite(tramite, mailer, usuario) {
     return {
         async ejecutar(idProcedure, rejected, reasonRejection) {
             await tramite.obtenerDatos(idProcedure)
             if (!rejected) {
                 tramite.finalizarTramite()
+            let usuarioBuscado = usuarioCiudadano.user.buscardatos(tramite.idUserCitizen)
                 let datos = {
                     from : "Tramites",
-                    to : tramite.userEmail,
+                    to : usuarioBuscado.email,
                     asunto : "Tramite finalizado",
                     mensaje : "El tramite ha sido finalizado. La razon es la siguiente " + reasonRejection
                 }
