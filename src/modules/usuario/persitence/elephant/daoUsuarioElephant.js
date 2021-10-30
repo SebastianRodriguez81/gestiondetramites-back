@@ -97,4 +97,4 @@ function crearDaoUsuario(db) {
     }
 }
 
-export default crearDaoUsuario;
+export default crearDaoUsuario

@@ -161,6 +161,17 @@ tramiteRouter.get('/dashboard', async (req, res, next) => {
     }
 })
 
+tramiteRouter.get('/events', async (req, res, next) => {
+    try {        
+        if (isNaN(req.query.idProcedure)) {throw new ValidationError("Identificador de tramie erroneo o faltantes.")}
+        const obtenerEventosTramite = tamiteApplications.getObtenerEventosTramite()
+        const respuesta = await obtenerEventosTramite.ejecutar(req.query.idProcedure)
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
+
 tramiteRouter.get('/procedureTypes', async (req, res, next) => {
     try {
         const obtenerTipoTramite = tamiteApplications.getObtenerTiposTramite()
