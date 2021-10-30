@@ -55,19 +55,19 @@ function getTramiteApplications() {
 
         getAsignarFechaRevision: function() {
             let tramite = getTramite()
-            let asignarFechaRevision = crearAsignarFechaRevision(tramite, crearMailer(), getUsuarioModels().getUsuarioCiudadano())
+            let asignarFechaRevision = crearAsignarFechaRevision(tramite, crearMailer(), usuarioModels.getUsuarioCiudadano())
             return asignarFechaRevision
         },
 
         getAsignarFechaRetiro: function() {
             let tramite = getTramite()
-            let asignarFechaRetiro = crearAsignarFechaRetiro(tramite, crearMailer(), getUsuarioModels().getUsuarioCiudadano())
+            let asignarFechaRetiro = crearAsignarFechaRetiro(tramite, crearMailer(), usuarioModels.getUsuarioCiudadano())
             return asignarFechaRetiro
         },
 
         getFinalizarTramite: function() {
             let tramite = getTramite()
-            let finalizarTramite = crearFinalizarTramite(tramite, crearMailer(), getUsuarioModels().getUsuarioCiudadano())
+            let finalizarTramite = crearFinalizarTramite(tramite, crearMailer(), usuarioModels.getUsuarioCiudadano())
             return finalizarTramite
         },
 
