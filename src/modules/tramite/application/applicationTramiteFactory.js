@@ -20,7 +20,6 @@ import crearAsignarFechaRevision from "./asignarFechaRevision.js"
 import crearAsignarFechaRetiro from "./asignarFechaRetiro.js"
 import crearFinalizarTramite from "./finalizarTramite.js"
 import {crearMailer} from "../../../common/mailing/mailerFactory.js"
-import getUsuarioModels from "../../usuario/model/modelUsurioFactory.js"
 
 const tramteModels = getTramiteModels()
 const usuarioModels = getUsuarioModels()
