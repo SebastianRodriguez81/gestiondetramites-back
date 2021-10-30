@@ -1,7 +1,7 @@
 import { NotFoundError } from "../../../../common/errors.js"
 import { getValidDate } from "../../../../common/validDate.js"
 
-function crearDaoUsuario(db) {
+function crearDaoEventoTramite(db) {
     return {
         persistir: async (usuario) => {
             const qTabla = 'usuarios'
@@ -38,63 +38,50 @@ function crearDaoUsuario(db) {
             } catch (err) {
                 throw new Error('Hubo un error al persistir el usuario: ' + err.message)
             }
-        },
+        },     
 
         obtenerDatosPorId: async (id) => {
             try {
-                const newQ = `select
-                                id,
-                                tiposusuarioidx as isUserType,
-                                correo as email,
-                                nombre as name,
-                                apellido as surname, 
-                                fechacreacion as creationDate,
-                                tipo.codigo as userTypeCode
-                            from usuarios as usu
-                            join tiposUsuario as tipo
-                            on tipo.idx = usu.tiposusuarioidx
-                            where eliminado = false
-                            and usu.id = ${id}`
+                const newQ = `
+                    select
+                        id,
+                        tramiteid as idProcedure,
+                        fechaevento as eventDate,
+                        observacion as observation
+                    from tramiteeventos
+                    where id = ${id}`
 
                 const result = await db.ejecutar(newQ)
-                if (!result.length) {
-                    throw new NotFoundError('Usuario no encontrado.')
-                }
+                if (!result.length) { throw new NotFoundError('Evento de tramite no encontrado.') }
                 return result[0]
             } catch (err) {
                 switch (err.constructor) {
                     case NotFoundError:
                         throw err
-
                     default:
-                        throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
+                        throw new Error('Hubo un error al buscar el evento del tramite.' + err.message)
                 }
-
             }
         },
 
-        buscarTodos: async () => {
+        buscarTodosPorIdTramite: async (idProcedure) => {
             try {
-                const newQ = `select
-                                id,
-                                tiposusuarioidx as isUserType,
-                                correo as email,
-                                nombre as name,
-                                apellido as surname, 
-                                fechacreacion as creationDate,
-                                tipo.codigo as userTypeCode
-                            from usuarios as usu
-                            join tiposUsuario as tipo
-                            on tipo.idx = usu.tiposusuarioidx
-                            where eliminado = false`
+                const newQ = `
+                    select
+                        id,
+                        tramiteid as idProcedure,
+                        fechaevento as eventDate,
+                        observacion as observation
+                    from tramiteeventos
+                    where tramiteid = ${idProcedure}`
 
                 const result = await db.ejecutar(newQ)
                 return result
             } catch (err) {
-                throw new Error('Hubo un error al buscar los usuarios.' + err.message)
+                throw new Error('Hubo un error al buscar los eventos del tramite.' + err.message)
             }
         }
     }
 }
 
-export default crearDaoUsuario
+export default crearDaoEventoTramite

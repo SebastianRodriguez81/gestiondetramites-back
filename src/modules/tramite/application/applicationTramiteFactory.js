@@ -1,12 +1,15 @@
-import getTramite from "../model/tramiteFactory.js";
-import getTramiteLicenciaConducir from "../model/tramiteLicenciaConducirFactory.js";
-import getTipoTramite from "../model/tipoTramiteFactory.js";
+import getTramiteModels from "../model/modelTramiteFactory.js"
+import getTramite from "../model/tramiteFactory.js"
+import getTramiteLicenciaConducir from "../model/tramiteLicenciaConducirFactory.js"
+
+import getTipoTramite from "../model/tipoTramiteFactory.js"
 import crearObtenerTramitePorId from "./obtenerTramitePorId.js"
 import crearObtenerTramitesPorUsuario from "./obtenerTramitesPorUsuario.js"
 import crearObtenerTramitesPendiente from "./obtenerTramitesPendiente.js"
 import crearObtenerTramitesEnProceso from "./obtenerTramitesEnProceso.js"
 import crearObtenerTramitesFinalizado from "./obtenerTramitesFinalizado.js"
 import crearObtenerTramitesCantidades from "./obtenerTramitesCantidades.js"
+import crearObtenerEventosTramite from "./obtenerEventosTramite.js"
 import crearObtenerTiposTramite from "./obtenerTiposTramite.js"
 import crearObtenerTramite from "./obtenerTramites.js"
 import crearAltaTramite from "./altaTramite.js"
@@ -17,6 +20,8 @@ import crearAsignarFechaRevision from "./asignarFechaRevision.js"
 import crearAsignarFechaRetiro from "./asignarFechaRetiro.js"
 import crearFinalizarTramite from "./finalizarTramite.js"
 import {crearMailer} from "../../../common/mailing/mailerFactory.js"
+
+const tramteModels = getTramiteModels()
 
 function getTramiteApplications() {
     return {
@@ -98,6 +103,12 @@ function getTramiteApplications() {
             let tramite = getTramite()
             let obtenerTipoTramitesCantidades = crearObtenerTramitesCantidades(tramite)
             return obtenerTipoTramitesCantidades
+        },
+
+        getObtenerEventosTramite: function () {
+            let eventoTramite = tramteModels.getEventoTramite()
+            let obtenerEventosTramite = crearObtenerEventosTramite(eventoTramite)
+            return obtenerEventosTramite
         },
 
         getObtenerTiposTramite: function () {
