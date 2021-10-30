@@ -1,11 +1,12 @@
 import { ValidationError } from "../../../common/errors.js";
 
-function finalizarTramite(tramite, mailer, usuario) {
+function finalizarTramite(tramite, mailer, usuarioCiudadano) {
     return {
         async ejecutar(idProcedure, rejected, reasonRejection) {
             await tramite.obtenerDatos(idProcedure)
             if (!rejected) {
                 tramite.finalizarTramite()
+                
             let usuarioBuscado = usuarioCiudadano.user.buscardatos(tramite.idUserCitizen)
                 let datos = {
                     from : "Tramites",
