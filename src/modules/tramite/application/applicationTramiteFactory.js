@@ -28,14 +28,14 @@ function getTramiteApplications() {
     return {
 
         getAltaTramites: function() {
-            let altaTramiteLicenciaConducir = this.getAltaTramitesLicenciaConducir()
-            let obtenerAltaTramite = crearAltaTramite(altaTramiteLicenciaConducir)
+            const altaTramiteLicenciaConducir = this.getAltaTramitesLicenciaConducir()
+            const obtenerAltaTramite = crearAltaTramite(altaTramiteLicenciaConducir)
             return obtenerAltaTramite
         },
 
         getAltaTramitesLicenciaConducir: function() {
-            let tramiteLicenciaConducir = tramteModels.getTramiteLicenciaConducir()
-            let obtenerAltaTramiteLicenciaConducir = crearAltaTramiteLicenciaConducir(tramiteLicenciaConducir)
+            const tramiteLicenciaConducir = tramteModels.getTramiteLicenciaConducir()
+            const obtenerAltaTramiteLicenciaConducir = crearAltaTramiteLicenciaConducir(tramiteLicenciaConducir)
             return obtenerAltaTramiteLicenciaConducir
         },
 
@@ -48,81 +48,92 @@ function getTramiteApplications() {
         },
 
         getAsignarResponsable: function() {
-            let tramite = tramteModels.getTramite()
-            let asignarResponsable = crearAsignarResponsable(tramite)
+            const tramite = tramteModels.getTramite()
+            const usuarioMunicipal = usuarioModels.getUsuarioMunicipal()
+            const eventoTramite = tramteModels.getEventoTramite()
+            const asignarResponsable = crearAsignarResponsable(tramite, usuarioMunicipal, eventoTramite)
             return asignarResponsable
         },
 
         getAsignarFechaRevision: function() {
-            let tramite = getTramite()
-            let asignarFechaRevision = crearAsignarFechaRevision(tramite, crearMailer(), usuarioModels.getUsuarioCiudadano())
+            const tramite = tramteModels.getTramite()
+            const mailer = crearMailer()
+            const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
+            const eventoTramite = tramteModels.getEventoTramite()
+            const asignarFechaRevision = crearAsignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite)
             return asignarFechaRevision
         },
 
         getAsignarFechaRetiro: function() {
-            let tramite = getTramite()
-            let asignarFechaRetiro = crearAsignarFechaRetiro(tramite, crearMailer(), usuarioModels.getUsuarioCiudadano())
+            const tramite = tramteModels.getTramite()
+            const mailer = crearMailer()
+            const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
+            const eventoTramite = tramteModels.getEventoTramite()
+            const asignarFechaRetiro = crearAsignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite)
             return asignarFechaRetiro
         },
 
         getFinalizarTramite: function() {
-            let tramite = getTramite()
-            let finalizarTramite = crearFinalizarTramite(tramite, crearMailer(), usuarioModels.getUsuarioCiudadano())
+            const tramite = tramteModels.getTramite()
+            const mailer = crearMailer()
+            const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
+            const eventoTramite = tramteModels.getEventoTramite()
+            const finalizarTramite = crearFinalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite)
             return finalizarTramite
         },
 
         getObtenerTramitePorId: function () {
-            let tramite = tramteModels.getTramite()
-            let licenciaConducir = tramteModels.getTramiteLicenciaConducir()
-            let obtenerTipoTramitePorId = crearObtenerTramitePorId(tramite, licenciaConducir)
+            const tramite = tramteModels.getTramite()
+            const licenciaConducir = tramteModels.getTramiteLicenciaConducir()
+            const obtenerTipoTramitePorId = crearObtenerTramitePorId(tramite, licenciaConducir)
             return obtenerTipoTramitePorId
         },
 
         getObtenerTramitesPorUsuario: function () {
-            let tramite = tramteModels.getTramite()
-            let obtenerTipoTramitesPorUsuario = crearObtenerTramitesPorUsuario(tramite)
+            const tramite = tramteModels.getTramite()
+            const obtenerTipoTramitesPorUsuario = crearObtenerTramitesPorUsuario(tramite)
             return obtenerTipoTramitesPorUsuario
         },
 
         getObtenerTramitesPendiente: function () {
-            let tramite = tramteModels.getTramite()
-            let obtenerTipoTramitesPendiente = crearObtenerTramitesPendiente(tramite)
+            const tramite = tramteModels.getTramite()
+            const obtenerTipoTramitesPendiente = crearObtenerTramitesPendiente(tramite)
             return obtenerTipoTramitesPendiente
         },
 
         getObtenerTramitesEnProceso: function () {
-            let tramite = tramteModels.getTramite()
-            let obtenerTipoTramitesEnProceso = crearObtenerTramitesEnProceso(tramite)
+            const tramite = tramteModels.getTramite()
+            const obtenerTipoTramitesEnProceso = crearObtenerTramitesEnProceso(tramite)
             return obtenerTipoTramitesEnProceso
         },
 
         getObtenerTramitesFinalizado: function () {
-            let tramite = tramteModels.getTramite()
-            let obtenerTipoTramitesFinalizado = crearObtenerTramitesFinalizado(tramite)
+            const tramite = tramteModels.getTramite()
+            const obtenerTipoTramitesFinalizado = crearObtenerTramitesFinalizado(tramite)
             return obtenerTipoTramitesFinalizado
         },
 
         getObtenerTramitesCantidades: function () {
-            let tramite = tramteModels.getTramite()
-            let obtenerTipoTramitesCantidades = crearObtenerTramitesCantidades(tramite)
+            const tramite = tramteModels.getTramite()
+            const obtenerTipoTramitesCantidades = crearObtenerTramitesCantidades(tramite)
             return obtenerTipoTramitesCantidades
         },
 
         getObtenerEventosTramite: function () {
-            let eventoTramite = tramteModels.getEventoTramite()
-            let obtenerEventosTramite = crearObtenerEventosTramite(eventoTramite)
+            const eventoTramite = tramteModels.getEventoTramite()
+            const obtenerEventosTramite = crearObtenerEventosTramite(eventoTramite)
             return obtenerEventosTramite
         },
 
         getObtenerTiposTramite: function () {
-            let tipoTramite = tramteModels.getTipoTramite()
-            let obtenerTipoTramite = crearObtenerTiposTramite(tipoTramite)
+            const tipoTramite = tramteModels.getTipoTramite()
+            const obtenerTipoTramite = crearObtenerTiposTramite(tipoTramite)
             return obtenerTipoTramite
         },
 
         getObtenerTramites: function () {
-            let tramite = tramteModels.getTramite()
-            let obtenerTramite = crearObtenerTramite(tramite)
+            const tramite = tramteModels.getTramite()
+            const obtenerTramite = crearObtenerTramite(tramite)
             return obtenerTramite
         }
     }

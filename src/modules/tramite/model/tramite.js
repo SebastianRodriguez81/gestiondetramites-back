@@ -40,11 +40,11 @@ function crearTramite(daoTramite) {
             this.userName = datos.username
             this.userSurname = datos.usersurname
             this.userDni = datos.userdni
-            this.userEmail = datos.userEmail
+            //this.userEmail = datos.userEmail
             this.userAddress = datos.useraddress
             this.userBirthdate = datos.userbirthdate ? datos.userbirthdate.toISOString().split('T')[0] :  datos.userbirthdate
             this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
-            this.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] : datos.anlystassignmentdate
+            this.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] : datos.anlystassignmentdate           
             this.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] : datos.assignmentdate
             this.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().split('T')[0] : datos.revisiondate
             this.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().split('T')[0] : datos.withdrawaldate
@@ -136,13 +136,14 @@ function crearTramite(daoTramite) {
 
         asignarFechaRevision(revisionDate) {
             if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            if (this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }
             this.revisionDate = revisionDate            
             return this
         },
 
         asignarFechaRetiro(withdrawalDate) {
             if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
-            if (this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            if (!this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }           
             this.withdrawalDate = withdrawalDate
             this.idState = 4
             return this

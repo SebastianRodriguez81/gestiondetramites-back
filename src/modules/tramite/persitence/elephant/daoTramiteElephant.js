@@ -57,8 +57,7 @@ function crearDaoTramite(db) {
             }
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)            
-
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;
@@ -86,6 +85,7 @@ function crearDaoTramite(db) {
             qFormer.addCampo('domicilio as userAddress')
             qFormer.addCampo('fechanacimiento as userBirthdate')
             qFormer.addCampo('fechacreacion as creationDate')
+            qFormer.addCampo('fechainicio as anlystassignmentdate')
             qFormer.addCampo('fechaasigancion as assignmentDate')
             qFormer.addCampo('fecharevision as revisionDate')
             qFormer.addCampo('fecharetiro as withdrawalDate')

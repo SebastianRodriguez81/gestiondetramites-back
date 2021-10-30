@@ -5,25 +5,28 @@ function crearDaoEventoTramite(db) {
     return {
         persistir: async (eventoTramite) => {
             const qTabla = 'tramiteeventos'
-            const qFormer = db.getQueryBuilder()            
+            const qFormer = db.getQueryBuilder() 
+            const fecha = getValidDate()
+           
 
             qFormer.setTabla(qTabla)
-            qFormer.addCampo('tramiteid', eventoTramite.idProcedure)
-            eventoTramite.eventDate ? qFormer.addCampo('fechaevento', "'" + eventoTramite.eventDate + "'") : qFormer.addCampo('fechaevento', eventoTramite.eventDate)
+            qFormer.addCampo('tramiteid', eventoTramite.idProcedure)            
             eventoTramite.observation ? qFormer.addCampo('observacion', "'" + eventoTramite.observation + "'") : qFormer.addCampo('observacion', eventoTramite.observation)
 
             if (eventoTramite.id) {
                 // UPDATE  
-                qFormer.setQueryType(qFormer.getQueryTypes().update)                
+                qFormer.setQueryType(qFormer.getQueryTypes().update)
+                eventoTramite.eventDate ? qFormer.addCampo('fechaevento', "'" + eventoTramite.eventDate + "'") : qFormer.addCampo('fechaevento', eventoTramite.eventDate)                
                 qFormer.addCondicion("id", "=", eventoTramite.id)
             } else {               
                 //INSERT
                 qFormer.setQueryType(qFormer.getQueryTypes().insert)
+                qFormer.addCampo('fechaevento', "'" + fecha + "'")               
                 qFormer.addCampo('id', "default")               
             }
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;

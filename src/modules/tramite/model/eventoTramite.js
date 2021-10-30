@@ -6,7 +6,31 @@ function crearEventoTramite(daoEventoTramite) {
         id: null,       
         idProcedure: null,
         eventDate: null,
-        observation: null, 
+        observation: null,
+
+        mensajeAsignarAnalista(nombreAnalista){
+            return `Asigando a ${nombreAnalista} para analisis.`
+        },
+
+        mensajeAsignarResponsable(nombreResponsable){
+            return `Asigando a ${nombreResponsable} para gestion.`
+        },
+
+        mensajeFechaRevision(fechaRevision){
+            return `Se solicito presnetarce el dia ${fechaRevision} para revision el tramite.`
+        },
+
+        mensajeFechaRetiro(fechaRetiro){
+            return `Se solicito presnetarce el dia ${fechaRetiro} para retirar el tramite.`
+        },
+
+        mensajeFinzalido(){
+            return `Se finzalizo el tramite.`
+        },
+
+        mensajeRechazado(motivo){
+            return `Se rechazo el tramite. Motivo: ${motivo}`
+        },
 
         async persistir() {
             const result = await daoEventoTramite.persistir(this)
