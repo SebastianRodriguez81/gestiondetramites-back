@@ -3,30 +3,31 @@ import { getValidDate } from "../../../../common/validDate.js"
 
 function crearDaoEventoTramite(db) {
     return {
-        persistir: async (usuario) => {
-            const qTabla = 'usuarios'
-            const qFormer = db.getQueryBuilder()
-            const fecha = getValidDate()
+        persistir: async (eventoTramite) => {
+            // const qTabla = 'usuarios'
+            // const qFormer = db.getQueryBuilder()
+            // const fecha = getValidDate()
 
-            qFormer.setTabla(qTabla)
-            qFormer.addCampo('tiposusuarioidx', usuario.idUserType)
-            usuario.email ? qFormer.addCampo('correo', "'" + usuario.email + "'") : qFormer.addCampo('correo', usuario.email)
-            usuario.pass ? qFormer.addCampo('contraseña', "'" + usuario.pass + "'") : qFormer.addCampo('contraseña', usuario.pass)
-            usuario.name ? qFormer.addCampo('nombre', "'" + usuario.name + "'") : qFormer.addCampo('nombre', usuario.name)
-            usuario.surname ? qFormer.addCampo('apellido', "'" + usuario.surname + "'") : qFormer.addCampo('apellido', usuario.surname)
-            qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
+            // qFormer.setTabla(qTabla)
+            // qFormer.addCampo('tiposusuarioidx', usuario.idUserType)
+            // usuario.email ? qFormer.addCampo('correo', "'" + usuario.email + "'") : qFormer.addCampo('correo', usuario.email)
+            // usuario.pass ? qFormer.addCampo('contraseña', "'" + usuario.pass + "'") : qFormer.addCampo('contraseña', usuario.pass)
+            // usuario.name ? qFormer.addCampo('nombre', "'" + usuario.name + "'") : qFormer.addCampo('nombre', usuario.name)
+            // usuario.surname ? qFormer.addCampo('apellido', "'" + usuario.surname + "'") : qFormer.addCampo('apellido', usuario.surname)
+            // qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
 
-            if (usuario.id) {
-                // UPDATE  
-                qFormer.setQueryType(qFormer.getQueryTypes().update)  
-                usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)              
-                qFormer.addCondicion("id", "=", tramite.id)
+            if (eventoTramite.id) {
+                // // UPDATE  
+                // qFormer.setQueryType(qFormer.getQueryTypes().update)  
+                // usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)              
+                // qFormer.addCondicion("id", "=", tramite.id)
             } else {
+                console.log(eventoTramite)
                 // INSERT
-                qFormer.setQueryType(qFormer.getQueryTypes().insert)
-                qFormer.addCampo('id', "default")
-                qFormer.addCampo('eliminado', false)
-                qFormer.addCampo('fechacreacion', "'" + fecha + "'")
+                // qFormer.setQueryType(qFormer.getQueryTypes().insert)
+                // qFormer.addCampo('id', "default")
+                // qFormer.addCampo('eliminado', false)
+                // qFormer.addCampo('fechacreacion', "'" + fecha + "'")
             }
 
             const newQ = qFormer.getQuerry()

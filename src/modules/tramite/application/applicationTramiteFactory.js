@@ -1,4 +1,5 @@
 import getTramiteModels from "../model/modelTramiteFactory.js"
+import getUsuarioModels from "../../usuario/model/modelUsurioFactory.js"
 // import getTramite from "../model/tramiteFactory.js"
 // import getTramiteLicenciaConducir from "../model/tramiteLicenciaConducirFactory.js"
 // import getTipoTramite from "../model/tipoTramiteFactory.js"
@@ -21,6 +22,7 @@ import crearFinalizarTramite from "./finalizarTramite.js"
 import {crearMailer} from "../../../common/mailing/mailerFactory.js"
 
 const tramteModels = getTramiteModels()
+const usuarioModels = getUsuarioModels()
 
 function getTramiteApplications() {
     return {
@@ -38,8 +40,10 @@ function getTramiteApplications() {
         },
 
         getAsignarAnalista: function() {
-            let tramite = tramteModels.getTramite()
-            let asignarAnalista = crearAsignarAnalista(tramite)
+            const tramite = tramteModels.getTramite()
+            const usuarioMunicipal = usuarioModels.getUsuarioMunicipal()
+            const eventoTramite = tramteModels.getEventoTramite()
+            const asignarAnalista = crearAsignarAnalista(tramite, usuarioMunicipal, eventoTramite)
             return asignarAnalista
         },
 
