@@ -7,36 +7,28 @@ function crearDaoEventoTramite(db) {
             const qTabla = 'tramiteeventos'
             const qFormer = db.getQueryBuilder()            
 
-            // qFormer.setTabla(qTabla)
-            // qFormer.addCampo('tramiteid', usuario.idUserType)
-            // usuario.email ? qFormer.addCampo('correo', "'" + usuario.email + "'") : qFormer.addCampo('correo', usuario.email)
-            // usuario.pass ? qFormer.addCampo('contraseña', "'" + usuario.pass + "'") : qFormer.addCampo('contraseña', usuario.pass)
-            // usuario.name ? qFormer.addCampo('nombre', "'" + usuario.name + "'") : qFormer.addCampo('nombre', usuario.name)
-            // usuario.surname ? qFormer.addCampo('apellido', "'" + usuario.surname + "'") : qFormer.addCampo('apellido', usuario.surname)
-            // qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
+            qFormer.setTabla(qTabla)
+            qFormer.addCampo('tramiteid', eventoTramite.idProcedure)
+            eventoTramite.eventDate ? qFormer.addCampo('fechaevento', "'" + eventoTramite.eventDate + "'") : qFormer.addCampo('fechaevento', eventoTramite.eventDate)
+            eventoTramite.observation ? qFormer.addCampo('observacion', "'" + eventoTramite.observation + "'") : qFormer.addCampo('observacion', eventoTramite.observation)
 
             if (eventoTramite.id) {
-                // // UPDATE  
-                // qFormer.setQueryType(qFormer.getQueryTypes().update)  
-                // usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)              
-                // qFormer.addCondicion("id", "=", tramite.id)
-            } else {
-                console.log(eventoTramite)
-                // INSERT
-                // qFormer.setQueryType(qFormer.getQueryTypes().insert)
-                // qFormer.addCampo('id', "default")
-                // qFormer.addCampo('eliminado', false)
-                // qFormer.addCampo('fechacreacion', "'" + fecha + "'")
+                // UPDATE  
+                qFormer.setQueryType(qFormer.getQueryTypes().update)                
+                qFormer.addCondicion("id", "=", eventoTramite.id)
+            } else {               
+                //INSERT
+                qFormer.setQueryType(qFormer.getQueryTypes().insert)
+                qFormer.addCampo('id', "default")               
             }
 
             const newQ = qFormer.getQuerry()
             console.log(newQ)
-
             try {
                 const result = await db.ejecutar(newQ);
                 return result;
             } catch (err) {
-                throw new Error('Hubo un error al persistir el usuario: ' + err.message)
+                throw new Error('Hubo un error al persistir el evento: ' + err.message)
             }
         },     
 

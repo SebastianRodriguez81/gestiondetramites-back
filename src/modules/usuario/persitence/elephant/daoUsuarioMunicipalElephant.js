@@ -21,7 +21,7 @@ function crearDaoUsuarioMunicipal(db) {
                             from usuarios as usu
                             join tiposUsuario as tipo
                                 on tipo.idx = usu.tiposusuarioidx
-                                and tipo.idx = 2
+                                and tipo.idx = 1
                             join usuariosmunicipo as mun
                                 on mun.usuariosId = usu.id
                             join usuariomunicipioroles as rol
@@ -63,7 +63,7 @@ function crearDaoUsuarioMunicipal(db) {
                             from usuarios as usu
                             join tiposUsuario as tipo
                                 on tipo.idx = usu.tiposusuarioidx
-                                and tipo.idx = 2
+                                and tipo.idx = 1
                             join usuariosmunicipo as mun
                                 on mun.usuariosId = usu.id
                             join usuariomunicipioroles as rol
@@ -104,7 +104,7 @@ function crearDaoUsuarioMunicipal(db) {
                             from usuarios as usu
                             join tiposUsuario as tipo
                                 on tipo.idx = usu.tiposusuarioidx
-                                and tipo.idx = 2
+                                and tipo.idx = 1
                             join usuariosmunicipo as mun
                                 on mun.usuariosId = usu.id
                             join usuariomunicipioroles as rol
