@@ -22,6 +22,7 @@ function crearTramite(daoTramite) {
         completedDate: null,
         rejected: null,
         reasonRejection: null,
+        lastModificationDate: null,
 
         async persistir() {
             const result = await daoTramite.persistir(this)
@@ -50,6 +51,7 @@ function crearTramite(daoTramite) {
             this.completedDate = datos.completeddate ? datos.completeddate.toISOString().split('T')[0] : datos.completeddate
             this.rejected = datos.rejected
             this.reasonRejection = datos.reasonrejection
+            this.lastModificationDate = datos.lastmodificationdate
 
             return this
         },
@@ -85,6 +87,7 @@ function crearTramite(daoTramite) {
                 tramiteRow.completedDate = datos.completeddate ? datos.completeddate.toISOString().split('T')[0] : datos.completeddate
                 tramiteRow.rejected = datos.rejected
                 tramiteRow.reasonRejection = datos.reasonrejection
+                tramiteRow.lastModificationDate = datos.lastmodificationdate ? datos.lastmodificationdate.toISOString().split('T')[0] : datos.lastmodificationdate
 
                 tramiteRow.stateCode = datos.statecode
                 tramiteRow.stateDescription = datos.statedescription

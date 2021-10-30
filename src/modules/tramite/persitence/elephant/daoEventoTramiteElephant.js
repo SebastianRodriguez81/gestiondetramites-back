@@ -4,12 +4,11 @@ import { getValidDate } from "../../../../common/validDate.js"
 function crearDaoEventoTramite(db) {
     return {
         persistir: async (eventoTramite) => {
-            // const qTabla = 'usuarios'
-            // const qFormer = db.getQueryBuilder()
-            // const fecha = getValidDate()
+            const qTabla = 'tramiteeventos'
+            const qFormer = db.getQueryBuilder()            
 
             // qFormer.setTabla(qTabla)
-            // qFormer.addCampo('tiposusuarioidx', usuario.idUserType)
+            // qFormer.addCampo('tramiteid', usuario.idUserType)
             // usuario.email ? qFormer.addCampo('correo', "'" + usuario.email + "'") : qFormer.addCampo('correo', usuario.email)
             // usuario.pass ? qFormer.addCampo('contraseña', "'" + usuario.pass + "'") : qFormer.addCampo('contraseña', usuario.pass)
             // usuario.name ? qFormer.addCampo('nombre', "'" + usuario.name + "'") : qFormer.addCampo('nombre', usuario.name)

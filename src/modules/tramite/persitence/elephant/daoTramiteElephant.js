@@ -91,6 +91,7 @@ function crearDaoTramite(db) {
             qFormer.addCampo('fechafinalizado as completedDate')
             qFormer.addCampo('rechazado as rejected')
             qFormer.addCampo('rechazomotivo as reasonRejection')
+            qFormer.addCampo("ultimamodifciacion as lastmodificationdate")
             qFormer.addCondicion("id", "=", id)
             qFormer.addCondicion("eliminado", "=", false)
 
@@ -183,6 +184,7 @@ function crearDaoTramite(db) {
             qFormer.addCampo("tra.fechafinalizado as completedDate")
             qFormer.addCampo("tra.rechazado as rejected")
             qFormer.addCampo("tra.rechazomotivo as reasonRejection")
+            qFormer.addCampo("tra.ultimamodifciacion as lastmodificationdate")
             qFormer.addCampo("tra.estadosidx as idState")
             qFormer.addCampo("est.codigo as stateCode")
             qFormer.addCampo("est.descripcion as stateDescription")
