@@ -12,7 +12,7 @@ tramiteRouter.post('/', async (req, res, next) => {
             typeof req.body.idProcedureType !== 'number' ||
             typeof req.body.userName !== 'string' ||
             typeof req.body.userSurname !== 'string' ||
-            typeof req.body.userDni !== 'string' ||
+            !req.body.userDni ||
             typeof req.body.userAddress !== 'string' ||
             typeof req.body.userBirthdate !== 'string' ||
             typeof req.body.subProcedureType !== 'string' ||

@@ -10,7 +10,7 @@ function crearAltaTramiteLicenciaConducir(tramiteLicenciaConducir) {
                 typeof tramiteLicenciaConducirData.idProcedureType !== 'number' ||
                 typeof tramiteLicenciaConducirData.userName !== 'string' ||
                 typeof tramiteLicenciaConducirData.userSurname !== 'string' ||
-                typeof tramiteLicenciaConducirData.userDni !== 'string' ||
+                !tramiteLicenciaConducirData.userDni ||
                 typeof tramiteLicenciaConducirData.userAddress !== 'string' ||
                 typeof tramiteLicenciaConducirData.userBirthdate !== 'string' ||
                 !isValidDate(tramiteLicenciaConducirData.userBirthdate) ||
@@ -22,7 +22,7 @@ function crearAltaTramiteLicenciaConducir(tramiteLicenciaConducir) {
                 typeof tramiteLicenciaConducirData.backDniUrl !== 'string' ||
                 typeof tramiteLicenciaConducirData.debtFreeUrl !== 'string'
             ) {
-                throw new ValidationError("Datos errornes y/o faltantes 222.")
+                throw new ValidationError("Datos errornes y/o faltantes.")
             }
 
             //  Validar usuario existente

@@ -95,8 +95,7 @@ function crearDaoTramite(db) {
             qFormer.addCondicion("eliminado", "=", false)
 
             const newQ = qFormer.getQuerry()
-            //console.log(newQ)            
-
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ)
                 if (!result.length) { throw new NotFoundError('tramite no encontrado.') }
@@ -123,6 +122,7 @@ function crearDaoTramite(db) {
                             on tra.estadosIdx = es.idx
                             group by estadosidx, es.codigo, es.descripcion, es.descripcionPublica`
 
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;
@@ -210,8 +210,7 @@ function crearDaoTramite(db) {
             qFormer.addCampo("rol.descripcion as userMunicipalRoleDesciption")
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)
-
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;

@@ -41,8 +41,8 @@ function crearDaoTramiteLicenciaConducir(db) {
                         where tra.id = ${idProcedure}
                         and tra.eliminado = false`
 
-            try {
-                console.log(newQ)
+            //console.log(newQ)
+            try {                
                 const result = await db.ejecutar(newQ)
                 if (!result.length) { throw new NotFoundError('tramite no encontrado.') }
                 return result[0]
@@ -76,8 +76,7 @@ function crearDaoTramiteLicenciaConducir(db) {
             qFormer.addCampo('libredeudasurl', "'" + tramiteLicenciaConducir.debtFreeUrl + "'")
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)
-
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;

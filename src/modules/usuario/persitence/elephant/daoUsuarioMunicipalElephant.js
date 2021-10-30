@@ -29,6 +29,7 @@ function crearDaoUsuarioMunicipal(db) {
                             where usu.eliminado = false
                             and usu.id = ${id}`
 
+                //console.log(newQ)
                 const result = await db.ejecutar(newQ)
                 if (!result.length) { throw new NotFoundError('Usuario no encontrado.') }
                 return result[0]
@@ -70,7 +71,7 @@ function crearDaoUsuarioMunicipal(db) {
                             where usu.eliminado = false
                             and usu.correo = '${email}'`
 
-                console.log(newQ)
+                //console.log(newQ)
                 const result = await db.ejecutar(newQ)
                 if (!result.length) {throw new NotFoundError('Usuario no encontrado.')}
                 return result[0]
@@ -111,6 +112,7 @@ function crearDaoUsuarioMunicipal(db) {
                                 and rol.idx = 2
                             where usu.eliminado = false`
 
+                //console.log(newQ)
                 const result = await db.ejecutar(newQ)
                 return result
             } catch (err) {

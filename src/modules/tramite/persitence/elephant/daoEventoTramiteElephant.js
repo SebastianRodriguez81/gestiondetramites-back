@@ -52,6 +52,7 @@ function crearDaoEventoTramite(db) {
                     from tramiteeventos
                     where id = ${id}`
 
+                //console.log(newQ)
                 const result = await db.ejecutar(newQ)
                 if (!result.length) { throw new NotFoundError('Evento de tramite no encontrado.') }
                 return result[0]
@@ -76,6 +77,7 @@ function crearDaoEventoTramite(db) {
                     from tramiteeventos
                     where tramiteid = ${idProcedure}`
 
+                //console.log(newQ)
                 const result = await db.ejecutar(newQ)
                 return result
             } catch (err) {

@@ -26,8 +26,7 @@ function crearDaoUsuarioCiudadano(db) {
             }
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)
-
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;
@@ -59,7 +58,8 @@ function crearDaoUsuarioCiudadano(db) {
                                 on ciu.usuariosId = usu.id
                             where eliminado = false
                             and usu.id = ${id}`
-
+                
+                //console.log(newQ)
                 const result = await db.ejecutar(newQ)
                 if (!result.length) {throw new NotFoundError('Usuario no encontrado.')}
                 return result[0]
@@ -98,7 +98,7 @@ function crearDaoUsuarioCiudadano(db) {
                             where eliminado = false
                             and usu.correo = '${email}'`
 
-                console.log(newQ)
+                //console.log(newQ)
                 const result = await db.ejecutar(newQ)
                 if (!result.length) {throw new NotFoundError('Usuario no encontrado.')}
                 return result[0]
