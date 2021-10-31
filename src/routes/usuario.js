@@ -29,6 +29,17 @@ usuarioRouter.post('/citizens', async (req, res, next) => {
 //#endregion
 
 //#region PUT
+usuarioRouter.put('/citizens/notifications', async (req, res, next) => {
+    try {        
+        if (isNaN(req.body.idUser) ) { throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
+        const marcarNotificacionLeida = usuarioApplications.getMarcarNotificacionLeida()
+        const respuesta = await marcarNotificacionLeida.ejecutar(req.body.idUser)
+      
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
 //#endregion
 
 //#region GET
@@ -47,27 +58,9 @@ usuarioRouter.get('/citizens', async (req, res, next) => {
 usuarioRouter.get('/citizens/notifications', async (req, res, next) => {
     try {        
         if (isNaN(req.query.idUser) ) { throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
-        // const obtenerUsuarioCiudadno = usuarioApplications.getObtenerUsuarioCiudadano()
-        // const respuesta = await obtenerUsuarioCiudadno.ejecutar(req.query.idUser, req.query.email)
-
-        const respuesta=[{
-            id: 1,
-            idUser:1,
-            NotificationDate:'2021-10-30',
-            menssage:'Mensaje preuba 1'
-        },
-        {
-            id: 1,
-            idUser:1,
-            NotificationDate:'2021-10-29',
-            menssage:'Mensaje preuba 2'
-        },
-        {
-            id: 1,
-            idUser:1,
-            NotificationDate:'2021-10-28',
-            menssage:'Mensaje preuba 3'
-        }]
+        const obtenerNotificacionUsuario = usuarioApplications.getObtenerNotificacionUsuario()
+        const respuesta = await obtenerNotificacionUsuario.ejecutar(req.query.idUser)
+      
         res.json(respuesta)
     } catch (error) {
         next(error)

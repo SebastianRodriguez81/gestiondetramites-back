@@ -12,4 +12,11 @@ function getValidDate() {
     return date.toISOString().split('T')[0]
 }
 
-export { isValidDate, getValidDate }
+function getValidDateTime() {
+    const date = new Date()
+    const splitDate = date.toISOString().split('T')
+    let stringDate = splitDate[0]+' '+splitDate[1]
+    return stringDate
+}
+
+export { isValidDate, getValidDate, getValidDateTime}

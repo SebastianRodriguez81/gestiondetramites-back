@@ -1,5 +1,5 @@
 import { NotFoundError } from "../../../../common/errors.js"
-import { getValidDate } from "../../../../common/validDate.js"
+import { getValidDate, getValidDateTime } from "../../../../common/validDate.js"
 
 function crearDaoUsuario(db) {
     return {
@@ -93,6 +93,17 @@ function crearDaoUsuario(db) {
                 return result
             } catch (err) {
                 throw new Error('Hubo un error al buscar los usuarios.' + err.message)
+            }
+        },
+
+        actualizarFechaNotificacionLeida: async (usuario) => {
+            try {
+                const fecha = getValidDateTime()
+                const newQ = `update usuarios set fechaultimanotificacion = '${fecha}' where id = ${usuario.id}`
+                //console.log(newQ)                
+                return await db.ejecutar(newQ)
+            } catch (err) {
+                throw new Error('Hubo un error al actualizar los datos: ' + err.message)
             }
         }
     }
