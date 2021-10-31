@@ -34,7 +34,7 @@ function crearAltaUsuarioCiudadano(usuarioCiudadano) {
 
             // Grabar
             await usuarioCiudadano.persistir()
-            return usuarioCiudadano
+            return usuarioCiudadano.user
         }
     }
 }

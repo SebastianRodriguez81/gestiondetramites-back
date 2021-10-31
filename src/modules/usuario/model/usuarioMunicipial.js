@@ -33,7 +33,7 @@ function crearUsuarioMunicipal(usuario, daoUsuarioMunicipal) {
             this.user.municipalRoleCode = datos.municipalrolecode
             this.user.municipalRoleDescription = datos.municipalroledescription
 
-            return this
+            return this.user
         },
 
         async obtenerResponsables() {
@@ -43,31 +43,41 @@ function crearUsuarioMunicipal(usuario, daoUsuarioMunicipal) {
 
             dbResult.forEach(datos => {                
                 let usuarioRow = {
-                    user: {
-                        id: null,
-                        idUserMunicipal: null,
-                        idUserType: null,
-                        idMunicipalRole: null,
-                        email: null,
-                        name: null,
-                        surname: null,
-                        creationDate: null,
-                        municipalRoleCode: null,
-                        municipalRoleDescription: null
-                    }
+                    // user: {
+                    //     id: null,
+                    //     idUserMunicipal: null,
+                    //     idUserType: null,
+                    //     idMunicipalRole: null,
+                    //     email: null,
+                    //     name: null,
+                    //     surname: null,
+                    //     creationDate: null,
+                    //     municipalRoleCode: null,
+                    //     municipalRoleDescription: null
+                    // }
+
+                    id: null,
+                    idUserMunicipal: null,
+                    idUserType: null,
+                    idMunicipalRole: null,
+                    email: null,
+                    name: null,
+                    surname: null,
+                    creationDate: null,
+                    municipalRoleCode: null,
+                    municipalRoleDescription: null
                 }
 
-                usuarioRow.user.id = datos.id
-                usuarioRow.user.idUserMunicipal = datos.idusermunicipal
-                usuarioRow.user.idUserType = datos.idusertype
-                usuarioRow.user.idMunicipalRole = datos.idmunicipalrole
-                usuarioRow.user.email = datos.email
-                usuarioRow.user.name = datos.name
-                usuarioRow.user.surname = datos.surname
-                usuarioRow.user.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate  
-                
-                usuarioRow.user.municipalRoleCode = datos.municipalrolecode
-                usuarioRow.user.municipalRoleDescription = datos.municipalroledescription
+                usuarioRow.id = datos.id
+                usuarioRow.idUserMunicipal = datos.idusermunicipal
+                usuarioRow.idUserType = datos.idusertype
+                usuarioRow.idMunicipalRole = datos.idmunicipalrole
+                usuarioRow.email = datos.email
+                usuarioRow.name = datos.name
+                usuarioRow.surname = datos.surname
+                usuarioRow.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate  
+                usuarioRow.municipalRoleCode = datos.municipalrolecode
+                usuarioRow.municipalRoleDescription = datos.municipalroledescription
 
                 resultList.push(usuarioRow)                
             })

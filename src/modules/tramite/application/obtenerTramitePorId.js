@@ -7,9 +7,10 @@ function crearObtenerTramitePorId(tramite, licenciaconducirdatos) {
             switch (tramite.idProcedureType) {
                 case 1:
                     await licenciaconducirdatos.obtenerDatos(tramite.id)
-                    break;
+                    return licenciaconducirdatos.procedure
+                default:
+                    throw new Error("No se pudo identificar el tipo de tramite.")
             }
-            return licenciaconducirdatos
         }
     }
 }

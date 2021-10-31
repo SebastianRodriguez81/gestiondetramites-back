@@ -19,7 +19,7 @@ function crearUsuarioCiudadano(usuario, daoUsuarioCuidadano) {
                     this.user.idUserCitizen = result
                 }
             }
-            return this
+            return this.user
         },
 
         async obtenerDatos(id, email) {
@@ -45,7 +45,7 @@ function crearUsuarioCiudadano(usuario, daoUsuarioCuidadano) {
             this.user.dni = datos.dni
             this.user.address = datos.address
             this.user.birthdate = datos.birthdate ? datos.birthdate.toISOString().split('T')[0] : datos.birthdate
-            return this
+            return this.user
         }
     }
 }
