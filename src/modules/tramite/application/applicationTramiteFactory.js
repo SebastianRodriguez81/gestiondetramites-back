@@ -60,7 +60,8 @@ function getTramiteApplications() {
             const mailer = crearMailer()
             const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
             const eventoTramite = tramteModels.getEventoTramite()
-            const asignarFechaRevision = crearAsignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite)
+            const notificacionUsuario = usuarioModels.getNotificacionUsuario()
+            const asignarFechaRevision = crearAsignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario)
             return asignarFechaRevision
         },
 

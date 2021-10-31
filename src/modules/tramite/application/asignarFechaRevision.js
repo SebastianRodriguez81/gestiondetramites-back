@@ -1,7 +1,7 @@
 import { ValidationError } from "../../../common/errors.js"
 import { isValidDate } from "../../../common/validDate.js"
 
-function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite) {
+function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario) {
     return {
         async ejecutar(idProcedure, revisionDate) {  
             if(!isValidDate(revisionDate)) {throw new ValidationError("Formato de fecha invalido o erroneo.")}        
@@ -12,6 +12,10 @@ function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite) 
             eventoTramite.idProcedure=tramite.id                    //Genero nuevo evento para el tramite            
             eventoTramite.observation=eventoTramite.mensajeFechaRevision(tramite.revisionDate)
             await eventoTramite.persistir()                         //Persisto evento
+
+            notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario            
+            notificacionUsuario.message=notificacionUsuario.mensajeFechaRevision(tramite.revisionDate)
+            await notificacionUsuario.persistir()                    //Persisto evento
 
             let usuarioBuscado = usuarioCiudadano.user.obtenerDatos(tramite.idUserCitizen)
             let datos = {

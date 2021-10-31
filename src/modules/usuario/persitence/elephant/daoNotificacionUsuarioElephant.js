@@ -11,12 +11,11 @@ function crearDaoNotificacionUsuario(db) {
             qFormer.setTabla(qTabla)
             qFormer.addCampo('usuarioid ', notificacionUsuario.idUser)            
             notificacionUsuario.message ? qFormer.addCampo('mensaje', "'" + notificacionUsuario.message + "'") : qFormer.addCampo('mensaje', notificacionUsuario.message)
-            notificacionUsuario.read ? qFormer.addCampo('leido', "'" + notificacionUsuario.read + "'") : qFormer.addCampo('leido', notificacionUsuario.read)
 
-            if (eventoTramite.id) {
+            if (notificacionUsuario.id) {
                 // UPDATE  
                 qFormer.setQueryType(qFormer.getQueryTypes().update)
-                notificacionUsuario.notificationDate ? qFormer.addCampo('fechanotificacion', "'" + eventoTramite.notificationDate + "'") : qFormer.addCampo('fechanotificacion', eventoTramite.notificationDate)                
+                notificacionUsuario.notificationDate ? qFormer.addCampo('fechanotificacion', "'" + notificacionUsuario.notificationDate + "'") : qFormer.addCampo('fechanotificacion', notificacionUsuario.notificationDate)                
                 qFormer.addCondicion("id", "=", notificacionUsuario.id)
             } else {               
                 //INSERT
@@ -26,7 +25,7 @@ function crearDaoNotificacionUsuario(db) {
             }
 
             const newQ = qFormer.getQuerry()
-            //console.log(newQ)
+            console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;
