@@ -15,7 +15,7 @@ function crearDaoUsuarioCiudadano(db) {
             usuario.user.birthdate ? qFormer.addCampo('fechanacimiento', "'" + usuario.user.birthdate + "'") : qFormer.addCampo('fechanacimiento', usuario.user.birthdate)
             
 
-            if (usuario.idUserCitizen) {
+            if (usuario.user.idUserCitizen) {
                 // UPDATE   
                 qFormer.setQueryType(qFormer.getQueryTypes().update)
                 qFormer.addCondicion("id", "=", usuario.user.idUserCitizen)

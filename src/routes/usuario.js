@@ -1,6 +1,7 @@
 import express from "express";
 import { ValidationError } from "../common/errors.js";
 import getUsuarioApplications from "../modules/usuario/application/applicationUsuarioFactory.js";
+import getUsuarioModels from "../modules/usuario/model/modelUsurioFactory.js";
 
 const usuarioRouter = express.Router();
 const usuarioApplications = getUsuarioApplications();
@@ -33,40 +34,38 @@ usuarioRouter.post("/citizens", async (req, res, next) => {
 //#region PUT
 usuarioRouter.put("/citizens/changeAddress", async (req, res, next) => {
     try {
-        if (
-            isNaN(req.query.idUser) &&
-            typeof req.query.email !== "string" &&
-            typeof req.query.address !== "string"
-        ) {
+        if (isNaN(req.query.idUser) && typeof req.query.address !== "string") {
             throw new ValidationError(
                 "Identificador de usuario erroneo o faltantes."
             );
         }
-        const obtenerUsuarioCiudadno =
-            usuarioApplications.getObtenerUsuarioCiudadano();
-        const usuario = await obtenerUsuarioCiudadno.ejecutar(
-            req.query.idUser,
-            req.query.email
-        );
-        usuario.address = req.query.address;
-        console.log(usuario);
-        const respuesta = usuario.persistir();
+        const usuarioCiudadano = getUsuarioModels().getUsuarioCiudadano();
+        await usuarioCiudadano.obtenerDatos(req.query.idUser);
+        usuarioCiudadano.user.address = req.query.address;
+        const respuesta = await usuarioCiudadano.persistir();
         res.json(respuesta);
     } catch (error) {
         next(error);
     }
 });
-usuarioRouter.put('/citizens/notifications', async (req, res, next) => {
-    try {        
-        if (isNaN(req.body.idUser) ) { throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
-        const marcarNotificacionLeida = usuarioApplications.getMarcarNotificacionLeida()
-        const respuesta = await marcarNotificacionLeida.ejecutar(req.body.idUser)
-      
-        res.json(respuesta)
+usuarioRouter.put("/citizens/notifications", async (req, res, next) => {
+    try {
+        if (isNaN(req.body.idUser)) {
+            throw new ValidationError(
+                "Identificador de usuario erroneo o faltantes."
+            );
+        }
+        const marcarNotificacionLeida =
+            usuarioApplications.getMarcarNotificacionLeida();
+        const respuesta = await marcarNotificacionLeida.ejecutar(
+            req.body.idUser
+        );
+
+        res.json(respuesta);
     } catch (error) {
-        next(error)
+        next(error);
     }
-})
+});
 //#endregion
 
 //#region GET
@@ -90,13 +89,20 @@ usuarioRouter.get("/citizens", async (req, res, next) => {
     }
 });
 
-usuarioRouter.get('/citizens/notifications', async (req, res, next) => {
-    try {        
-        if (isNaN(req.query.idUser) ) { throw new ValidationError("Identificador de usuario erroneo o faltantes.") }
-        const obtenerNotificacionUsuario = usuarioApplications.getObtenerNotificacionUsuario()
-        const respuesta = await obtenerNotificacionUsuario.ejecutar(req.query.idUser)
-      
-        res.json(respuesta)
+usuarioRouter.get("/citizens/notifications", async (req, res, next) => {
+    try {
+        if (isNaN(req.query.idUser)) {
+            throw new ValidationError(
+                "Identificador de usuario erroneo o faltantes."
+            );
+        }
+        const obtenerNotificacionUsuario =
+            usuarioApplications.getObtenerNotificacionUsuario();
+        const respuesta = await obtenerNotificacionUsuario.ejecutar(
+            req.query.idUser
+        );
+
+        res.json(respuesta);
     } catch (error) {
         next(error);
     }

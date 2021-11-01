@@ -11,7 +11,6 @@ function crearDaoUsuario(db) {
             qFormer.setTabla(qTabla)
             qFormer.addCampo('tiposusuarioidx', usuario.idUserType)
             usuario.email ? qFormer.addCampo('correo', "'" + usuario.email + "'") : qFormer.addCampo('correo', usuario.email)
-            usuario.pass ? qFormer.addCampo('contraseña', "'" + usuario.pass + "'") : qFormer.addCampo('contraseña', usuario.pass)
             usuario.name ? qFormer.addCampo('nombre', "'" + usuario.name + "'") : qFormer.addCampo('nombre', usuario.name)
             usuario.surname ? qFormer.addCampo('apellido', "'" + usuario.surname + "'") : qFormer.addCampo('apellido', usuario.surname)
             qFormer.addCampo('ultimamodifciacion', "'" + fecha + "'")
@@ -20,7 +19,7 @@ function crearDaoUsuario(db) {
                 // UPDATE  
                 qFormer.setQueryType(qFormer.getQueryTypes().update)  
                 usuario.creationDate ? qFormer.addCampo('fechacreacion', "'" + usuario.creationDate + "'") : qFormer.addCampo('fechacreacion', usuario.creationDate)              
-                qFormer.addCondicion("id", "=", tramite.id)
+                qFormer.addCondicion("id", "=", usuario.id)
             } else {
                 // INSERT
                 qFormer.setQueryType(qFormer.getQueryTypes().insert)
