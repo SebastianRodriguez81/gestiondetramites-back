@@ -135,8 +135,8 @@ function crearTramite(daoTramite) {
         },
 
         asignarFechaRevision(revisionDate) {
-            if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
-            if (this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            // if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            // if (this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }
             this.revisionDate = revisionDate            
             return this
         },

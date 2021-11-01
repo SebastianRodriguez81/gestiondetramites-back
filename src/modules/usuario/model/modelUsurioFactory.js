@@ -2,6 +2,7 @@ import getUsuarioDaos from "../persitence/persistenceUsuarioFactory.js"
 import crearUsuario from "./usuario.js"
 import crearUsuarioCiudadano from "./usuarioCiudadano.js"
 import crearUsuarioMunicipal from "./usuarioMunicipial.js"
+import crearNotificacionUsuario from "./notificacionUsuario.js"
 
 const usuarioDaos = getUsuarioDaos()
 
@@ -25,6 +26,12 @@ function getUsuarioModels() {
             let daoUsuarioMunicipal = usuarioDaos.getDaoUsuarioMunicipal()
             let usuarioMunicipal = crearUsuarioMunicipal(usuario, daoUsuarioMunicipal)
             return usuarioMunicipal
+        },
+
+        getNotificacionUsuario: function () {           
+            let daoNotificacionUsuario = usuarioDaos.getDaoNotificacionUsuario()
+            let notificacionUsuario = crearNotificacionUsuario(daoNotificacionUsuario)
+            return notificacionUsuario
         }
     }
 }
