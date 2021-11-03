@@ -10,7 +10,7 @@ function crearUsuarioCiudadano(usuario, daoUsuarioCuidadano) {
         user: usuario,
 
         async persistir() {
-            console.log(this.user.idUserType)
+            //console.log(this.user.idUserType)
             if (this.user.idUserType != 2) { throw new ValidationError("Tipo de usuario incorrecto o faltante.") }
             await this.user.persistir()
             if (this.user.id) {

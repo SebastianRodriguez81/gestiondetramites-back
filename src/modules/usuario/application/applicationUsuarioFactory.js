@@ -6,6 +6,7 @@ import crearObtenerUsuariosMunicipalResponsable from "./obtenerUsuariosMunicipal
 import crearObtenerNotificacionUsuario from "./obtenerNotificacionUsuario.js"
 import crearMarcarNotificacionLeida from "./marcarNotificacionLeida.js"
 import crearObtenerUsuarios from "./obtenerUsuarios.js"
+import crearCambiarDireccion from "./cambiarDireccionUsuarioCiudadano.js"
 
 let usuarioModels = getUsuarioModels()
 
@@ -53,7 +54,12 @@ function getUsuarioApplications() {
             let usuario = usuarioModels.getUsuario()
             let obtenerUsuarios = crearObtenerUsuarios(usuario)
             return obtenerUsuarios
-        }        
+        },
+        getCambiarDireccionDeUsuario: function () {
+            let usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
+            let cambiarDireccionDeUsuario = crearCambiarDireccion(usuarioCiudadano)
+            return cambiarDireccionDeUsuario
+        },        
     }
 }
 

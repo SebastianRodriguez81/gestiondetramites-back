@@ -1,7 +1,6 @@
 import express from "express";
 import { ValidationError } from "../common/errors.js";
 import getUsuarioApplications from "../modules/usuario/application/applicationUsuarioFactory.js";
-import getUsuarioModels from "../modules/usuario/model/modelUsurioFactory.js";
 
 const usuarioRouter = express.Router();
 const usuarioApplications = getUsuarioApplications();
@@ -39,10 +38,12 @@ usuarioRouter.put("/citizens/changeAddress", async (req, res, next) => {
                 "Identificador de usuario erroneo o faltantes."
             );
         }
-        const usuarioCiudadano = getUsuarioModels().getUsuarioCiudadano();
-        await usuarioCiudadano.obtenerDatos(req.query.idUser);
-        usuarioCiudadano.user.address = req.query.address;
-        const respuesta = await usuarioCiudadano.persistir();
+        const cambioDireccionUsuario =
+            usuarioApplications.getCambiarDireccionDeUsuario();
+        const respuesta = await cambioDireccionUsuario.ejecutar(
+            req.query.idUser,
+            req.query.address
+        );
         res.json(respuesta);
     } catch (error) {
         next(error);
