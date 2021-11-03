@@ -3,7 +3,7 @@ import { getAuth } from '../../config/index.js'
 
 const credencialesEnv = getAuth()
 
-async function crearMailer() {
+function crearMailer() {
   return  createEmailRecordatorio(credencialesEnv.mail, credencialesEnv.pass)
 }
 

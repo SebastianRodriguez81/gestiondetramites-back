@@ -11,7 +11,7 @@ function crearAltaUsuarioCiudadano(usuarioCiudadano) {
                 //typeof usuarioCiudadanoData.pass !== 'string' ||
                 typeof usuarioCiudadanoData.name !== 'string' ||
                 typeof usuarioCiudadanoData.surname !== 'string' ||
-                typeof usuarioCiudadanoData.dni !== 'string' ||
+                !usuarioCiudadanoData.dni ||
                 typeof usuarioCiudadanoData.address !== 'string' ||
                 typeof usuarioCiudadanoData.birthdate !== 'string' ||
                 !isValidDate(usuarioCiudadanoData.birthdate)
@@ -20,6 +20,7 @@ function crearAltaUsuarioCiudadano(usuarioCiudadano) {
             }
 
             //  Validaciones
+            if (usuarioCiudadano.user.existe(null, usuarioCiudadanoData.email)){ throw new ValidationError('Ya existe un usuario con este correo')}
 
             //  Preparar usuario ciudadano
             usuarioCiudadano.user.idUserType = 2

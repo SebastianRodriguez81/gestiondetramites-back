@@ -72,6 +72,56 @@ function crearDaoUsuario(db) {
             }
         },
 
+        obtenerDatosPorEmail: async (email) => {
+            try {
+                const newQ = `select
+                                id,
+                                tiposusuarioidx as isUserType,
+                                correo as email,
+                                nombre as name,
+                                apellido as surname, 
+                                fechacreacion as creationDate,
+                                tipo.codigo as userTypeCode
+                            from usuarios as usu
+                            join tiposUsuario as tipo
+                            on tipo.idx = usu.tiposusuarioidx
+                            where eliminado = false
+                            and usu.correo = ${email}`
+                
+                //console.log(newQ)
+                const result = await db.ejecutar(newQ)
+                if (!result.length) {
+                    throw new NotFoundError('Usuario no encontrado.')
+                }
+                return result[0]
+            } catch (err) {
+                switch (err.constructor) {
+                    case NotFoundError:
+                        throw err
+
+                    default:
+                        throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
+                }
+
+            }
+        },
+
+        obtenerIdPorEmail: async (email) => {
+            try {
+                const newQ = `select
+                                id                                
+                            from usuarios as usu                            
+                            and usu.correo = ${email}`
+
+                //console.log(newQ)
+                const result = await db.ejecutar(newQ)
+                if (!result.length) { return null }
+                return result[0]
+            } catch (err) {
+                throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
+            }
+        },
+
         buscarTodos: async () => {
             try {
                 const newQ = `select

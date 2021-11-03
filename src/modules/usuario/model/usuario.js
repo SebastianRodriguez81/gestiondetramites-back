@@ -15,8 +15,17 @@ function crearUsuario(daoUsuario) {
             return this
         },
 
-        async obtenerDatos(id) {
-            const datos = await daoUsuario.obtenerDatosPorId(id)           
+        async obtenerDatos(id,email) {
+            let datos            
+            if(id){
+                datos = await daoUsuario.obtenerDatosPorId(id)
+            } else {
+                if(email){
+                    datos = await daoUsuario.obtenerDatosPorEmail(email)
+                } else {
+                    throw new ValidationError("Identificador de usuario faltante.")
+                }
+            }
             this.id = datos.id
             this.idUserType = datos.idusertype
             this.email = datos.email
@@ -26,6 +35,10 @@ function crearUsuario(daoUsuario) {
             //this.userTypeCode = datos.usertypecode
             return this
         },
+
+        async existe(email) {            
+            return await daoUsuario.obtenerIdPorEmail(email)
+        },        
 
         async buscarTodos() {
             return await daoUsuario.buscarTodos()

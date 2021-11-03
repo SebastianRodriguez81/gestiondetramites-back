@@ -12,7 +12,7 @@ function createEmailRecordatorio(user, pass) {
         datos.to,
         datos.asunto,
         datos.mensaje
-      );
+      ); 
       await sender.send(email);
     },
     

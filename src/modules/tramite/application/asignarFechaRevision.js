@@ -9,22 +9,24 @@ function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, 
             tramite.asignarFechaRevision(revisionDate)           
             await tramite.persistir()
 
+            const codigoTramite = tramite.obtenerCodigo()
+
             eventoTramite.idProcedure=tramite.id                    //Genero nuevo evento para el tramite            
             eventoTramite.observation=eventoTramite.mensajeFechaRevision(tramite.revisionDate)
             await eventoTramite.persistir()                         //Persisto evento
 
             notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario            
-            notificacionUsuario.message=notificacionUsuario.mensajeFechaRevision(tramite.obtenerCodigo(), tramite.revisionDate)
+            notificacionUsuario.message=notificacionUsuario.mensajeFechaRevision(codigoTramite, tramite.revisionDate)
             await notificacionUsuario.persistir()                    //Persisto evento
 
-            let usuarioBuscado = usuarioCiudadano.user.obtenerDatos(tramite.idUserCitizen)
+            let usuarioBuscado = await usuarioCiudadano.user.obtenerDatos(tramite.idUserCitizen)
             let datos = {
                 from : "Tramites",
                 to : usuarioBuscado.email,
                 asunto : "Fecha de presentacion",
-                mensaje : "La fecha presencial para revisar el tramite ya está establecida. " + revisionDate
+                mensaje : `La fecha presencial para revisar el tramite ${codigoTramite} ya está establecida. ` + revisionDate+"."
             }
-            //mailer.send(datos)
+            mailer.send(datos)
 
             return true
         }

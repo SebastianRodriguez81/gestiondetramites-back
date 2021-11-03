@@ -9,22 +9,24 @@ function asignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, no
             tramite.asignarFechaRetiro(withdrawalDate)           
             await tramite.persistir()
 
+            const codigoTramite = tramite.obtenerCodigo()
+
             eventoTramite.idProcedure=tramite.id                    //Genero nuevo evento para el tramite                    
             eventoTramite.observation=eventoTramite.mensajeFechaRetiro(tramite.withdrawalDate)
             await eventoTramite.persistir()                         //Persisto evento
 
             notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario            
-            notificacionUsuario.message=notificacionUsuario.mensajeFechaRetiro(tramite.obtenerCodigo(), tramite.withdrawalDate)
+            notificacionUsuario.message=notificacionUsuario.mensajeFechaRetiro(codigoTramite, tramite.withdrawalDate)
             await notificacionUsuario.persistir()                    //Persisto evento
 
-            let usuarioBuscado = usuarioCiudadano.user.obtenerDatos(tramite.idUserCitizen)
+            let usuarioBuscado = await usuarioCiudadano.user.obtenerDatos(tramite.idUserCitizen)
             let datos = {
                 from : "Tramites",
                 to : usuarioBuscado.email,
                 asunto : "Fecha de retiro",
-                mensaje : "La fecha del retiro ya está establecida. " + withdrawalDate
+                mensaje : `La fecha del retiro para el tramite ${codigoTramite} ya está establecida: ` + withdrawalDate+'.'
             }
-            //mailer.send(datos)
+            mailer.send(datos)
 
             return true
         }

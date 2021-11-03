@@ -13,7 +13,7 @@ usuarioRouter.post("/citizens", async (req, res, next) => {
             typeof req.body.name !== "string" ||
             //typeof req.body.pass !== "string" ||
             typeof req.body.surname !== "string" ||
-            typeof req.body.dni !== "string" ||
+            !req.body.dni ||
             typeof req.body.address !== "string" ||
             typeof req.body.birthdate !== "string"
         ) {
