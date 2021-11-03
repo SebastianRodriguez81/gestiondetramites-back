@@ -9,20 +9,20 @@ function crearNotificacionUsuario(daoNotificacionUsuario) {
         message: null,
         read: null,
 
-        mensajeFechaRevision(fechaRevision){
-            return `Se solicito presnetarce el dia ${fechaRevision} para revision el tramite.`
+        mensajeFechaRevision(codigoTramite, fechaRevision){
+            return `Se solicito presnetarce el dia ${fechaRevision} para revision el tramite ${codigoTramite}.`
         },
 
-        mensajeFechaRetiro(fechaRetiro){
-            return `Se solicito presnetarce el dia ${fechaRetiro} para retirar el tramite.`
+        mensajeFechaRetiro(codigoTramite, fechaRetiro){
+            return `Se solicito presnetarce el dia ${fechaRetiro} para retirar el tramite ${codigoTramite}.`
         },
 
-        mensajeFinzalido(){
-            return `Se finzalizo el tramite.`
+        mensajeFinzalido(codigoTramite){
+            return `Se finzalizo el tramite ${codigoTramite}.`
         },
 
-        mensajeRechazado(motivo){
-            return `Se rechazo el tramite. Motivo: ${motivo}`
+        mensajeRechazado(codigoTramite, motivo){
+            return `Se rechazo el tramite ${codigoTramite}. Motivo: ${motivo}`
         },
 
         async persistir() {

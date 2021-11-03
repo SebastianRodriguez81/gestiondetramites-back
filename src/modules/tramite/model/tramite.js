@@ -163,6 +163,19 @@ function crearTramite(daoTramite) {
             this.reasonRejection = reasonRejection
             this.idState = 5
             return this
+        },
+
+        obtenerCodigo(){
+            let codigo = ''
+            if (this.id) {
+                switch (this.idProcedureType) {
+                    case 1:
+                        codigo = 'LIC-'+this.id.toString().padStart(5, '0')
+                        break;              
+                    
+                }
+            }
+            return codigo
         }
     }
 }
