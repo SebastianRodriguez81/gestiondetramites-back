@@ -8,7 +8,7 @@ function crearAltaUsuarioCiudadano(usuarioCiudadano) {
             //  Validar datos
             if (
                 typeof usuarioCiudadanoData.email !== 'string' ||
-                typeof usuarioCiudadanoData.pass !== 'string' ||
+                //typeof usuarioCiudadanoData.pass !== 'string' ||
                 typeof usuarioCiudadanoData.name !== 'string' ||
                 typeof usuarioCiudadanoData.surname !== 'string' ||
                 typeof usuarioCiudadanoData.dni !== 'string' ||
@@ -24,7 +24,7 @@ function crearAltaUsuarioCiudadano(usuarioCiudadano) {
             //  Preparar usuario ciudadano
             usuarioCiudadano.user.idUserType = 2
             usuarioCiudadano.user.email = usuarioCiudadanoData.email
-            usuarioCiudadano.user.pass = usuarioCiudadanoData.pass
+            //usuarioCiudadano.user.pass = usuarioCiudadanoData.pass
             usuarioCiudadano.user.name = usuarioCiudadanoData.name
             usuarioCiudadano.user.surname = usuarioCiudadanoData.surname
             usuarioCiudadano.user.dni = usuarioCiudadanoData.dni
