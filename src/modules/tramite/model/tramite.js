@@ -135,8 +135,8 @@ function crearTramite(daoTramite) {
         },
 
         asignarFechaRevision(revisionDate) {
-            // if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
-            // if (this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            if (this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }
             this.revisionDate = revisionDate            
             return this
         },
@@ -170,7 +170,7 @@ function crearTramite(daoTramite) {
             if (this.id) {
                 switch (this.idProcedureType) {
                     case 1:
-                        codigo = 'LIC-'+this.id.toString().padStart(5, '0')
+                        codigo = 'LICC-'+this.id.toString().padStart(5, '0')
                         break;              
                     
                 }

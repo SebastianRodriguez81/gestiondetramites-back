@@ -70,7 +70,8 @@ function getTramiteApplications() {
             const mailer = crearMailer()
             const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
             const eventoTramite = tramteModels.getEventoTramite()
-            const asignarFechaRetiro = crearAsignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite)
+            const notificacionUsuario = usuarioModels.getNotificacionUsuario()
+            const asignarFechaRetiro = crearAsignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario)
             return asignarFechaRetiro
         },
 
@@ -79,7 +80,8 @@ function getTramiteApplications() {
             const mailer = crearMailer()
             const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
             const eventoTramite = tramteModels.getEventoTramite()
-            const finalizarTramite = crearFinalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite)
+            const notificacionUsuario = usuarioModels.getNotificacionUsuario()
+            const finalizarTramite = crearFinalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario)
             return finalizarTramite
         },
 
