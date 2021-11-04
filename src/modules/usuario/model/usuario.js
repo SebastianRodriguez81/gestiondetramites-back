@@ -36,7 +36,7 @@ function crearUsuario(daoUsuario) {
             return this
         },
 
-        async existe(email) {            
+        async existe(email) {                
             return await daoUsuario.obtenerIdPorEmail(email)
         },        
 

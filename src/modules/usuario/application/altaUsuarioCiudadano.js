@@ -19,8 +19,8 @@ function crearAltaUsuarioCiudadano(usuarioCiudadano) {
                 throw new ValidationError("Datos erroneos y/o faltantes.")
             }
 
-            //  Validaciones
-            if (usuarioCiudadano.user.existe(null, usuarioCiudadanoData.email)){ throw new ValidationError('Ya existe un usuario con este correo')}
+            //  Validaciones           
+            if (await usuarioCiudadano.user.existe(usuarioCiudadanoData.email)){ throw new ValidationError('Ya existe un usuario con este correo')}
 
             //  Preparar usuario ciudadano
             usuarioCiudadano.user.idUserType = 2
