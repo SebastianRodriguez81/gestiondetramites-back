@@ -161,7 +161,7 @@ function crearDaoTramite(db) {
 
             qFormer.addCondicion("usu.eliminado", "=", false)
             qFormer.addCondicion("tra.eliminado", "=", false)
-
+            
             qFormer.addJoin("join", qTEstado, "est.idx = tra.estadosIdx")
             qFormer.addJoin("join", qTTipo, "tipo.idx = tra.tiposTramiteIdx")
             qFormer.addJoin("join", qTUser, "usu.id = tra.usuariosId")
@@ -211,6 +211,8 @@ function crearDaoTramite(db) {
             qFormer.addCampo("rol.idx as idUserMunicipalRole")
             qFormer.addCampo("rol.codigo as userMunicipalRoleCode")
             qFormer.addCampo("rol.descripcion as userMunicipalRoleDesciption")
+
+            qFormer.setOrden("tra.id")
 
             const newQ = qFormer.getQuerry()
             //console.log(newQ)

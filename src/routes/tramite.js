@@ -7,26 +7,25 @@ const tamiteApplications = getTramiteApplications()
 
 //#region POST
 tramiteRouter.post('/', async (req, res, next) => {
-    try {    
-        if (typeof req.body.idUser !== 'number' ||
-            typeof req.body.idProcedureType !== 'number' ||
-            typeof req.body.userName !== 'string' ||
-            typeof req.body.userSurname !== 'string' ||
-            !req.body.userDni ||
-            typeof req.body.userAddress !== 'string' ||
-            typeof req.body.userBirthdate !== 'string' ||
-            typeof req.body.subProcedureType !== 'string' ||
-            typeof req.body.licenceCode !== 'string' ||
-            typeof req.body.selfieUrl !== 'string' ||
-            typeof req.body.selfieDniUrl !== 'string' ||
-            typeof req.body.frontDniUrl !== 'string' ||
-            typeof req.body.backDniUrl !== 'string' ||
-            typeof req.body.debtFreeUrl !== 'string'
-        ){throw new ValidationError("Datos errornes y/o faltantes.")}
+    try {
+        if (typeof req.body.idUser !== 'number') { throw new ValidationError("Identificador de usuario erroneo o faltante.") }
+        if (typeof req.body.idProcedureType !== 'number') { throw new ValidationError("Tipo de tramie errorneo o faltante.") }
+        if (typeof req.body.userName !== 'string') { throw new ValidationError("Nombre errorneo o faltante.") }
+        if (typeof req.body.userSurname !== 'string') { throw new ValidationError("Apellido errorneo o faltante.") }
+        if (!req.body.userDni) { throw new ValidationError("DNI errorneo o faltante.") }
+        if (typeof req.body.userAddress !== 'string') { throw new ValidationError("Direccion errornea o faltante.") }
+        if (typeof req.body.userBirthdate !== 'string') { throw new ValidationError("FEcha de nacimiento errornea o faltante.") }
+        if (typeof req.body.subProcedureType !== 'string') { throw new ValidationError("Clase de tramie errorneo o faltante.") }
+        if (typeof req.body.licenceCode !== 'string') { throw new ValidationError("Codigo de licencia errorna o faltante.") }
+        if (typeof req.body.selfieUrl !== 'string') { throw new ValidationError("Foto selfie errorna o faltante.") }
+        if (typeof req.body.selfieDniUrl !== 'string') { throw new ValidationError("Foto selfie y dni errorna o faltante.") }
+        if (typeof req.body.frontDniUrl !== 'string') { throw new ValidationError("Foto frente dni errorna o faltante.") }
+        if (typeof req.body.backDniUrl !== 'string') { throw new ValidationError("Foto dorso dni errorna o faltante.") }
+        if (typeof req.body.debtFreeUrl !== 'string') { throw new ValidationError("Foto libre de deudas errorna o faltante.") }
 
-            const altaTramite = tamiteApplications.getAltaTramites()
-            const respuesta = await altaTramite.ejecutar(req.body)
-            res.json(respuesta)
+        const altaTramite = tamiteApplications.getAltaTramites()
+        const respuesta = await altaTramite.ejecutar(req.body)
+        res.json(respuesta)
     } catch (error) {
         next(error)
     }
@@ -121,7 +120,7 @@ tramiteRouter.get('/user', async (req, res, next) => {
 
 tramiteRouter.get('/pending', async (req, res, next) => {
     try {
-        if (req.query.idUsermunicipalRole) { if (NaN(req.query.idUsermunicipalRole)) { throw new ValidationError("Identificador de rol erroneo o faltantes.") } }
+        if (req.query.idUsermunicipalRole) { if (isNaN(req.query.idUsermunicipalRole)) { throw new ValidationError("Identificador de rol erroneo o faltantes.") } }
         const obtenerTramitesPendiente = tamiteApplications.getObtenerTramitesPendiente()
         const respuesta = await obtenerTramitesPendiente.ejecutar(req.query.idUsermunicipalRole)
         res.json(respuesta)
