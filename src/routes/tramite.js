@@ -190,6 +190,16 @@ tramiteRouter.get('/obtenerTodos/', async (req, res, next) => {
         next(error)
     }
 })
+
+tramiteRouter.post('/Orion', async (req, res, next) => {
+    try {
+        
+        console.log("******************************** EVENTO DE ORION ***************************************")
+        res.json(true)
+    } catch (error) {
+        next(error)
+    }
+})
 //#endregion
 
 export default tramiteRouter
