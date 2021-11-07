@@ -149,7 +149,7 @@ function crearDaoTramite(db) {
             qFormer.setTabla(qTabla)
             qFormer.setQueryType(qFormer.getQueryTypes().select)
          
-            if (opEstadosIdx1 && opEstadosIdx2 && opEstadosIdx3) { qFormer.addCondicion("tra.estadosIdx", "in", `( ${opEstadosIdx1} , ${opEstadosIdx2}, ${opEstadosIdx3})`) }
+            if (opEstadosIdx1 && opEstadosIdx2) { qFormer.addCondicion("tra.estadosIdx", "in", `( ${opEstadosIdx1} , ${opEstadosIdx2})`) }
             if (estadosIdx) { qFormer.addCondicion("tra.estadosIdx", "=", estadosIdx) }
             if (tiposTramiteIdx) { qFormer.addCondicion("tra.tiposTramiteIdx", "=", tiposTramiteIdx) }
             if (fechaCreacionDesde) { qFormer.addCondicion("tra.fechaCreacion", ">=", fechaCreacionDesde) }
@@ -215,7 +215,7 @@ function crearDaoTramite(db) {
             qFormer.setOrden("tra.id")
 
             const newQ = qFormer.getQuerry()
-            //console.log(newQ)
+            console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;

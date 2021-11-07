@@ -1,5 +1,6 @@
 import { ValidationError } from "../../../common/errors.js"
 import { isValidDate } from "../../../common/validDate.js"
+import moment from 'moment'
 
 function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario) {
     return {
@@ -20,11 +21,12 @@ function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, 
             await notificacionUsuario.persistir()                    //Persisto evento
 
             let usuarioBuscado = await usuarioCiudadano.user.obtenerDatos(tramite.idUserCitizen)
+            const fechaForamteada = moment(revisionDate).format("DD/MM/YYYY")
             let datos = {
                 from : "Tramites",
                 to : usuarioBuscado.email,
                 asunto : "Fecha de presentacion",
-                mensaje : `La fecha presencial para revisar el tramite ${codigoTramite} ya está establecida. ` + revisionDate+"."
+                mensaje : `La fecha presencial para revisar el tramite ${codigoTramite} ya está establecida. ` + fechaForamteada+"."
             }
             mailer.send(datos)
 

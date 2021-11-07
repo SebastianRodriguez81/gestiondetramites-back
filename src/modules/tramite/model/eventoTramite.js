@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { getValidDate } from "../../../common/validDate.js"
 import { ValidationError } from '../../../common/errors.js'
 
@@ -17,11 +18,13 @@ function crearEventoTramite(daoEventoTramite) {
         },
 
         mensajeFechaRevision(fechaRevision){
-            return `Se solicito presnetarce el dia ${fechaRevision} para revision el tramite.`
+            const fechaForamteada = moment(fechaRevision).format("DD/MM/YYYY")
+            return `Se solicito presnetarce el dia ${fechaForamteada} para revision el tramite.`
         },
 
         mensajeFechaRetiro(fechaRetiro){
-            return `Se solicito presnetarce el dia ${fechaRetiro} para retirar el tramite.`
+            const fechaForamteada = moment(fechaRetiro).format("DD/MM/YYYY")
+            return `Se solicito presnetarce el dia ${fechaForamteada} para retirar el tramite.`
         },
 
         mensajeFinzalido(){

@@ -1,4 +1,5 @@
 function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
+    tramite.procedureTypeDescription = null
     tramite.idLicence = null
     tramite.subProcedureType = null
     tramite.licenceCode = null
@@ -43,6 +44,7 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
             this.procedure.rejected = datos.rejected
             this.procedure.reasonRejection = datos.reasonrejection
             this.procedure.lastModificationDate = datos.lastmodificationdate ? datos.lastmodificationdate.toISOString().split('T')[0] :  datos.lastmodificationdate
+            this.procedure.procedureTypeDescription = datos.proceduretypedescription
             this.procedure.idLicence = datos.idlicence
             this.procedure.subProcedureType = datos.subproceduretype
             this.procedure.licenceCode = datos.licencecode

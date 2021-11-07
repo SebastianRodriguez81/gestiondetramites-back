@@ -35,10 +35,13 @@ function crearDaoTramiteLicenciaConducir(db) {
                             lin.selfiedniurl as selfieDniUrl,
                             lin.frentedniurl as frontDniUrl,
                             lin.dorsodniurl as backDniUrl,
-                            lin.libredeudasurl as debtFreeUrl
+                            lin.libredeudasurl as debtFreeUrl,
+                            tipo.descripcion as proceduretypedescription
                         from tramites as tra
                         join licenciaconducirdatos as lin
                             on lin.tramitesid = tra.id
+                        join tipostramite as tipo
+                            on tipo.idx = tra.tipostramiteidx
                         where tra.id = ${idProcedure}
                         and tra.eliminado = false`
 
