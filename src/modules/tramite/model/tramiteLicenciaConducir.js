@@ -35,6 +35,7 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
             this.procedure.userAddress = datos.useraddress
             this.procedure.userBirthdate = datos.userbirthdate ? datos.userbirthdate.toISOString().split('T')[0] :  datos.userbirthdate
             this.procedure.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] :  datos.creationdate
+            this.procedure.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] :  datos.anlystassignmentdate
             this.procedure.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] :  datos.assignmentdate
             this.procedure.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().split('T')[0] :  datos.revisiondate
             this.procedure.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().split('T')[0] :  datos.withdrawaldate
