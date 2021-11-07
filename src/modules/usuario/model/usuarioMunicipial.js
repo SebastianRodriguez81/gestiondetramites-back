@@ -83,6 +83,55 @@ function crearUsuarioMunicipal(usuario, daoUsuarioMunicipal) {
             })
             
             return resultList            
+        },
+
+        async obtenerAnalistas() {
+
+            const dbResult = await daoUsuarioMunicipal.buscarAnalistas()           
+            const resultList = []
+
+            dbResult.forEach(datos => {                
+                let usuarioRow = {
+                    // user: {
+                    //     id: null,
+                    //     idUserMunicipal: null,
+                    //     idUserType: null,
+                    //     idMunicipalRole: null,
+                    //     email: null,
+                    //     name: null,
+                    //     surname: null,
+                    //     creationDate: null,
+                    //     municipalRoleCode: null,
+                    //     municipalRoleDescription: null
+                    // }
+
+                    id: null,
+                    idUserMunicipal: null,
+                    idUserType: null,
+                    idMunicipalRole: null,
+                    email: null,
+                    name: null,
+                    surname: null,
+                    creationDate: null,
+                    municipalRoleCode: null,
+                    municipalRoleDescription: null
+                }
+
+                usuarioRow.id = datos.id
+                usuarioRow.idUserMunicipal = datos.idusermunicipal
+                usuarioRow.idUserType = datos.idusertype
+                usuarioRow.idMunicipalRole = datos.idmunicipalrole
+                usuarioRow.email = datos.email
+                usuarioRow.name = datos.name
+                usuarioRow.surname = datos.surname
+                usuarioRow.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate  
+                usuarioRow.municipalRoleCode = datos.municipalrolecode
+                usuarioRow.municipalRoleDescription = datos.municipalroledescription
+
+                resultList.push(usuarioRow)                
+            })
+            
+            return resultList            
         }
     }
 }

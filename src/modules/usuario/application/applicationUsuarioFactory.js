@@ -3,6 +3,7 @@ import crearAltaUsuarioCiudadano from "./altaUsuarioCiudadano.js"
 import crearObtenerUsuarioCiudadano from "./obtenerUsuarioCiudadano.js"
 import crearObtenerUsuarioMunicipal from "./obtenerUsuarioMunicipal.js"
 import crearObtenerUsuariosMunicipalResponsable from "./obtenerUsuariosMunicipalResponsable.js"
+import crearObtenerUsuariosMunicipalAnalista from "./obtenerUsuariosMunicipalAnalista.js"
 import crearObtenerNotificacionUsuario from "./obtenerNotificacionUsuario.js"
 import crearMarcarNotificacionLeida from "./marcarNotificacionLeida.js"
 import crearObtenerUsuarios from "./obtenerUsuarios.js"
@@ -35,6 +36,12 @@ function getUsuarioApplications() {
             let usuarioMunicipal = usuarioModels.getUsuarioMunicipal()
             let obtenerUsuariosUsuarioMunicipalResponsable = crearObtenerUsuariosMunicipalResponsable(usuarioMunicipal)
             return obtenerUsuariosUsuarioMunicipalResponsable
+        },
+
+        getObtenerUsuariosMunicipalAnalista: function () {
+            let usuarioMunicipal = usuarioModels.getUsuarioMunicipal()
+            let obtenerUsuariosUsuarioMunicipalAnalista = crearObtenerUsuariosMunicipalAnalista(usuarioMunicipal)
+            return obtenerUsuariosUsuarioMunicipalAnalista
         },
 
         getObtenerNotificacionUsuario: function () {

@@ -118,6 +118,40 @@ function crearDaoUsuarioMunicipal(db) {
             } catch (err) {
                 throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
             }
+        },
+
+        buscarAnalistas: async () => {
+            try {
+                const newQ = `
+                            select
+                                usu.id,
+                                tiposusuarioidx as idUserType,
+                                tipo.codigo as userTypeCode,
+                                tipo.codigo as userTypeCode,
+                                correo as email, nombre as name,
+                                apellido as surname, 
+                                fechacreacion as creationDate,
+                                mun.id as idUserMunicipal,
+                                mun.usuariomunicipiorolesidx as idMunicipalRole,
+                                rol.codigo as municipalRoleCode,
+                                rol.descripcion as municipalRoleDescription
+                            from usuarios as usu
+                            join tiposUsuario as tipo
+                                on tipo.idx = usu.tiposusuarioidx
+                                and tipo.idx = 1
+                            join usuariosmunicipo as mun
+                                on mun.usuariosId = usu.id
+                            join usuariomunicipioroles as rol
+                                on rol.idx = mun.usuariomunicipiorolesidx
+                                and rol.idx = 1
+                            where usu.eliminado = false`
+
+                //console.log(newQ)
+                const result = await db.ejecutar(newQ)
+                return result
+            } catch (err) {
+                throw new Error('Hubo un error al buscar los datos del usuarios.' + err.message)
+            }
         }
     }
 }

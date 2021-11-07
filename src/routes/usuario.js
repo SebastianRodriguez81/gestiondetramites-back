@@ -123,9 +123,18 @@ usuarioRouter.get("/municipal", async (req, res, next) => {
 
 usuarioRouter.get("/municipal/responsible", async (req, res, next) => {
     try {
-        const obtenerUsuariosMunicipalResponsable =
-            usuarioApplications.getObtenerUsuariosMunicipalResponsable();
+        const obtenerUsuariosMunicipalResponsable = usuarioApplications.getObtenerUsuariosMunicipalResponsable();
         const respuesta = await obtenerUsuariosMunicipalResponsable.ejecutar();
+        res.json(respuesta);
+    } catch (error) {
+        next(error);
+    }
+});
+
+usuarioRouter.get("/municipal/analyst", async (req, res, next) => {
+    try {
+        const obtenerUsuariosMunicipalAnalista = usuarioApplications.getObtenerUsuariosMunicipalAnalista();
+        const respuesta = await obtenerUsuariosMunicipalAnalista.ejecutar();
         res.json(respuesta);
     } catch (error) {
         next(error);
