@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node src/app.js"
+    "test": "node src/app.js",
+    "testAxios": "node src/testAxios.js"
   },
   "repository": {
     "type": "git",
