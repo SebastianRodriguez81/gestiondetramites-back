@@ -1,5 +1,6 @@
 import { ValidationError } from "../../../common/errors.js"
 import { isValidDate } from "../../../common/validDate.js"
+import moment from 'moment'
 
 function asignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario) {
     return {
@@ -19,12 +20,13 @@ function asignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, no
             notificacionUsuario.message=notificacionUsuario.mensajeFechaRetiro(codigoTramite, tramite.withdrawalDate)
             await notificacionUsuario.persistir()                    //Persisto evento
 
+            const fechaForamteada = moment(withdrawalDate).format("DD/MM/YYYY")
             let usuarioBuscado = await usuarioCiudadano.user.obtenerDatos(tramite.idUserCitizen)
             let datos = {
                 from : "Tramites",
                 to : usuarioBuscado.email,
                 asunto : "Fecha de retiro",
-                mensaje : `La fecha del retiro para el tramite ${codigoTramite} ya está establecida: ` + withdrawalDate+'.'
+                mensaje : `La fecha del retiro para el tramite ${codigoTramite} ya está establecida: ` + fechaForamteada+'.'
             }
             mailer.send(datos)
 

@@ -1,5 +1,6 @@
 import { getValidDate } from "../../../common/validDate.js"
 import { ValidationError } from '../../../common/errors.js'
+import moment from 'moment'
 
 function crearNotificacionUsuario(daoNotificacionUsuario) {
     return {
@@ -10,11 +11,13 @@ function crearNotificacionUsuario(daoNotificacionUsuario) {
         read: null,
 
         mensajeFechaRevision(codigoTramite, fechaRevision){
-            return `Se solicito presnetarce el dia ${fechaRevision} para revision el tramite ${codigoTramite}.`
+            const fechaForamteada = moment(fechaRevision).format("DD/MM/YYYY")
+            return `Se solicito presnetarce el dia ${fechaForamteada} para revision el tramite ${codigoTramite}.`
         },
 
         mensajeFechaRetiro(codigoTramite, fechaRetiro){
-            return `Se solicito presnetarce el dia ${fechaRetiro} para retirar el tramite ${codigoTramite}.`
+            const fechaForamteada = moment(fechaRetiro).format("DD/MM/YYYY")
+            return `Se solicito presnetarce el dia ${fechaForamteada} para retirar el tramite ${codigoTramite}.`
         },
 
         mensajeFinzalido(codigoTramite){
