@@ -157,7 +157,7 @@ function crearTramite(daoTramite) {
         },
 
         rechazarTramite(reasonRejection) {
-            if (this.idState != 4) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            //if (this.idState != 4 && this.rejected) { throw new ValidationError("El estado del tramite no permite esta accion.") }
             this.completedDate = getValidDate()
             this.rejected = true
             this.reasonRejection = reasonRejection

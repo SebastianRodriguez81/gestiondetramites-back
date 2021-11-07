@@ -7,6 +7,8 @@ import crearObtenerTramitePorId from "./obtenerTramitePorId.js"
 import crearObtenerTramitesPorUsuario from "./obtenerTramitesPorUsuario.js"
 import crearObtenerTramitesPendiente from "./obtenerTramitesPendiente.js"
 import crearObtenerTramitesEnProceso from "./obtenerTramitesEnProceso.js"
+import crearObtenerTramitesEnProcesoAnalista from "./obtenerTramitesEnProcesoAnalista.js"
+import crearObtenerTramitesEnProcesoResponsable from "./obtenerTramitesEnProcesoResponsable.js"
 import crearObtenerTramitesFinalizado from "./obtenerTramitesFinalizado.js"
 import crearObtenerTramitesCantidades from "./obtenerTramitesCantidades.js"
 import crearObtenerEventosTramite from "./obtenerEventosTramite.js"
@@ -102,12 +104,24 @@ function getTramiteApplications() {
             const tramite = tramteModels.getTramite()
             const obtenerTipoTramitesPendiente = crearObtenerTramitesPendiente(tramite)
             return obtenerTipoTramitesPendiente
-        },
+        },        
 
         getObtenerTramitesEnProceso: function () {
             const tramite = tramteModels.getTramite()
             const obtenerTipoTramitesEnProceso = crearObtenerTramitesEnProceso(tramite)
             return obtenerTipoTramitesEnProceso
+        },
+
+        getObtenerTramitesEnProcesoAnalista: function () {
+            const tramite = tramteModels.getTramite()
+            const obtenerTipoTramitesEnProcesoAnalista = crearObtenerTramitesEnProcesoAnalista(tramite)
+            return obtenerTipoTramitesEnProcesoAnalista
+        },
+
+        getObtenerTramitesEnProcesoResponsable: function () {
+            const tramite = tramteModels.getTramite()
+            const obtenerTipoTramitesEnProcesoResponsable = crearObtenerTramitesEnProcesoResponsable(tramite)
+            return obtenerTipoTramitesEnProcesoResponsable
         },
 
         getObtenerTramitesFinalizado: function () {

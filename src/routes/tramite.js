@@ -140,6 +140,26 @@ tramiteRouter.get('/inProgress', async (req, res, next) => {
     }
 })
 
+tramiteRouter.get('/inProgress/Analyst', async (req, res, next) => {
+    try {      
+        const obtenerTramitesEnProcesoAnalista = tamiteApplications.getObtenerTramitesEnProcesoAnalista()
+        const respuesta = await obtenerTramitesEnProcesoAnalista.ejecutar()
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
+
+tramiteRouter.get('/inProgress/Responsable', async (req, res, next) => {
+    try {       
+        const obtenerTramitesEnProcesoResponsable = tamiteApplications.getObtenerTramitesEnProcesoResponsable()
+        const respuesta = await obtenerTramitesEnProcesoResponsable.ejecutar()
+        res.json(respuesta)
+    } catch (error) {
+        next(error)
+    }
+})
+
 tramiteRouter.get('/historical', async (req, res, next) => {
     try {
         const obtenerTramitesFinzalizado = tamiteApplications.getObtenerTramitesFinalizado()
