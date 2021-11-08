@@ -4,13 +4,22 @@ function crearAltaTramite(altaTramiteLicenciaConduicir) {
     return {
         async ejecutar(tramiteData) {
 
+            let nuevoTramite = {}
+
+            console.log(tramiteData)
+
             switch (tramiteData.idProcedureType) {
                 case 1:
-                    return altaTramiteLicenciaConduicir.ejecutar(tramiteData)
+                    nuevoTramite =  altaTramiteLicenciaConduicir.ejecutar(tramiteData)
+                    break
 
                 default:
                     throw new ValidationError("Tipo de tramite invalido o faltante.")
             }
+
+//          orion.informarNuevoTramite(nuevoTramite)
+
+            return nuevoTramite
         }
     }
 }

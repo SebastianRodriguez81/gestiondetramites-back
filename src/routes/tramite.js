@@ -6,7 +6,7 @@ const tramiteRouter = express.Router()
 const tamiteApplications = getTramiteApplications()
 
 //#region POST
-tramiteRouter.post('/', async (req, res, next) => {
+tramiteRouter.post('/', async (req, res, next) => {    
     try {
         if (typeof req.body.idUser !== 'number') { throw new ValidationError("Identificador de usuario erroneo o faltante.") }
         if (typeof req.body.idProcedureType !== 'number') { throw new ValidationError("Tipo de tramie errorneo o faltante.") }
