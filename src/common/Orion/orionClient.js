@@ -28,3 +28,5 @@ function obtenerClienteOrion() {
     }
 
 }
+
+export default obtenerClienteOrion
