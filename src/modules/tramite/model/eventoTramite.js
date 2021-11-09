@@ -45,7 +45,7 @@ function crearEventoTramite(daoEventoTramite) {
             const data = await daoEventoTramite.obtenerDatosPorId(id)           
             this.id = data.id       
             this.idProcedure = data.idprocedure           
-            this.eventDate = data.eventdate ? data.eventdate.toISOString().split('T')[0] :  data.eventdate
+            this.eventDate = data.eventdate ? moment(data.eventdate).format("DD/MM/YYYY HH:MM:SS") :  data.eventdate
             this.observation = data.observation
 
             return this
@@ -60,7 +60,7 @@ function crearEventoTramite(daoEventoTramite) {
 
                 row.id = data.id               
                 row.idProcedure = data.idprocedure               
-                row.eventDate = data.eventdate ? data.eventdate.toISOString().split('T')[0] :  data.eventdate               
+                row.eventDate = data.eventdate ? moment(data.eventdate).format("DD/MM/YYYY HH:MM:SS") :  data.eventdate               
                 row.observation = data.observation             
 
                 resultList.push(row)                
