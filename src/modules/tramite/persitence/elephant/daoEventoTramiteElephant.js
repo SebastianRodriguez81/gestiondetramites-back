@@ -1,13 +1,12 @@
 import { NotFoundError } from "../../../../common/errors.js"
-import { getValidDate } from "../../../../common/validDate.js"
+import { getValidDate, getValidDateTime } from "../../../../common/validDate.js"
 
 function crearDaoEventoTramite(db) {
     return {
         persistir: async (eventoTramite) => {
             const qTabla = 'tramiteeventos'
             const qFormer = db.getQueryBuilder() 
-            const fecha = getValidDate()
-           
+            //const fecha = getValidDateTime()           
 
             qFormer.setTabla(qTabla)
             qFormer.addCampo('tramiteid', eventoTramite.idProcedure)            
@@ -16,12 +15,12 @@ function crearDaoEventoTramite(db) {
             if (eventoTramite.id) {
                 // UPDATE  
                 qFormer.setQueryType(qFormer.getQueryTypes().update)
-                eventoTramite.eventDate ? qFormer.addCampo('fechaevento', "'" + eventoTramite.eventDate + "'") : qFormer.addCampo('fechaevento', eventoTramite.eventDate)                
+                //eventoTramite.eventDate ? qFormer.addCampo('fechaevento', "'" + eventoTramite.eventDate + "'") : qFormer.addCampo('fechaevento', eventoTramite.eventDate)                
                 qFormer.addCondicion("id", "=", eventoTramite.id)
             } else {               
                 //INSERT
                 qFormer.setQueryType(qFormer.getQueryTypes().insert)
-                qFormer.addCampo('fechaevento', "'" + fecha + "'")               
+                //qFormer.addCampo('fechaevento', "'" + fecha + "'")               
                 qFormer.addCampo('id', "default")               
             }
 
@@ -44,7 +43,8 @@ function crearDaoEventoTramite(db) {
                         fechaevento as eventDate,
                         observacion as observation
                     from tramiteeventos
-                    where id = ${id}`
+                    where id = ${id}
+                    order by fechaevento, id`
 
                 //console.log(newQ)
                 const result = await db.ejecutar(newQ)
@@ -69,7 +69,8 @@ function crearDaoEventoTramite(db) {
                         fechaevento as eventDate,
                         observacion as observation
                     from tramiteeventos
-                    where tramiteid = ${idProcedure}`
+                    where tramiteid = ${idProcedure}
+                    order by fechaevento, id`
 
                 //console.log(newQ)
                 const result = await db.ejecutar(newQ)

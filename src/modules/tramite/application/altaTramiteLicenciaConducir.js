@@ -35,7 +35,7 @@ function crearAltaTramiteLicenciaConducir(tramiteLicenciaConducir) {
             const cantEst1 = await tramiteLicenciaConducir.procedure.buscarTodos(1, 1, null, null, tramiteLicenciaConducirData.idUser, null)
             const cantEst2 = await tramiteLicenciaConducir.procedure.buscarTodos(2, 1, null, null, tramiteLicenciaConducirData.idUser, null)
             if (cantEst1.length || cantEst2.length) {
-                //throw new ValidationError("Ya existe un tramie de licencia en curso para el usuario.")
+                throw new ValidationError("Ya existe un tramie de licencia en curso para el usuario.")
             }
 
             //  Preparar tramite            

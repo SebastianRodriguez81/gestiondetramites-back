@@ -49,7 +49,8 @@ function crearDaoNotificacionUsuario(db) {
                     from usuarionotificaciones as noti
                     join usuarios as usu
                         on usu.id = noti.usuarioid
-                    where noti.id = ${id}`
+                    where noti.id = ${id}
+                    order by fechanotificacion, id`
 
                 //console.log(newQ)
                 const result = await db.ejecutar(newQ)
@@ -80,7 +81,8 @@ function crearDaoNotificacionUsuario(db) {
                     from usuarionotificaciones as noti
                     join usuarios as usu
                         on usu.id = noti.usuarioid
-                    where noti.usuarioid = ${idUsuario}`
+                    where noti.usuarioid = ${idUsuario}
+                    order by fechanotificacion, id`
 
                 //console.log(newQ)
                 const result = await db.ejecutar(newQ)
