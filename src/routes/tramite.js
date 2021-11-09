@@ -140,7 +140,7 @@ tramiteRouter.get('/inProgress', async (req, res, next) => {
     }
 })
 
-tramiteRouter.get('/inProgress/Analyst', async (req, res, next) => {
+tramiteRouter.get('/inProgress/analyst', async (req, res, next) => {
     try {      
         const obtenerTramitesEnProcesoAnalista = tamiteApplications.getObtenerTramitesEnProcesoAnalista()
         const respuesta = await obtenerTramitesEnProcesoAnalista.ejecutar()
@@ -150,7 +150,7 @@ tramiteRouter.get('/inProgress/Analyst', async (req, res, next) => {
     }
 })
 
-tramiteRouter.get('/inProgress/Responsable', async (req, res, next) => {
+tramiteRouter.get('/inProgress/responsable', async (req, res, next) => {
     try {       
         const obtenerTramitesEnProcesoResponsable = tamiteApplications.getObtenerTramitesEnProcesoResponsable()
         const respuesta = await obtenerTramitesEnProcesoResponsable.ejecutar()

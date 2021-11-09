@@ -215,7 +215,7 @@ function crearDaoTramite(db) {
             qFormer.setOrden("tra.id")
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;

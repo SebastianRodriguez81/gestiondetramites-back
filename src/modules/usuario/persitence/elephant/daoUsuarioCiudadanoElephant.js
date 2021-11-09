@@ -36,7 +36,6 @@ function crearDaoUsuarioCiudadano(db) {
         },
 
         obtenerDatosPorId: async (id) => {
-            //console.log(id)
             try {
                 const newQ = `
                             select
@@ -75,7 +74,6 @@ function crearDaoUsuarioCiudadano(db) {
         },
         
         obtenerDatosPorEmail: async (email) => {
-            console.log(email)
             try {
                 const newQ = `
                             select

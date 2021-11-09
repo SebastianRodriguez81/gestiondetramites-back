@@ -142,8 +142,8 @@ function crearTramite(daoTramite) {
         },
 
         asignarFechaRetiro(withdrawalDate) {
-            if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
-            if (!this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }           
+            // if (this.idState != 3) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            // if (!this.revisionDate) { throw new ValidationError("El estado del tramite no permite esta accion.") }           
             this.withdrawalDate = withdrawalDate
             this.idState = 4
             return this
@@ -157,7 +157,7 @@ function crearTramite(daoTramite) {
         },
 
         rechazarTramite(reasonRejection) {
-            //if (this.idState != 4 && this.rejected) { throw new ValidationError("El estado del tramite no permite esta accion.") }
+            if (this.idState == 5) { throw new ValidationError("El estado del tramite no permite esta accion.") }
             this.completedDate = getValidDate()
             this.rejected = true
             this.reasonRejection = reasonRejection

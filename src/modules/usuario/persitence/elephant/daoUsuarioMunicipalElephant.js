@@ -45,7 +45,6 @@ function crearDaoUsuarioMunicipal(db) {
         },
 
         obtenerDatosPorEmail: async (email) => {
-            console.log(email)
             try {
                 const newQ = `
                             select

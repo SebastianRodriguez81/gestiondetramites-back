@@ -114,8 +114,7 @@ function crearDaoUsuario(db) {
                             where usu.correo = '${email}'`
 
                 //console.log(newQ)
-                const result = await db.ejecutar(newQ)
-                console.log(result)
+                const result = await db.ejecutar(newQ)               
                 if (!result.length) { return null }
                 return result[0]
             } catch (err) {
