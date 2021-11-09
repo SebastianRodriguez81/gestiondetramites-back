@@ -16,7 +16,8 @@ function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, 
             eventoTramite.observation=eventoTramite.mensajeFechaRevision(tramite.revisionDate)
             await eventoTramite.persistir()                         //Persisto evento
 
-            notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario            
+            notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario  
+            notificacionUsuario.title='Fecha de recisión' 
             notificacionUsuario.message=notificacionUsuario.mensajeFechaRevision(codigoTramite, tramite.revisionDate)
             await notificacionUsuario.persistir()                    //Persisto evento
 

@@ -4,6 +4,7 @@ function finalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, noti
     return {
         async ejecutar(idProcedure, rejected, reasonRejection) {
             let mensajeFinzaliacion = ''
+            let tituloFinalizacion = ''
             let notificacionFinzaliacion = ''
             let datos = ''
             await tramite.obtenerDatos(idProcedure)
@@ -26,11 +27,13 @@ function finalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, noti
                 
 
                 mensajeFinzaliacion = eventoTramite.mensajeFinzalido()
+                tituloFinalizacion='Tramite finalizado'
                 notificacionFinzaliacion = notificacionUsuario.mensajeFinzalido(codigoTramite)
 
             } else {
                 if (reasonRejection.length == 0) { throw new ValidationError("Motivo de rechazo no puede estar vacio.") }
                 tramite.rechazarTramite(reasonRejection)
+                tituloFinalizacion='Tramite rechazado'
                 mensajeFinzaliacion = eventoTramite.mensajeRechazado(reasonRejection)
                 notificacionFinzaliacion = notificacionUsuario.mensajeRechazado(codigoTramite, reasonRejection)
 
@@ -47,8 +50,9 @@ function finalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, noti
             eventoTramite.observation=mensajeFinzaliacion
             await eventoTramite.persistir()                         //Persisto evento
 
-            notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario            
-            notificacionUsuario.message= notificacionFinzaliacion            
+            notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario 
+            notificacionUsuario.title=tituloFinalizacion       
+            notificacionUsuario.message=notificacionFinzaliacion            
             await notificacionUsuario.persistir()                    //Persisto evento
 
             mailer.send(datos)

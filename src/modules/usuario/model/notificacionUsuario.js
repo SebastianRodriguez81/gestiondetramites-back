@@ -7,6 +7,7 @@ function crearNotificacionUsuario(daoNotificacionUsuario) {
         id: null,       
         idUser: null,
         notificationDate: null,
+        title: null,
         message: null,
         read: null,
 
@@ -39,6 +40,7 @@ function crearNotificacionUsuario(daoNotificacionUsuario) {
             this.id = data.id       
             this.idUser = data.iduser           
             this.notificationDate = data.notificationdate ? data.notificationdate.toISOString().split('T')[0] :  data.notificationdate
+            this.title = data.title
             this.message = data.message
             this.read = data.read
 
@@ -55,6 +57,7 @@ function crearNotificacionUsuario(daoNotificacionUsuario) {
                 row.id = data.id               
                 row.idUser = data.iduser               
                 row.notificationDate = data.notificationdate ? data.notificationdate.toISOString().split('T')[0] :  data.notificationdate               
+                row.title = data.title
                 row.message = data.message
                 row.read = data.read             
 

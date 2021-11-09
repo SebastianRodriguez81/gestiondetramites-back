@@ -64,7 +64,6 @@ usuarioRouter.put("/citizens/notifications", async (req, res, next) => {
 
 //#region GET
 usuarioRouter.get("/citizens", async (req, res, next) => {
-    console.log("hola");
     try {
         if (isNaN(req.query.idUser) && typeof req.query.email !== "string") {
             throw new ValidationError(
@@ -141,7 +140,7 @@ usuarioRouter.get("/municipal/analyst", async (req, res, next) => {
     }
 });
 
-usuarioRouter.get("/obtenerTodos/", async (req, res, next) => {
+usuarioRouter.get("/obtenerTodos", async (req, res, next) => {
     try {
         const obtenerUsuarios = usuarioApplications.getObtenerUsuarios();
         const respuesta = await obtenerUsuarios.ejecutar();

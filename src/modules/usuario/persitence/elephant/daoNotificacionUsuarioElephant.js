@@ -9,7 +9,8 @@ function crearDaoNotificacionUsuario(db) {
             const fecha = getValidDateTime()           
 
             qFormer.setTabla(qTabla)
-            qFormer.addCampo('usuarioid ', notificacionUsuario.idUser)            
+            qFormer.addCampo('usuarioid ', notificacionUsuario.idUser)  
+            notificacionUsuario.title ? qFormer.addCampo('titulo', "'" + notificacionUsuario.title + "'") : qFormer.addCampo('titulo', notificacionUsuario.title)          
             notificacionUsuario.message ? qFormer.addCampo('mensaje', "'" + notificacionUsuario.message + "'") : qFormer.addCampo('mensaje', notificacionUsuario.message)
 
             if (notificacionUsuario.id) {
@@ -25,7 +26,7 @@ function crearDaoNotificacionUsuario(db) {
             }
 
             const newQ = qFormer.getQuerry()
-            console.log(newQ)
+            //console.log(newQ)
             try {
                 const result = await db.ejecutar(newQ);
                 return result;
@@ -41,6 +42,7 @@ function crearDaoNotificacionUsuario(db) {
                         noti.id,
                         noti.usuarioid as idUser,
                         noti.fechanotificacion as notificationDate,
+                        noti.titulo as title,
                         noti.mensaje as message,
                         noti.fechanotificacion <= coalesce(usu.fechaultimanotificacion, '0001-01-01 00:00:01') as read
 
@@ -71,6 +73,7 @@ function crearDaoNotificacionUsuario(db) {
                         noti.id,
                         noti.usuarioid as idUser,
                         noti.fechanotificacion as notificationDate,
+                        noti.titulo as title,
                         noti.mensaje as message,
                         noti.fechanotificacion <= coalesce(usu.fechaultimanotificacion, '0001-01-01 00:00:01') as read
 

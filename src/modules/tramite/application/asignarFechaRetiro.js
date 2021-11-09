@@ -16,7 +16,8 @@ function asignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, no
             eventoTramite.observation=eventoTramite.mensajeFechaRetiro(tramite.withdrawalDate)
             await eventoTramite.persistir()                         //Persisto evento
 
-            notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario            
+            notificacionUsuario.idUser=tramite.idUserCitizen        //Genero nueva notificacion para el usuario 
+            notificacionUsuario.title='Fecha de retiro'            
             notificacionUsuario.message=notificacionUsuario.mensajeFechaRetiro(codigoTramite, tramite.withdrawalDate)
             await notificacionUsuario.persistir()                    //Persisto evento
 
