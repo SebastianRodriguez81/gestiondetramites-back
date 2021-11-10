@@ -82,6 +82,7 @@ function crearDaoNotificacionUsuario(db) {
                     join usuarios as usu
                         on usu.id = noti.usuarioid
                     where noti.usuarioid = ${idUsuario}
+                        and noti.fechanotificacion > coalesce(usu.fechaultimanotificacion, '0001-01-01 00:00:01')
                     order by fechanotificacion, id`
 
                 //console.log(newQ)
