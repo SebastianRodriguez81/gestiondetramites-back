@@ -33,10 +33,10 @@ usuarioRouter.post("/citizens", async (req, res, next) => {
 //#region PUT
 usuarioRouter.put("/citizens/changeAddress", async (req, res, next) => {
     try {
-        if (isNaN(req.body.idUser)) { throw new ValidationError( "Identificador de usuario erroneo o faltantes." )}
+        if (isNaN(req.query.idUser)) { throw new ValidationError( "Identificador de usuario erroneo o faltantes." )}
         if(typeof req.body.address !== "string"){throw new ValidationError( "direccion erronea o faltantes." )}
         const cambioDireccionUsuario = usuarioApplications.getCambiarDireccionDeUsuario();
-        const respuesta = await cambioDireccionUsuario.ejecutar( req.body.idUser, req.body.address );
+        const respuesta = await cambioDireccionUsuario.ejecutar( req.query.idUser, req.body.address );
         res.json(respuesta);
     } catch (error) {
         next(error);
