@@ -22,6 +22,7 @@ import crearAsignarFechaRevision from "./asignarFechaRevision.js"
 import crearAsignarFechaRetiro from "./asignarFechaRetiro.js"
 import crearFinalizarTramite from "./finalizarTramite.js"
 import {crearMailer} from "../../../common/mailing/mailerFactory.js"
+import obtenerClienteOrion from "../../../common/Orion/orionClient.js"
 
 const tramteModels = getTramiteModels()
 const usuarioModels = getUsuarioModels()
@@ -30,8 +31,10 @@ function getTramiteApplications() {
     return {
 
         getAltaTramites: function() {
+            const tramite = tramteModels.getTramite()
+            const orionClient = obtenerClienteOrion()
             const altaTramiteLicenciaConducir = this.getAltaTramitesLicenciaConducir()
-            const obtenerAltaTramite = crearAltaTramite(altaTramiteLicenciaConducir)
+            const obtenerAltaTramite = crearAltaTramite(tramite, orionClient, altaTramiteLicenciaConducir)
             return obtenerAltaTramite
         },
 

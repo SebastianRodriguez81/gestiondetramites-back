@@ -1,23 +1,22 @@
 import { ValidationError } from "../../../common/errors.js";
 
-function crearAltaTramite(altaTramiteLicenciaConduicir) {
+function crearAltaTramite(tramite, orionClient, altaTramiteLicenciaConduicir) {
     return {
         async ejecutar(tramiteData) {
 
             let nuevoTramite = {}
 
-            console.log(tramiteData)
-
             switch (tramiteData.idProcedureType) {
                 case 1:
-                    nuevoTramite =  altaTramiteLicenciaConduicir.ejecutar(tramiteData)
+                    nuevoTramite =  await altaTramiteLicenciaConduicir.ejecutar(tramiteData)
                     break
 
                 default:
                     throw new ValidationError("Tipo de tramite invalido o faltante.")
             }
 
-//          orion.informarNuevoTramite(nuevoTramite)
+            await tramite.obtenerDatos(nuevoTramite.id)
+            await orionClient.informarNuevoTramite(tramite)
 
             return nuevoTramite
         }

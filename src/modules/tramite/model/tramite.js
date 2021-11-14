@@ -26,8 +26,8 @@ function crearTramite(daoTramite) {
 
         async persistir() {
             const result = await daoTramite.persistir(this)
-            if (!this.id) { this.id = result }
-            return this;
+            if (!this.id) { this.id = parseInt(result) }            
+            return this
         },
 
         async obtenerDatos(id) {

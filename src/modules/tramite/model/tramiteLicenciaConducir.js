@@ -17,7 +17,7 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
             await this.procedure.persistir()
             if (this.procedure.id) {
                 let result = await daoTramiteLicenciaConducir.persistir(this.procedure)
-                if (!this.procedure.idLicence) { this.procedure.idLicence = result }
+                if (!this.procedure.idLicence) { this.procedure.idLicence = parseInt(result) }
             }                       
             return this.procedure
         },
