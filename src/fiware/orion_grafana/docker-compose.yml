@@ -114,11 +114,11 @@ services:
     volumes:
       - grafana-volume:/var/lib/grafana/data
 
-networks:
-  default:
-    ipam:
-      config:
-        - subnet: 172.19.100.0/24
+# networks:
+#   default:
+#     ipam:
+#       config:
+#         - subnet: 172.19.100.0/24
 
 volumes:
   mongo-db: ~

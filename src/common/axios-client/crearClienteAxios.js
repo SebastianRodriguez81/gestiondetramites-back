@@ -1,26 +1,39 @@
 import axios from 'axios'
 
 const crearClienteAxios = (url, ) => {
+
     return {
-        get: function (url, ) { return axios.get(url, )},
+
+        get: function (url, ) {
+            const headers = { 'Content-Type': 'application/json' }
+            return axios.get(url, {
+                headers: headers
+            })
+        },
 
         post: async function (url, body) {
-            axios.post(url, body)
+            const headers = { 'Content-Type': 'application/json' }
+
+            axios.post(url, body, {
+                    headers: headers
+                })
                 .then((res) => {
                     return true
                 })
-                .catch((err) => {                    
+                .catch((err) => {
                     console.log(err.message)
-                    throw new Error(err.message)                    
+                    throw new Error(err.message)
                 })
         },
 
+        put: function (url, ) {
+            return axios.put(url, )
+        },
 
-        put:  function (url, ) { return axios.put(url, )},
-        
-        patch:  function (url, ) { return axios.patch(url, )}
+        patch: function (url, ) {
+            return axios.patch(url, )
+        }
     }
 }
 
 export default crearClienteAxios
-

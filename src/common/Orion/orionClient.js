@@ -11,15 +11,15 @@ function obtenerClienteOrion() {
                 case 1:
                     nombreTipoTramite = 'LicenciaConducir'
                     break;
-            
+
                 default:
                     throw new Error('Error al obtener los datos del tipo de tramite para Orion.')
             }
-           
+
             let nombreEstado
             switch (parseInt(tramite.idState)) {
                 case 1:
-                    nombreEstado = 'EnProceso'                   
+                    nombreEstado = 'EnProceso'
                     break;
 
                 case 2:
@@ -37,7 +37,7 @@ function obtenerClienteOrion() {
                 case 5:
                     nombreEstado = 'Finalizado'
                     break;
-            
+
                 default:
                     throw new Error('Error al obtener los datos del estado para Orion.')
             }
@@ -45,18 +45,18 @@ function obtenerClienteOrion() {
             let tramiteOrion = {
                 id: tramite.id,
                 type: "tramites",
-                code:{
+                code: {
                     value: codigoTramite,
                     type: "String"
                 },
-                procedureType:{
+                procedureType: {
                     value: tramite.idProcedureType,
                     type: "Integer"
                 },
-                procedureTypeName:{
+                procedureTypeName: {
                     value: nombreTipoTramite,
                     type: "String"
-                },               
+                },
                 state: {
                     value: parseInt(tramite.idState),
                     type: "Integer"
@@ -79,10 +79,10 @@ function obtenerClienteOrion() {
                 }
             }
 
-            const clienteAxios = crearClienteAxios()            
+            const clienteAxios = crearClienteAxios()
 
             try {
-                //await clienteAxios.post("192.168.0.38:1026/v2/entities", tramiteOrion)
+                const resre = await clienteAxios.post('http://localhost:1026/v2/entities', tramiteOrion)
             } catch (error) {
                 console.log(error)
             }
