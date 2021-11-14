@@ -1,6 +1,5 @@
 version: "3.5"
 services:
-
   # Orion is the context broker
   orion:
     image: fiware/orion:2.4.0
@@ -15,7 +14,6 @@ services:
     command: -dbhost mongo-db -logLevel DEBUG -noCache
     healthcheck:
       test: curl --fail -s http://orion:1026/version || exit 1
-
 
   # Databases for Orion
   mongo-db:
@@ -36,70 +34,66 @@ services:
         host=`hostname --ip-address || echo '127.0.0.1'`; 
         mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
 
+  #   # Cygnus persite los datos historicos
+  #   cygnus:
+  #       image: fiware/cygnus-ngsi:latest
+  #       hostname: cygnus
+  #       container_name: fiware-cygnus
+  #       networks:
+  #           - default
+  #       depends_on:
+  #           - postgres-db
+  #       expose:
+  #           - "5080"
+  #       ports:
+  #           - "5050:5050"
+  #           - "5080:5080"
+  #       environment:
+  #           - "CYGNUS_POSTGRESQL_HOST=postgres-db"
+  #           - "CYGNUS_POSTGRESQL_PORT=5432"
+  #           - "CYGNUS_POSTGRESQL_USER=postgres"
+  #           - "CYGNUS_POSTGRESQL_PASS=password"
+  #           - "CYGNUS_LOG_LEVEL=DEBUG"
+  #           - "CYGNUS_SERVICE_PORT=5050"
+  #           - "CYGNUS_API_PORT=5080"
+  #           - "CYGNUS_POSTGRESQL_ENABLE_CACHE=true"
 
-#   # Cygnus persite los datos historicos
-#   cygnus:
-#       image: fiware/cygnus-ngsi:latest
-#       hostname: cygnus
-#       container_name: fiware-cygnus
-#       networks:
-#           - default
-#       depends_on:
-#           - postgres-db
-#       expose:
-#           - "5080"
-#       ports:
-#           - "5050:5050"
-#           - "5080:5080"
-#       environment:
-#           - "CYGNUS_POSTGRESQL_HOST=postgres-db"
-#           - "CYGNUS_POSTGRESQL_PORT=5432"
-#           - "CYGNUS_POSTGRESQL_USER=postgres"
-#           - "CYGNUS_POSTGRESQL_PASS=password"
-#           - "CYGNUS_LOG_LEVEL=DEBUG"
-#           - "CYGNUS_SERVICE_PORT=5050"
-#           - "CYGNUS_API_PORT=5080"
-#           - "CYGNUS_POSTGRESQL_ENABLE_CACHE=true"
+  # # Databases for Orion
+  #   postgres-db:
+  #     image: postgres:latest
+  #     hostname: postgres-db
+  #     container_name: db-postgres
+  #     expose:
+  #       - "5432"
+  #     ports:
+  #       - "5432:5432"
+  #     networks:
+  #       - default
+  #     environment:
+  #       - "POSTGRES_PASSWORD=password"
+  #       - "POSTGRES_USER=postgres"
+  #       - "POSTGRES_DB=postgres"
+  #     volumes:
+  #       - postgres-db:/var/lib/postgresql/data
 
+  #   # WEB POSTGRES
+  #   pgadmin:
+  #     image: dpage/pgadmin4:latest
+  #     hostname: pg-admin
+  #     container_name: pgadmin
+  #     expose:
+  #       - "3100"
+  #     ports:
+  #       - "3100:80"
+  #     networks:
+  #       - default
+  #     environment:
+  #       - "PGADMIN_DEFAULT_EMAIL=user@domain.com"
+  #       - "PGADMIN_DEFAULT_PASSWORD=SuperSecret"
+  #       - "PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True"
+  #       - "PGADMIN_CONFIG_LOGIN_BANNER='Authorised users only!'"
+  #       - "PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=10"
 
-# # Databases for Orion
-#   postgres-db:
-#     image: postgres:latest
-#     hostname: postgres-db
-#     container_name: db-postgres
-#     expose:
-#       - "5432"
-#     ports:
-#       - "5432:5432"
-#     networks:
-#       - default
-#     environment:
-#       - "POSTGRES_PASSWORD=password"
-#       - "POSTGRES_USER=postgres"
-#       - "POSTGRES_DB=postgres"
-#     volumes:
-#       - postgres-db:/var/lib/postgresql/data
-
-
-#   # WEB POSTGRES
-#   pgadmin:
-#     image: dpage/pgadmin4:latest
-#     hostname: pg-admin
-#     container_name: pgadmin
-#     expose:
-#       - "3100"
-#     ports:
-#       - "3100:80"
-#     networks:
-#       - default
-#     environment:
-#       - "PGADMIN_DEFAULT_EMAIL=user@domain.com"
-#       - "PGADMIN_DEFAULT_PASSWORD=SuperSecret"
-#       - "PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True"
-#       - "PGADMIN_CONFIG_LOGIN_BANNER='Authorised users only!'"
-#       - "PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=10"
-  
-  
   # GRAFANA
   grafana:
     hostname: grafana
@@ -113,6 +107,11 @@ services:
       - "3000"
     volumes:
       - grafana-volume:/var/lib/grafana/data
+    environment:
+      GF_SECURITY_ALLOW_EMBEDDING: "true"
+#     GF_AUTH.ANONYMOUS_ENABLED: "true"
+#     GF_AUTH.ANONYMOUS_ORG_NAME: "<<org name>>"
+#     GF_AUTH.ANONYMOUS_ORG_ROLE: "Viewer"
 
 # networks:
 #   default:
