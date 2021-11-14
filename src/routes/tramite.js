@@ -215,6 +215,8 @@ tramiteRouter.post('/Orion', async (req, res, next) => {
     try {
         
         console.log("******************************** EVENTO DE ORION ***************************************")
+        console.log(req.body)
+        console.log("******************************** EVENTO DE ORION ***************************************")
         res.json(true)
     } catch (error) {
         next(error)

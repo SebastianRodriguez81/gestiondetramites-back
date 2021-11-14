@@ -44,7 +44,7 @@ function obtenerClienteOrion() {
 
             let tramiteOrion = {
                 id: tramite.id,
-                type: "tramites",
+                type: "tramite",
                 code: {
                     value: codigoTramite,
                     type: "String"

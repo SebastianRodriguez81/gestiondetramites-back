@@ -12,7 +12,7 @@ const crearClienteAxios = (url, ) => {
         },
 
         post: async function (url, body) {
-            const headers = { 'Content-Type': 'application/json' }
+            const headers = { 'Content-Type': 'application/json', 'fiware-service': 'gestionDeTramites' }
 
             axios.post(url, body, {
                     headers: headers
