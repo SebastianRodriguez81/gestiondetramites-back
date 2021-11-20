@@ -2,7 +2,7 @@ import { ValidationError } from "../../../common/errors.js"
 import { isValidDate } from "../../../common/validDate.js"
 import moment from 'moment'
 
-function asignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario) {
+function asignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario, orionClient) {
     return {
         async ejecutar(idProcedure, withdrawalDate) {  
             if(!isValidDate(withdrawalDate)) {throw new ValidationError("Formato de fecha invalido o erroneo.")}        
@@ -30,6 +30,8 @@ function asignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, no
                 mensaje : `La fecha del retiro para el tramite ${codigoTramite} ya está establecida: ` + fechaForamteada+'.'
             }
             mailer.send(datos)
+
+            await orionClient.informarCambioEstadoTramite(tramite)
 
             return true
         }

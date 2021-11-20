@@ -1,6 +1,6 @@
 import { ValidationError } from "../../../common/errors.js";
 
-function finalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario) {
+function finalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario, orionClient) {
     return {
         async ejecutar(idProcedure, rejected, reasonRejection) {
             let mensajeFinzaliacion = ''
@@ -56,6 +56,8 @@ function finalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, noti
             await notificacionUsuario.persistir()                    //Persisto evento
 
             mailer.send(datos)
+
+            await orionClient.informarCambioEstadoTramite(tramite)
 
             return true
         }

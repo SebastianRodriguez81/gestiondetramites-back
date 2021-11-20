@@ -86,6 +86,54 @@ function obtenerClienteOrion() {
             } catch (error) {
                 console.log(error)
             }
+        },
+
+        informarCambioEstadoTramite: async function (tramite) {                  
+
+            let nombreEstado
+            switch (parseInt(tramite.idState)) {
+                case 1:
+                    nombreEstado = 'EnProceso'
+                    break;
+
+                case 2:
+                    nombreEstado = 'AsigandoAnalista'
+                    break;
+
+                case 3:
+                    nombreEstado = 'AsigandoResponsable'
+                    break;
+
+                case 4:
+                    nombreEstado = 'FechaRetiro'
+                    break;
+
+                case 5:
+                    nombreEstado = 'Finalizado'
+                    break;
+
+                default:
+                    throw new Error('Error al obtener los datos del estado para Orion.')
+            }
+
+            let cambioEstadoTramiteOrion = {
+                state: {
+                    value: parseInt(tramite.idState),
+                    type: "Integer"
+                },
+                stateName: {
+                    value: nombreEstado,
+                    type: "Integer"
+                }
+            }
+
+            const clienteAxios = crearClienteAxios()
+
+            try {
+                await clienteAxios.patch(`http://localhost:1026/v2/entities/${tramite.id}/attrs?type=tramite`, cambioEstadoTramiteOrion)
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 

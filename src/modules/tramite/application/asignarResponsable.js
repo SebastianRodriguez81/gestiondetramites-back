@@ -1,6 +1,6 @@
 import { ValidationError } from "../../../common/errors.js"
 
-function asignarResponsable(tramite, usuarioMunicipal, eventoTramite) {
+function asignarResponsable(tramite, usuarioMunicipal, eventoTramite, orionClient) {
     return {
         async ejecutar(idProcedure, idUser) {           
             await tramite.obtenerDatos(idProcedure)                 //Obtengo dato del tramite. Error si no lo encuentra   
@@ -13,6 +13,8 @@ function asignarResponsable(tramite, usuarioMunicipal, eventoTramite) {
             const nombreResponsable = usuarioMunicipal.user.name+' '+usuarioMunicipal.user.surname                     
             eventoTramite.observation=eventoTramite.mensajeAsignarResponsable(nombreResponsable)
             await eventoTramite.persistir()                         //Persisto evento
+
+            await orionClient.informarCambioEstadoTramite(tramite)
 
             return true
         }

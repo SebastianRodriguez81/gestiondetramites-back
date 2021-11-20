@@ -2,7 +2,7 @@ import { ValidationError } from "../../../common/errors.js"
 import { isValidDate } from "../../../common/validDate.js"
 import moment from 'moment'
 
-function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario) {
+function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario, orionClient) {
     return {
         async ejecutar(idProcedure, revisionDate) {  
             if(!isValidDate(revisionDate)) {throw new ValidationError("Formato de fecha invalido o erroneo.")}        
@@ -30,6 +30,8 @@ function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, 
                 mensaje : `La fecha presencial para revisar el tramite ${codigoTramite} ya está establecida. ` + fechaForamteada+"."
             }
             mailer.send(datos)
+
+            //await orionClient.informarCambioEstadoTramite(tramite)
 
             return true
         }
