@@ -32,7 +32,11 @@ function crearTramite(daoTramite) {
         },
 
         async obtenerDatos(id) {
-            const datos = await daoTramite.obtenerDatos(id)           
+            const datos = await daoTramite.obtenerDatos(id) 
+            
+            if (datos.revisiondate) datos.revisiondate.setHours(datos.revisiondate.getHours() -3)
+            if (datos.withdrawaldate) datos.withdrawaldate.setHours(datos.withdrawaldate.getHours() -3) 
+            
             this.id = datos.id
             this.idState = datos.idstate
             this.idProcedureType = datos.idproceduretype
@@ -68,6 +72,9 @@ function crearTramite(daoTramite) {
 
             dbResult.forEach(datos => {                
                 const tramiteRow = {}
+
+                if (datos.revisiondate) datos.revisiondate.setHours(datos.revisiondate.getHours() -3)
+                if (datos.withdrawaldate) datos.withdrawaldate.setHours(datos.withdrawaldate.getHours() -3)  
 
                 tramiteRow.id = datos.id
                 tramiteRow.idState = datos.idstate

@@ -27,8 +27,9 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
         async obtenerDatos(idProcedure) {
            
             const datos = await daoTramiteLicenciaConducir.obtenerDatosLicencia(idProcedure)
-
-            console.log(datos.revisiondate)
+           
+            if (datos.revisiondate) datos.revisiondate.setHours(datos.revisiondate.getHours() -3)
+            if (datos.withdrawaldate) datos.withdrawaldate.setHours(datos.withdrawaldate.getHours() -3)     
 
             this.procedure.id = datos.id
             this.procedure.idState = datos.idstate
