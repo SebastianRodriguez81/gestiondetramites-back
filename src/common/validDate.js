@@ -12,8 +12,8 @@ function getValidDate() {
     return date.toISOString().split('T')[0]
 }
 
-function getValidDateTime() {
-    const date = new Date()
+function getValidDateTime(time) {
+    let date = new Date()
     const splitDate = date.toISOString().split('T')
     let stringDate = splitDate[0]+' '+splitDate[1]
     return stringDate
