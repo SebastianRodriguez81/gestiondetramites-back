@@ -18,12 +18,12 @@ function crearEventoTramite(daoEventoTramite) {
         },
 
         mensajeFechaRevision(fechaRevision){
-            const fechaForamteada = moment(fechaRevision).format("DD/MM/YYYY")
+            const fechaForamteada = moment(fechaRevision).format("DD/MM/YYYY HH:MM")
             return `Se solicito presnetarce el dia ${fechaForamteada} para revision el tramite.`
         },
 
         mensajeFechaRetiro(fechaRetiro){
-            const fechaForamteada = moment(fechaRetiro).format("DD/MM/YYYY")
+            const fechaForamteada = moment(fechaRetiro).format("DD/MM/YYYY HH:MM")
             return `Se solicito presnetarce el dia ${fechaForamteada} para retirar el tramite.`
         },
 
