@@ -47,8 +47,8 @@ function crearTramite(daoTramite) {
             this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
             this.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] : datos.anlystassignmentdate           
             this.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] : datos.assignmentdate
-            this.revisionDate = datos.revisiondate ? moment(datos.revisiondate).format("DD/MM/YYYY HH:MM:SS") : datos.revisiondate
-            this.withdrawalDate = datos.withdrawaldate ?  moment(datos.withdrawaldate).format("DD/MM/YYYY HH:MM:SS") : datos.withdrawaldate
+            this.revisionDate = datos.revisiondate ? moment(datos.revisiondate).format("DD/MM/YYYY HH:MM") : datos.revisiondate
+            this.withdrawalDate = datos.withdrawaldate ?  moment(datos.withdrawaldate).format("DD/MM/YYYY HH:MM") : datos.withdrawaldate
             this.completedDate = datos.completeddate ? datos.completeddate.toISOString().split('T')[0] : datos.completeddate
             this.rejected = datos.rejected
             this.reasonRejection = datos.reasonrejection
@@ -83,8 +83,8 @@ function crearTramite(daoTramite) {
                 tramiteRow.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
                 tramiteRow.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] : datos.anlystassignmentdate
                 tramiteRow.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] : datos.assignmentdate
-                tramiteRow.revisionDate = datos.revisiondate ? moment(datos.revisiondate).format("DD/MM/YYYY HH:MM:SS") : datos.revisiondate
-                tramiteRow.withdrawalDate = datos.withdrawaldate ? moment(datos.withdrawaldate).format("DD/MM/YYYY HH:MM:SS") : datos.withdrawaldate
+                tramiteRow.revisionDate = datos.revisiondate ? moment(datos.revisiondate).format("DD/MM/YYYY HH:MM") : datos.revisiondate
+                tramiteRow.withdrawalDate = datos.withdrawaldate ? moment(datos.withdrawaldate).format("DD/MM/YYYY HH:MM") : datos.withdrawaldate
                 tramiteRow.completedDate = datos.completeddate ? datos.completeddate.toISOString().split('T')[0] : datos.completeddate
                 tramiteRow.rejected = datos.rejected
                 tramiteRow.reasonRejection = datos.reasonrejection
