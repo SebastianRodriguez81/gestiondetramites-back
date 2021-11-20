@@ -47,9 +47,15 @@ function crearNotificacionUsuario(daoNotificacionUsuario) {
             return this
         },      
 
-        async buscarTodos(idUser) {
-            const dbResult = await daoNotificacionUsuario.buscarTodosPorIdUsuario(idUser)
+        async buscarTodos(idUser, unread) {
+
+            let dbResult
             const resultList = []
+            if (unread) {                
+                dbResult = await daoNotificacionUsuario.buscarTodosNoLeidosPorIdUsuario(idUser)
+            } else {
+                dbResult = await daoNotificacionUsuario.buscarTodosPorIdUsuario(idUser)
+            }
 
             dbResult.forEach(data => {                
                 const row = {}
