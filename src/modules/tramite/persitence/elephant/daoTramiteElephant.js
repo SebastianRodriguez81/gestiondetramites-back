@@ -1,5 +1,6 @@
 import { getValidDate } from "../../../../common/validDate.js"
 import { NotFoundError } from "../../../../common/errors.js"
+import moment from 'moment'
 
 function crearDaoTramite(db) {
 
@@ -26,8 +27,8 @@ function crearDaoTramite(db) {
                 tramite.creationDate ? qFormer.addCampo('fechacreacion', "'" + tramite.creationDate + "'") : qFormer.addCampo('fechacreacion', tramite.creationDate)
                 tramite.anlystAssignmentDate ? qFormer.addCampo('fechainicio', "'" + tramite.anlystAssignmentDate + "'") : qFormer.addCampo('fechainicio', tramite.anlystAssignmentDate)
                 tramite.assignmentDate ? qFormer.addCampo('fechaasigancion', "'" + tramite.assignmentDate + "'") : qFormer.addCampo('fechaasigancion', tramite.assignmentDate)
-                tramite.revisionDate ? qFormer.addCampo('fecharevision', "'" + tramite.revisionDate + "'") : qFormer.addCampo('fecharevision', tramite.revisionDate)
-                tramite.withdrawalDate ? qFormer.addCampo('fecharetiro', "'" + tramite.withdrawalDate + "'") : qFormer.addCampo('fecharetiro', tramite.withdrawalDate)
+                tramite.revisionDate ? qFormer.addCampo('fecharevision', "'" + moment(tramite.revisionDate).format("YYYY-MM-DD HH:MM:SS") + "'") : qFormer.addCampo('fecharevision', tramite.revisionDate)
+                tramite.withdrawalDate ? qFormer.addCampo('fecharetiro', "'" +  moment(tramite.withdrawalDate).format("YYYY-MM-DD HH:MM:SS") + "'") : qFormer.addCampo('fecharetiro', tramite.withdrawalDate)
                 tramite.completedDate ? qFormer.addCampo('fechafinalizado', "'" + tramite.completedDate + "'") : qFormer.addCampo('fechafinalizado', tramite.completedDate)
                 qFormer.addCampo('rechazado', tramite.rejected)
                 tramite.reasonRejection ? qFormer.addCampo('rechazomotivo', "'" + tramite.reasonRejection + "'") : qFormer.addCampo('rechazomotivo', tramite.reasonRejection)
