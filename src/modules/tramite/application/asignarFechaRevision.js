@@ -5,7 +5,7 @@ import moment from 'moment'
 function asignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario, orionClient) {
     return {
         async ejecutar(idProcedure, revisionDate) {  
-            if(!isValidDate(revisionDate)) {throw new ValidationError("Formato de fecha invalido o erroneo.")}        
+            //if(!isValidDate(revisionDate)) {throw new ValidationError("Formato de fecha invalido o erroneo.")}        
             await tramite.obtenerDatos(idProcedure)           
             tramite.asignarFechaRevision(revisionDate)           
             await tramite.persistir()
