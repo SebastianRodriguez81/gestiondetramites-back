@@ -84,16 +84,11 @@ usuarioRouter.get("/citizens", async (req, res, next) => {
 
 usuarioRouter.get("/citizens/notifications", async (req, res, next) => {
     try {
-        if (isNaN(req.query.idUser)) {
-            throw new ValidationError(
-                "Identificador de usuario erroneo o faltantes."
-            );
-        }
-        const obtenerNotificacionUsuario =
-            usuarioApplications.getObtenerNotificacionUsuario();
-        const respuesta = await obtenerNotificacionUsuario.ejecutar(
-            req.query.idUser
-        );
+        let readBool = false
+        if (isNaN(req.query.idUser)) { throw new ValidationError( "Identificador de usuario erroneo o faltantes." ); }
+        if (req.query.read && req.query.read.toString().toLowerCase() == 'true') { readBool = true }
+        const obtenerNotificacionUsuario = usuarioApplications.getObtenerNotificacionUsuario();
+        const respuesta = await obtenerNotificacionUsuario.ejecutar(req.query.idUser, readBool);
 
         res.json(respuesta);
     } catch (error) {

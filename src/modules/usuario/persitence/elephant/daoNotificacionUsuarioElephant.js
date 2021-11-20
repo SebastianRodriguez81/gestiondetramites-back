@@ -81,6 +81,32 @@ function crearDaoNotificacionUsuario(db) {
                     from usuarionotificaciones as noti
                     join usuarios as usu
                         on usu.id = noti.usuarioid
+                    where noti.usuarioid = ${idUsuario}                        
+                    order by fechanotificacion, id`
+
+                //console.log(newQ)
+                const result = await db.ejecutar(newQ)
+                return result
+            } catch (err) {
+                throw new Error('Hubo un error al buscar las notificaciones del usuario.' + err.message)
+            }
+        },
+
+        buscarTodosNoLeidosPorIdUsuario: async (idUsuario) => {            
+            
+            try {
+                const newQ = `
+                    select
+                        noti.id,
+                        noti.usuarioid as idUser,
+                        noti.fechanotificacion as notificationDate,
+                        noti.titulo as title,
+                        noti.mensaje as message,
+                        noti.fechanotificacion <= coalesce(usu.fechaultimanotificacion, '0001-01-01 00:00:01') as read
+
+                    from usuarionotificaciones as noti
+                    join usuarios as usu
+                        on usu.id = noti.usuarioid
                     where noti.usuarioid = ${idUsuario}
                         and noti.fechanotificacion > coalesce(usu.fechaultimanotificacion, '0001-01-01 00:00:01')
                     order by fechanotificacion, id`
