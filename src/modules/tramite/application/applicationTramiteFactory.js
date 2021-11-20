@@ -46,47 +46,52 @@ function getTramiteApplications() {
 
         getAsignarAnalista: function() {
             const tramite = tramteModels.getTramite()
+            const orionClient = obtenerClienteOrion()
             const usuarioMunicipal = usuarioModels.getUsuarioMunicipal()
             const eventoTramite = tramteModels.getEventoTramite()
-            const asignarAnalista = crearAsignarAnalista(tramite, usuarioMunicipal, eventoTramite)
+            const asignarAnalista = crearAsignarAnalista(tramite, usuarioMunicipal, eventoTramite, orionClient)
             return asignarAnalista
         },
 
         getAsignarResponsable: function() {
             const tramite = tramteModels.getTramite()
+            const orionClient = obtenerClienteOrion()
             const usuarioMunicipal = usuarioModels.getUsuarioMunicipal()
             const eventoTramite = tramteModels.getEventoTramite()
-            const asignarResponsable = crearAsignarResponsable(tramite, usuarioMunicipal, eventoTramite)
+            const asignarResponsable = crearAsignarResponsable(tramite, usuarioMunicipal, eventoTramite, orionClient)
             return asignarResponsable
         },
 
         getAsignarFechaRevision: function() {
             const tramite = tramteModels.getTramite()
+            const orionClient = obtenerClienteOrion()
             const mailer = crearMailer()
             const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
             const eventoTramite = tramteModels.getEventoTramite()
             const notificacionUsuario = usuarioModels.getNotificacionUsuario()
-            const asignarFechaRevision = crearAsignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario)
+            const asignarFechaRevision = crearAsignarFechaRevision(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario, orionClient)
             return asignarFechaRevision
         },
 
         getAsignarFechaRetiro: function() {
             const tramite = tramteModels.getTramite()
+            const orionClient = obtenerClienteOrion()
             const mailer = crearMailer()
             const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
             const eventoTramite = tramteModels.getEventoTramite()
             const notificacionUsuario = usuarioModels.getNotificacionUsuario()
-            const asignarFechaRetiro = crearAsignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario)
+            const asignarFechaRetiro = crearAsignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario, orionClient)
             return asignarFechaRetiro
         },
 
         getFinalizarTramite: function() {
             const tramite = tramteModels.getTramite()
+            const orionClient = obtenerClienteOrion()
             const mailer = crearMailer()
             const usuarioCiudadano = usuarioModels.getUsuarioCiudadano()
             const eventoTramite = tramteModels.getEventoTramite()
             const notificacionUsuario = usuarioModels.getNotificacionUsuario()
-            const finalizarTramite = crearFinalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario)
+            const finalizarTramite = crearFinalizarTramite(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario, orionClient)
             return finalizarTramite
         },
 
