@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
     tramite.procedureTypeDescription = null
     tramite.idLicence = null
@@ -23,7 +25,11 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
         },
 
         async obtenerDatos(idProcedure) {
+           
             const datos = await daoTramiteLicenciaConducir.obtenerDatosLicencia(idProcedure)
+           
+            if (datos.revisiondate) datos.revisiondate.setHours(datos.revisiondate.getHours() -3)
+            if (datos.withdrawaldate) datos.withdrawaldate.setHours(datos.withdrawaldate.getHours() -3)     
 
             this.procedure.id = datos.id
             this.procedure.idState = datos.idstate
@@ -37,9 +43,9 @@ function crearTramiteLicenciaConducir(tramite, daoTramiteLicenciaConducir) {
             this.procedure.userBirthdate = datos.userbirthdate ? datos.userbirthdate.toISOString().split('T')[0] :  datos.userbirthdate
             this.procedure.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] :  datos.creationdate
             this.procedure.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] :  datos.anlystassignmentdate
-            this.procedure.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] :  datos.assignmentdate
-            this.procedure.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().split('T')[0] :  datos.revisiondate
-            this.procedure.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().split('T')[0] :  datos.withdrawaldate
+            this.procedure.assignmentDate = datos.assignmentdate ?  datos.assignmentdate.toISOString().split('T')[0] :  datos.assignmentdate
+            this.procedure.revisionDate = datos.revisiondate ?  datos.revisiondate.toISOString().replace(/T/, ' ').replace(/\..+/, '') :  datos.revisiondate
+            this.procedure.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().replace(/T/, ' ').replace(/\..+/, '') :  datos.withdrawaldate
             this.procedure.completedDate = datos.completeddate ? datos.completeddate.toISOString().split('T')[0] :  datos.completeddate         
             this.procedure.rejected = datos.rejected
             this.procedure.reasonRejection = datos.reasonrejection

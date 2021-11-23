@@ -5,7 +5,7 @@ import moment from 'moment'
 function asignarFechaRetiro(tramite, mailer, usuarioCiudadano, eventoTramite, notificacionUsuario, orionClient) {
     return {
         async ejecutar(idProcedure, withdrawalDate) {  
-            if(!isValidDate(withdrawalDate)) {throw new ValidationError("Formato de fecha invalido o erroneo.")}        
+            //if(!isValidDate(withdrawalDate)) {throw new ValidationError("Formato de fecha invalido o erroneo.")}        
             await tramite.obtenerDatos(idProcedure)           
             tramite.asignarFechaRetiro(withdrawalDate)           
             await tramite.persistir()

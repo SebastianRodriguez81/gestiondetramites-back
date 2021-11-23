@@ -1,5 +1,6 @@
 import { getValidDate } from "../../../common/validDate.js"
 import { ValidationError } from '../../../common/errors.js'
+import moment from 'moment'
 
 function crearTramite(daoTramite) {
     return {
@@ -31,7 +32,11 @@ function crearTramite(daoTramite) {
         },
 
         async obtenerDatos(id) {
-            const datos = await daoTramite.obtenerDatos(id)           
+            const datos = await daoTramite.obtenerDatos(id) 
+            
+            if (datos.revisiondate) datos.revisiondate.setHours(datos.revisiondate.getHours() -3)
+            if (datos.withdrawaldate) datos.withdrawaldate.setHours(datos.withdrawaldate.getHours() -3) 
+            
             this.id = datos.id
             this.idState = datos.idstate
             this.idProcedureType = datos.idproceduretype
@@ -46,8 +51,8 @@ function crearTramite(daoTramite) {
             this.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
             this.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] : datos.anlystassignmentdate           
             this.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] : datos.assignmentdate
-            this.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().split('T')[0] : datos.revisiondate
-            this.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().split('T')[0] : datos.withdrawaldate
+            this.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().replace(/T/, ' ').replace(/\..+/, '') : datos.revisiondate
+            this.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().replace(/T/, ' ').replace(/\..+/, '') : datos.withdrawaldate
             this.completedDate = datos.completeddate ? datos.completeddate.toISOString().split('T')[0] : datos.completeddate
             this.rejected = datos.rejected
             this.reasonRejection = datos.reasonrejection
@@ -68,6 +73,9 @@ function crearTramite(daoTramite) {
             dbResult.forEach(datos => {                
                 const tramiteRow = {}
 
+                if (datos.revisiondate) datos.revisiondate.setHours(datos.revisiondate.getHours() -3)
+                if (datos.withdrawaldate) datos.withdrawaldate.setHours(datos.withdrawaldate.getHours() -3)  
+
                 tramiteRow.id = datos.id
                 tramiteRow.idState = datos.idstate
                 tramiteRow.idProcedureType = datos.idproceduretype
@@ -82,8 +90,8 @@ function crearTramite(daoTramite) {
                 tramiteRow.creationDate = datos.creationdate ? datos.creationdate.toISOString().split('T')[0] : datos.creationdate
                 tramiteRow.anlystAssignmentDate = datos.anlystassignmentdate ? datos.anlystassignmentdate.toISOString().split('T')[0] : datos.anlystassignmentdate
                 tramiteRow.assignmentDate = datos.assignmentdate ? datos.assignmentdate.toISOString().split('T')[0] : datos.assignmentdate
-                tramiteRow.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().split('T')[0] : datos.revisiondate
-                tramiteRow.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().split('T')[0] : datos.withdrawaldate
+                tramiteRow.revisionDate = datos.revisiondate ? datos.revisiondate.toISOString().replace(/T/, ' ').replace(/\..+/, '') : datos.revisiondate
+                tramiteRow.withdrawalDate = datos.withdrawaldate ? datos.withdrawaldate.toISOString().replace(/T/, ' ').replace(/\..+/, '') : datos.withdrawaldate
                 tramiteRow.completedDate = datos.completeddate ? datos.completeddate.toISOString().split('T')[0] : datos.completeddate
                 tramiteRow.rejected = datos.rejected
                 tramiteRow.reasonRejection = datos.reasonrejection

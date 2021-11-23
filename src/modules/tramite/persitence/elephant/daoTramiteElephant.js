@@ -1,5 +1,6 @@
 import { getValidDate } from "../../../../common/validDate.js"
 import { NotFoundError } from "../../../../common/errors.js"
+import moment from 'moment'
 
 function crearDaoTramite(db) {
 
@@ -10,7 +11,8 @@ function crearDaoTramite(db) {
             const fecha = getValidDate()
 
             if (tramite.id) {
-                // UPDATE       
+                // UPDATE   
+                               
                 qFormer.setTabla(qTabla)
                 qFormer.setQueryType(qFormer.getQueryTypes().update)
                 qFormer.addCampo('estadosidx', tramite.idState)

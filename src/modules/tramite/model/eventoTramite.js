@@ -18,12 +18,12 @@ function crearEventoTramite(daoEventoTramite) {
         },
 
         mensajeFechaRevision(fechaRevision){
-            const fechaForamteada = moment(fechaRevision).format("DD/MM/YYYY")
+            const fechaForamteada = moment(fechaRevision).format("DD/MM/YYYY HH:mm")
             return `Se solicito presnetarce el dia ${fechaForamteada} para revision el tramite.`
         },
 
         mensajeFechaRetiro(fechaRetiro){
-            const fechaForamteada = moment(fechaRetiro).format("DD/MM/YYYY")
+            const fechaForamteada = moment(fechaRetiro).format("DD/MM/YYYY HH:mm")
             return `Se solicito presnetarce el dia ${fechaForamteada} para retirar el tramite.`
         },
 
@@ -45,7 +45,7 @@ function crearEventoTramite(daoEventoTramite) {
             const data = await daoEventoTramite.obtenerDatosPorId(id)           
             this.id = data.id       
             this.idProcedure = data.idprocedure           
-            this.eventDate = data.eventdate ? moment(data.eventdate).format("DD/MM/YYYY HH:MM:SS") :  data.eventdate
+            this.eventDate = data.eventdate ? moment(data.eventdate).format("DD/MM/YYYY HH:mm:ss") :  data.eventdate
             this.observation = data.observation
 
             return this
@@ -60,7 +60,7 @@ function crearEventoTramite(daoEventoTramite) {
 
                 row.id = data.id               
                 row.idProcedure = data.idprocedure               
-                row.eventDate = data.eventdate ? moment(data.eventdate).format("DD/MM/YYYY HH:MM:SS") :  data.eventdate               
+                row.eventDate = data.eventdate ? moment(data.eventdate).format("DD/MM/YYYY HH:mm:ss") :  data.eventdate               
                 row.observation = data.observation             
 
                 resultList.push(row)                
