@@ -39,7 +39,7 @@ function crearNotificacionUsuario(daoNotificacionUsuario) {
             const data = await daoNotificacionUsuario.obtenerDatosPorId(id)                
             this.id = data.id       
             this.idUser = data.iduser           
-            this.notificationDate = data.notificationdate ? moment(data.notificationdate).format("DD/MM/YYYY HH:MM:SS") :  data.notificationdate
+            this.notificationDate = data.notificationdate ? moment(data.notificationdate).format("DD/MM/YYYY HH:mm:ss") :  data.notificationdate
             this.title = data.title
             this.message = data.message
             this.read = data.read
@@ -62,7 +62,7 @@ function crearNotificacionUsuario(daoNotificacionUsuario) {
 
                 row.id = data.id               
                 row.idUser = data.iduser               
-                row.notificationDate = data.notificationdate ? moment(data.notificationdate).format("DD/MM/YYYY HH:MM:SS") :  data.notificationdate               
+                row.notificationDate = data.notificationdate ? moment(data.notificationdate).format("DD/MM/YYYY HH:mm:ss") :  data.notificationdate               
                 row.title = data.title
                 row.message = data.message
                 row.read = data.read             
